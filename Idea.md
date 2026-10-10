@@ -146,3 +146,5 @@ Tech (v1)
 
 Keep it small so it actually gets built.
 
+
+Once user completes all the tasks at last along with things i wish  i knew earlier card ; the urls of goodfirstissues.dev , goodfirstissues.org will be displayed showing search your first open-source repo here .
