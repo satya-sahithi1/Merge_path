@@ -5,5 +5,6 @@
   "/repo/[repoId]/file/page": "app/repo/[repoId]/file/page.js",
   "/repo/[repoId]/issues/[issueId]/page": "app/repo/[repoId]/issues/[issueId]/page.js",
   "/repo/[repoId]/page": "app/repo/[repoId]/page.js",
-  "/repo/[repoId]/prs/[prId]/page": "app/repo/[repoId]/prs/[prId]/page.js"
+  "/repo/[repoId]/prs/[prId]/page": "app/repo/[repoId]/prs/[prId]/page.js",
+  "/repo/[repoId]/quiz/page": "app/repo/[repoId]/quiz/page.js"
 }

@@ -78,7 +78,7 @@ export default function QuizPage() {
   // ── Scoring ──────────────────────────────────────────────────────────────
 
   function isCorrect(q: QuizQuestion, selected: string[]): boolean {
-    const correctIds = q.options.filter((o) => o.correct).map((o) => o.id);
+    const correctIds = q.options.filter((o) => o.correct).map((o) => o.id as string);
     if (q.type === "single") {
       return selected.length === 1 && correctIds.includes(selected[0]);
     }
@@ -327,14 +327,16 @@ export default function QuizPage() {
         </div>
 
         {/* Question */}
-        <div className="space-y-1">
+        <div className="space-y-2">
           <p className="text-base font-medium" style={{ color: "var(--text-primary)", lineHeight: 1.6 }}>
             {q.question}
           </p>
           {q.type === "multi" && (
-            <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
-              Select all that apply
-            </p>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium"
+              style={{ background: "#1f3a5f", color: "#58a6ff", border: "1px solid #1f6feb" }}>
+              <span>☑</span>
+              <span>Multiple answers — select all that apply</span>
+            </div>
           )}
         </div>
 
@@ -356,8 +358,10 @@ export default function QuizPage() {
                   cursor: ans.submitted ? "default" : "pointer",
                 }}
               >
-                <span className="font-mono mr-2 text-xs" style={{ color: "var(--text-secondary)" }}>
-                  {opt.id.toUpperCase()}.
+                <span className="mr-2 text-xs" style={{ color: "var(--text-secondary)" }}>
+                  {q.type === "multi"
+                    ? ans.selected.includes(opt.id) ? "☑" : "☐"
+                    : ans.selected.includes(opt.id) ? "◉" : "○"}
                 </span>
                 {opt.text}
               </button>

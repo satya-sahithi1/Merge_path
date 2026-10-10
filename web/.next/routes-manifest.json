@@ -55,6 +55,14 @@
         "nxtPprId": "nxtPprId"
       },
       "namedRegex": "^/repo/(?<nxtPrepoId>[^/]+?)/prs/(?<nxtPprId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/repo/[repoId]/quiz",
+      "regex": "^/repo/([^/]+?)/quiz(?:/)?$",
+      "routeKeys": {
+        "nxtPrepoId": "nxtPrepoId"
+      },
+      "namedRegex": "^/repo/(?<nxtPrepoId>[^/]+?)/quiz(?:/)?$"
     }
   ],
   "staticRoutes": [

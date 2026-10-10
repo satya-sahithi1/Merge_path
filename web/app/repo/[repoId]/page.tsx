@@ -111,6 +111,26 @@ export default async function RepoPage({
         {tab === "issues" && <IssueListView issues={issues} repoId={repoId} />}
         {tab === "prs" && <PRListView prs={prs} repoId={repoId} />}
         {tab === "commits" && <CommitsView commits={commits} />}
+
+        {/* Take quiz CTA */}
+        <div className="rounded-md border p-4 flex items-center justify-between gap-4"
+          style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
+          <div className="space-y-0.5">
+            <p className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+              Done exploring?
+            </p>
+            <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
+              Test whether you read the right signals — issues, PRs, and repo health.
+            </p>
+          </div>
+          <Link
+            href={`/repo/${repoId}/quiz`}
+            className="whitespace-nowrap px-4 py-2 rounded-md text-sm font-medium"
+            style={{ background: "var(--accent)", color: "#fff" }}
+          >
+            Take the quiz →
+          </Link>
+        </div>
       </div>
     </div>
   );
