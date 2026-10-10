@@ -1,6 +1,7 @@
 {
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
+  "/learn/page": "/learn",
   "/page": "/",
   "/repo/[repoId]/file/page": "/repo/[repoId]/file",
   "/repo/[repoId]/issues/[issueId]/page": "/repo/[repoId]/issues/[issueId]",
