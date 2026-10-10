@@ -1,6 +1,4 @@
 {
-  "/page": "app/page.js",
-  "/repo/[repoId]/file/page": "app/repo/[repoId]/file/page.js",
-  "/repo/[repoId]/page": "app/repo/[repoId]/page.js",
-  "/repo/[repoId]/quiz/page": "app/repo/[repoId]/quiz/page.js"
+  "/learn/page": "app/learn/page.js",
+  "/page": "app/page.js"
 }
