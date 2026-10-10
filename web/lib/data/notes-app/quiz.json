@@ -1,0 +1,264 @@
+[
+  {
+    "id": 1,
+    "domain": "repo_health",
+    "question": "Which two signals from this repo tell you most about whether your PR would get a response?",
+    "type": "multi",
+    "options": [
+      {
+        "id": "a",
+        "text": "Star count (87 stars)",
+        "correct": false,
+        "explanation": "Stars show how many people found the repo interesting — not whether the maintainer is still reviewing PRs. A repo can have thousands of stars and be completely inactive."
+      },
+      {
+        "id": "b",
+        "text": "Date of the most recent merged PR",
+        "correct": true,
+        "explanation": "The most recent merged PR was from September 2026. That tells you the maintainer is still actively reviewing and merging — which is the actual signal you need."
+      },
+      {
+        "id": "c",
+        "text": "How quickly the maintainer replied in issue threads",
+        "correct": true,
+        "explanation": "The maintainer replied on every open issue within 1–2 days. That's the clearest evidence you'd get a response on a PR too."
+      },
+      {
+        "id": "d",
+        "text": "Number of forks (12)",
+        "correct": false,
+        "explanation": "Forks tell you how many people copied the repo — often for practice, not active development. They say nothing about whether the original maintainer is responsive."
+      },
+      {
+        "id": "e",
+        "text": "How detailed the README is",
+        "correct": false,
+        "explanation": "A detailed README means the author cared about documentation at some point. It doesn't tell you whether the repo is still maintained or whether PRs get reviewed."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "domain": "contributing",
+    "question": "Your plan for issue #7: branch named my-fix, no new tests, PR title "fixed delete bug". Which parts conflict with this repo's CONTRIBUTING.md?",
+    "type": "multi",
+    "options": [
+      {
+        "id": "a",
+        "text": "Branch name my-fix",
+        "correct": true,
+        "explanation": "CONTRIBUTING.md specifies the format fix/issue-<number>-short-description. A branch named my-fix doesn't follow this convention and makes it harder for the maintainer to track what the branch is for."
+      },
+      {
+        "id": "b",
+        "text": "No new tests added",
+        "correct": true,
+        "explanation": "CONTRIBUTING.md explicitly says: if you're fixing a bug, add a test that fails on the buggy code and passes after your fix. Submitting without a test is likely to get a review comment asking you to add one."
+      },
+      {
+        "id": "c",
+        "text": "PR title "fixed delete bug"",
+        "correct": false,
+        "explanation": "CONTRIBUTING.md doesn't prescribe a specific PR title format for this repo. The title could be clearer, but it doesn't technically conflict with the written rules."
+      },
+      {
+        "id": "d",
+        "text": "Fixing a bug without opening an issue first",
+        "correct": false,
+        "explanation": "Issue #7 already exists and is open. You don't need to open a new one. CONTRIBUTING.md says to open an issue before a PR only when you find a new bug."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "domain": "issue_judgment",
+    "question": "Issue #7 has a comment from anon-contributor saying "I'll take this" — posted 4 months ago. No PR was ever merged. What do you do?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Start working on it immediately. They've had enough time.",
+        "correct": false,
+        "explanation": "They may have started and hit a blocker, or be close to finishing. Starting without checking means you might both open PRs for the same thing, which wastes both your time and the maintainer's."
+      },
+      {
+        "id": "b",
+        "text": "Leave a comment asking if it's still being worked on, then wait for a reply.",
+        "correct": true,
+        "explanation": "A polite check-in costs one comment and prevents duplicate work. The maintainer can also weigh in. If there's no reply in a week or two, it's reasonable to proceed."
+      },
+      {
+        "id": "c",
+        "text": "Skip it. It's assigned to someone.",
+        "correct": false,
+        "explanation": "It's not formally assigned — someone just said they'd take it. And they never followed through. Skipping it entirely means you might miss a valid issue just because of an old comment."
+      },
+      {
+        "id": "d",
+        "text": "Open a PR immediately. If yours gets merged first, that's fair.",
+        "correct": false,
+        "explanation": "Racing on PRs creates unnecessary conflict and extra work for the maintainer who now has to close a duplicate. It's also poor etiquette in most communities."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "domain": "issue_judgment",
+    "question": "Issue #15 (case-insensitive search) is open and labeled bug. You're about to start on it. What should you check first?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Whether the issue has a lot of comments.",
+        "correct": false,
+        "explanation": "Comment count shows engagement, not whether the bug is still present. Issue #15 has comments, but that doesn't tell you whether it was already fixed."
+      },
+      {
+        "id": "b",
+        "text": "Whether the label says good first issue.",
+        "correct": false,
+        "explanation": "Labels are set by maintainers and aren't always kept up to date when issues get resolved. A label is a starting point, not a guarantee the issue is still open or relevant."
+      },
+      {
+        "id": "c",
+        "text": "Whether any merged PR already fixed it.",
+        "correct": true,
+        "explanation": "PR #38, merged in August 2026, fixed exactly this bug. The issue is still marked open, but the fix is already in the codebase. Checking closed PRs before you start would have caught this."
+      },
+      {
+        "id": "d",
+        "text": "Whether the fix would be small enough.",
+        "correct": false,
+        "explanation": "Scope matters when choosing an issue, but not before you've checked whether the issue even needs fixing anymore. Scope comes after you've confirmed the bug is still present."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "domain": "issue_judgment",
+    "question": "Which issue is the best first pick?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "#12 — Saving a note with an empty title silently creates a broken note",
+        "correct": true,
+        "explanation": "Clear reproduction steps, maintainer confirmed it's a good first contribution, no one has claimed it, and the fix is small and self-contained. This is what a good first pick looks like."
+      },
+      {
+        "id": "b",
+        "text": "#15 — search_notes does not find notes when query case doesn't match",
+        "correct": false,
+        "explanation": "PR #38 merged in August 2026 and fixed this bug. The issue is still open but the code is already corrected. Starting here means doing work that's already done."
+      },
+      {
+        "id": "c",
+        "text": "#19 — list_notes returns live objects — mutations affect the internal store",
+        "correct": false,
+        "explanation": "The maintainer's own comment explains this requires understanding shallow vs deep copy semantics and the storage layer design. The label says good first issue but the issue body itself warns you off if you're not familiar with copy semantics."
+      },
+      {
+        "id": "d",
+        "text": "#23 — Notes disappear sometimes when I add a lot of them",
+        "correct": false,
+        "explanation": "There are no reproduction steps, no version, and no error message. The maintainer already asked for more info and the reporter hasn't followed up. You can't fix what you can't reproduce."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "domain": "issue_judgment",
+    "question": "Issue #23 says "notes disappear sometimes when I add a lot of them" and nothing else. Which comment is most useful?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "\"Same issue here — I see it too.\"",
+        "correct": false,
+        "explanation": "This tells the maintainer the bug affects more than one person, but gives them nothing to work with. It adds noise without moving the issue forward."
+      },
+      {
+        "id": "b",
+        "text": "\"This report is too vague to be useful.\"",
+        "correct": false,
+        "explanation": "Accurate, but unhelpful. Telling someone their report is bad without explaining what's missing doesn't help them fix it — and it's likely to discourage them from reporting again."
+      },
+      {
+        "id": "c",
+        "text": "\"Could you share your Python version, the exact steps you followed, and what you expected versus what actually happened?\"",
+        "correct": true,
+        "explanation": "This tells the reporter exactly what's missing and why it matters. Version, steps, and expected vs actual output are the minimum needed to reproduce any bug. Specific questions get specific answers."
+      },
+      {
+        "id": "d",
+        "text": "\"I'll try to reproduce this and let you know.\"",
+        "correct": false,
+        "explanation": "You can't reproduce it from what's been shared — there are no steps. Promising to try without asking for the missing info just delays the issue without resolving the information gap."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "domain": "git_workflow",
+    "question": "Your fork's main branch is 14 commits behind the original repo. What do you do before branching to fix issue #12?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Branch from your fork's main as it is.",
+        "correct": false,
+        "explanation": "You'd be working off stale code. If the area you're changing has been updated in those 14 commits, you'll either have conflicts when you open the PR or silently undo work that was already done."
+      },
+      {
+        "id": "b",
+        "text": "Sync your fork with the original repo, then branch from the updated main.",
+        "correct": true,
+        "explanation": "Syncing first means your branch starts from the latest code. Fewer merge conflicts, no risk of reverting recent changes, and a cleaner diff when the maintainer reviews."
+      },
+      {
+        "id": "c",
+        "text": "Make the changes directly on your fork's main.",
+        "correct": false,
+        "explanation": "Working on main directly makes it hard to keep your fork in sync with the original and breaks the standard fork-and-branch workflow. It also makes it harder to work on multiple issues separately."
+      },
+      {
+        "id": "d",
+        "text": "Delete your fork and fork again from the original.",
+        "correct": false,
+        "explanation": "This works but it's unnecessarily disruptive. Git gives you git fetch upstream and git merge upstream/main (or git rebase) to sync without starting over."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "domain": "review",
+    "question": "You open a PR for issue #12. The maintainer replies: "Thanks! Can you move the empty check to after the strip() call, and add a period to the error message?" What do you do?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Open a new PR with the changes.",
+        "correct": false,
+        "explanation": "A new PR loses the review history and context. Push the changes to the same branch — the existing PR updates automatically. Opening a second PR is confusing and creates cleanup work for the maintainer."
+      },
+      {
+        "id": "b",
+        "text": "Reply explaining why your original approach is correct.",
+        "correct": false,
+        "explanation": "The maintainer isn't asking for a debate — they're giving you specific, low-stakes feedback to keep the codebase consistent. Pushing back on minor style points in a first PR is a poor use of everyone's time."
+      },
+      {
+        "id": "c",
+        "text": "Make the two changes, push to the same branch, and reply once it's done.",
+        "correct": true,
+        "explanation": "This is exactly what happened in PR #41. The contributor made the requested changes, explained what they updated, and thanked the reviewer. The PR was merged the next day."
+      },
+      {
+        "id": "d",
+        "text": "Close the PR. The feedback means it's been rejected.",
+        "correct": false,
+        "explanation": "A review with requested changes is the opposite of a rejection — the maintainer engaged, read your code, and told you how to get it merged. Closing it means the work never lands."
+      }
+    ]
+  }
+]

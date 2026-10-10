@@ -1,4 +1,4 @@
-import type { RepoMeta, Issue, PR, Commit, FileTree } from "./types";
+import type { RepoMeta, Issue, PR, Commit, FileTree, Quiz } from "./types";
 
 // In v1, repos are bundled as static JSON. This loader is the single
 // point of access — pages never import JSON directly.
@@ -56,6 +56,10 @@ export function findFile(
   }
 
   return search(tree.tree);
+}
+
+export function getQuiz(repoId: string): Quiz {
+  return loadJson<Quiz>(repoId, "quiz");
 }
 
 // All available repo IDs — add new repos here as they're written

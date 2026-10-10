@@ -113,3 +113,29 @@ export type FileNode =
 export type FileTree = {
   tree: FileNode[];
 };
+
+export type QuizOptionId = "a" | "b" | "c" | "d" | "e";
+
+export type QuizOption = {
+  id: QuizOptionId;
+  text: string;
+  correct: boolean;
+  explanation: string;
+};
+
+export type QuizDomain =
+  | "repo_health"
+  | "contributing"
+  | "issue_judgment"
+  | "git_workflow"
+  | "review";
+
+export type QuizQuestion = {
+  id: number;
+  domain: QuizDomain;
+  question: string;
+  type: "single" | "multi";
+  options: QuizOption[];
+};
+
+export type Quiz = QuizQuestion[];
