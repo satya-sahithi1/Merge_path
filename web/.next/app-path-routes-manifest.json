@@ -1,0 +1,9 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/page": "/",
+  "/repo/[repoId]/file/page": "/repo/[repoId]/file",
+  "/repo/[repoId]/issues/[issueId]/page": "/repo/[repoId]/issues/[issueId]",
+  "/repo/[repoId]/page": "/repo/[repoId]",
+  "/repo/[repoId]/prs/[prId]/page": "/repo/[repoId]/prs/[prId]"
+}

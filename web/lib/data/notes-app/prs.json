@@ -1,0 +1,87 @@
+[
+  {
+    "id": 38,
+    "title": "fix: make search_notes case-insensitive",
+    "state": "merged",
+    "author": "lena-open-source",
+    "opened_at": "2026-08-02",
+    "merged_at": "2026-08-05",
+    "linked_issue": 15,
+    "branch": "fix/issue-15-case-insensitive-search",
+    "description": "Fixes #15.\n\nThe `search_notes` function was doing a case-sensitive substring match, so searching for `'shopping'` wouldn't find a note titled `'Shopping List'`.\n\nFix: lowercase both the query and the note title before comparing.\n\n**Changes:**\n- `src/notes.py`: one line changed in `search_notes`\n\n**Testing:**\n- Added `test_search_case_insensitive` in `tests/test_notes.py`\n- All existing tests still pass",
+    "diff_summary": "src/notes.py: changed `if query in note['title']` to `if query.lower() in note['title'].lower()`",
+    "review_comments": [
+      {
+        "author": "tariq-dev",
+        "date": "2026-08-03",
+        "body": "Thanks for picking this up! The fix looks correct. One small thing — can you also add a test where the *title* is lowercase and the query is uppercase, to cover both directions?",
+        "resolved": true
+      },
+      {
+        "author": "lena-open-source",
+        "date": "2026-08-04",
+        "body": "Good point, added that test in the latest commit. Let me know if there's anything else."
+      },
+      {
+        "author": "tariq-dev",
+        "date": "2026-08-05",
+        "body": "Looks great. Merging. Thanks for the clean PR!"
+      }
+    ],
+    "lesson": "good_newcomer_pr",
+    "lesson_note": "This is what a good first PR looks like. Small scope (one line changed), linked to the issue, clear description of what changed and why, tests added, and the author responded to review feedback without getting defensive."
+  },
+  {
+    "id": 41,
+    "title": "fix: validate title is not empty before saving note",
+    "state": "merged",
+    "author": "dev-rohan",
+    "opened_at": "2026-09-10",
+    "merged_at": "2026-09-14",
+    "linked_issue": 12,
+    "branch": "fix/issue-12-empty-title-validation",
+    "description": "Fixes #12.\n\nAdded a check in `save_note` — after stripping whitespace, if the title is empty, return `{\"error\": \"Title cannot be empty.\"}` instead of saving.\n\n**Changes:**\n- `src/notes.py`: 2 lines added to `save_note`\n\n**Testing:**\n- Added tests for empty string, whitespace-only string, and a valid title\n- All existing tests pass\n\nLet me know if the error message wording should be different.",
+    "diff_summary": "src/notes.py: added `if not clean_title: return {\"error\": \"Title cannot be empty.\"}` after the strip() call",
+    "review_comments": [
+      {
+        "author": "tariq-dev",
+        "date": "2026-09-11",
+        "body": "Thanks for this! Two things:\n1. Can you move the empty check to right after the `strip()` call rather than at the top of the function? It reads more naturally that way.\n2. The error message is fine, but let's keep it consistent with the rest of the codebase — use a period at the end.",
+        "resolved": true
+      },
+      {
+        "author": "dev-rohan",
+        "date": "2026-09-12",
+        "body": "Makes sense on both points — moved the check and added the period. Updated in the latest commit. Thanks for the review."
+      },
+      {
+        "author": "tariq-dev",
+        "date": "2026-09-13",
+        "body": "Perfect. This is exactly right. Merging."
+      }
+    ],
+    "lesson": "polite_review_response",
+    "lesson_note": "The maintainer requested changes — not to be difficult, but to keep the code consistent. The contributor didn't argue or re-open the issue. They made the changes, said why they agreed, and thanked the reviewer. That's how review is supposed to go. A change request is not a rejection."
+  },
+  {
+    "id": 29,
+    "title": "fix: handle KeyError in delete_note",
+    "state": "open",
+    "author": "anon-contributor",
+    "opened_at": "2026-07-22",
+    "merged_at": null,
+    "linked_issue": 7,
+    "branch": "fix/delete-keyerror",
+    "description": "Attempting to fix #7. Added a try/except around the delete call.\n\nNot sure if this is the right approach — open to feedback.",
+    "diff_summary": "src/notes.py: wrapped `del _notes[note_id]` in try/except KeyError",
+    "review_comments": [
+      {
+        "author": "tariq-dev",
+        "date": "2026-07-23",
+        "body": "Thanks for trying this. The try/except approach works but I'd prefer an explicit `if note_id not in _notes` check — it's clearer about what we're guarding against. Can you update?\n\nAlso please add tests for this case."
+      }
+    ],
+    "lesson": null,
+    "lesson_note": "This PR is stale — opened months ago, maintainer left review feedback, author never came back. Issue #7 is still open as a result."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "hash": "f3a1c9",
+    "author": "tariq-dev",
+    "date": "2026-09-18",
+    "message": "refactor: clean up note storage internals"
+  },
+  {
+    "hash": "e9d32b",
+    "author": "tariq-dev",
+    "date": "2026-09-14",
+    "message": "Merge pull request #41 from dev-rohan/fix/issue-12-empty-title-validation"
+  },
+  {
+    "hash": "b4f812",
+    "author": "dev-rohan",
+    "date": "2026-09-12",
+    "message": "fix: move empty check after strip and add period to error message"
+  },
+  {
+    "hash": "a7c305",
+    "author": "dev-rohan",
+    "date": "2026-09-10",
+    "message": "fix: validate title is not empty before saving note"
+  },
+  {
+    "hash": "dc219f",
+    "author": "tariq-dev",
+    "date": "2026-09-08",
+    "message": "docs: update README with usage examples"
+  },
+  {
+    "hash": "cc1048",
+    "author": "tariq-dev",
+    "date": "2026-08-22",
+    "message": "chore: add requirements.txt"
+  },
+  {
+    "hash": "9be47a",
+    "author": "tariq-dev",
+    "date": "2026-08-05",
+    "message": "Merge pull request #38 from lena-open-source/fix/issue-15-case-insensitive-search"
+  },
+  {
+    "hash": "87da61",
+    "author": "lena-open-source",
+    "date": "2026-08-04",
+    "message": "test: add uppercase query case for search test"
+  },
+  {
+    "hash": "74fc2e",
+    "author": "lena-open-source",
+    "date": "2026-08-02",
+    "message": "fix: make search_notes case-insensitive"
+  },
+  {
+    "hash": "61ba30",
+    "author": "tariq-dev",
+    "date": "2026-07-28",
+    "message": "feat: add get_note function to retrieve single note by id"
+  },
+  {
+    "hash": "55ef1d",
+    "author": "tariq-dev",
+    "date": "2026-07-15",
+    "message": "feat: add clear_all helper for test resets"
+  },
+  {
+    "hash": "3d9c84",
+    "author": "tariq-dev",
+    "date": "2026-07-10",
+    "message": "fix: notes id counter now starts at 1 not 0"
+  },
+  {
+    "hash": "2af019",
+    "author": "tariq-dev",
+    "date": "2026-06-30",
+    "message": "feat: add search_notes function"
+  },
+  {
+    "hash": "1bc774",
+    "author": "tariq-dev",
+    "date": "2026-06-22",
+    "message": "feat: add delete_note and list_notes"
+  },
+  {
+    "hash": "0d4e58",
+    "author": "tariq-dev",
+    "date": "2026-06-18",
+    "message": "init: add save_note with basic in-memory store"
+  }
+]

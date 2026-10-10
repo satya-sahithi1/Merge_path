@@ -1,0 +1,21 @@
+{
+  "id": "notes-app",
+  "name": "notes-app",
+  "description": "A minimal command-line notes manager written in Python.",
+  "language": "Python",
+  "stars": 87,
+  "forks": 12,
+  "owner": "tariq-dev",
+  "health": "active",
+  "last_commit_date": "2026-09-18",
+  "has_readme": true,
+  "has_contributing": true,
+  "has_ci": true,
+  "avg_pr_response_days": 3,
+  "open_issues": 5,
+  "open_prs": 1,
+  "stale_prs": 1,
+  "merged_prs_last_90_days": 2,
+  "maintainer_replies_in_issues": true,
+  "topics": ["python", "cli", "notes", "beginner-friendly"]
+}
