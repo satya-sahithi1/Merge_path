@@ -94,8 +94,10 @@ function QuizPage() {
         if (q.type === "single") {
             return selected.length === 1 && correctIds.includes(selected[0]);
         }
-        // multi: must select all correct and no incorrect
-        return correctIds.length === selected.length && correctIds.every((id)=>selected.includes(id));
+        // multi: at least one correct selected, and no wrong options selected
+        const hasAtLeastOneCorrect = selected.some((id)=>correctIds.includes(id));
+        const hasNoWrong = selected.every((id)=>correctIds.includes(id));
+        return hasAtLeastOneCorrect && hasNoWrong;
     }
     const totalCorrect = questions.filter((q, i)=>answers[i].submitted && isCorrect(q, answers[i].selected)).length;
     const total = questions.length;
@@ -153,7 +155,7 @@ function QuizPage() {
                             children: "Merge Path"
                         }, void 0, false, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 124,
+                            lineNumber: 123,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -163,7 +165,7 @@ function QuizPage() {
                             children: "/"
                         }, void 0, false, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 125,
+                            lineNumber: 124,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -175,7 +177,7 @@ function QuizPage() {
                             children: meta.name
                         }, void 0, false, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 126,
+                            lineNumber: 125,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -185,7 +187,7 @@ function QuizPage() {
                             children: "/"
                         }, void 0, false, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 129,
+                            lineNumber: 128,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -196,13 +198,13 @@ function QuizPage() {
                             children: "Quiz"
                         }, void 0, false, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 130,
+                            lineNumber: 129,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                    lineNumber: 122,
+                    lineNumber: 121,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -227,7 +229,7 @@ function QuizPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                    lineNumber: 137,
+                                    lineNumber: 136,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -238,7 +240,7 @@ function QuizPage() {
                                     children: band.label
                                 }, void 0, false, {
                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                    lineNumber: 140,
+                                    lineNumber: 139,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -249,13 +251,13 @@ function QuizPage() {
                                     children: band.note
                                 }, void 0, false, {
                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                    lineNumber: 143,
+                                    lineNumber: 142,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 135,
+                            lineNumber: 134,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -269,7 +271,7 @@ function QuizPage() {
                                     children: "By domain"
                                 }, void 0, false, {
                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                    lineNumber: 150,
+                                    lineNumber: 149,
                                     columnNumber: 13
                                 }, this),
                                 Object.entries(domainScores).map(([domain, { correct, total }])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -283,7 +285,7 @@ function QuizPage() {
                                                 children: DOMAIN_LABELS[domain] ?? domain
                                             }, void 0, false, {
                                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                lineNumber: 155,
+                                                lineNumber: 154,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -299,12 +301,12 @@ function QuizPage() {
                                                     }
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                    lineNumber: 160,
+                                                    lineNumber: 159,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                lineNumber: 158,
+                                                lineNumber: 157,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -319,19 +321,19 @@ function QuizPage() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                lineNumber: 168,
+                                                lineNumber: 167,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, domain, true, {
                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                        lineNumber: 154,
+                                        lineNumber: 153,
                                         columnNumber: 15
                                     }, this))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 149,
+                            lineNumber: 148,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -345,7 +347,7 @@ function QuizPage() {
                                     children: "Question review"
                                 }, void 0, false, {
                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                    lineNumber: 177,
+                                    lineNumber: 176,
                                     columnNumber: 13
                                 }, this),
                                 questions.map((q, i)=>{
@@ -377,7 +379,7 @@ function QuizPage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                        lineNumber: 194,
+                                                        lineNumber: 193,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -388,13 +390,13 @@ function QuizPage() {
                                                         children: DOMAIN_LABELS[q.domain] ?? q.domain
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                        lineNumber: 197,
+                                                        lineNumber: 196,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                lineNumber: 189,
+                                                lineNumber: 188,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -408,7 +410,7 @@ function QuizPage() {
                                                         children: q.question
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                        lineNumber: 202,
+                                                        lineNumber: 201,
                                                         columnNumber: 21
                                                     }, this),
                                                     !correct && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -428,13 +430,13 @@ function QuizPage() {
                                                                         children: selectedOptions.map((o)=>o.text).join(", ") || "—"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                                        lineNumber: 207,
+                                                                        lineNumber: 206,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                                lineNumber: 205,
+                                                                lineNumber: 204,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -448,13 +450,13 @@ function QuizPage() {
                                                                         children: correctOptions.map((o)=>o.text).join(", ")
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                                        lineNumber: 213,
+                                                                        lineNumber: 212,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                                lineNumber: 211,
+                                                                lineNumber: 210,
                                                                 columnNumber: 25
                                                             }, this),
                                                             selectedOptions.filter((o)=>!o.correct).map((o)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -465,7 +467,7 @@ function QuizPage() {
                                                                     children: o.explanation
                                                                 }, o.id, false, {
                                                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                                    lineNumber: 221,
+                                                                    lineNumber: 220,
                                                                     columnNumber: 29
                                                                 }, this)),
                                                             correctOptions.filter((o)=>!answers[i].selected.includes(o.id)).map((o)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -476,32 +478,32 @@ function QuizPage() {
                                                                     children: o.explanation
                                                                 }, o.id, false, {
                                                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                                    lineNumber: 229,
+                                                                    lineNumber: 228,
                                                                     columnNumber: 29
                                                                 }, this))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                        lineNumber: 204,
+                                                        lineNumber: 203,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                                lineNumber: 201,
+                                                lineNumber: 200,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, q.id, true, {
                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                        lineNumber: 187,
+                                        lineNumber: 186,
                                         columnNumber: 17
                                     }, this);
                                 })
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 176,
+                            lineNumber: 175,
                             columnNumber: 11
                         }, this),
                         totalCorrect >= 7 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -519,7 +521,7 @@ function QuizPage() {
                                     children: "Ready to find a real issue?"
                                 }, void 0, false, {
                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                    lineNumber: 245,
+                                    lineNumber: 244,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -537,7 +539,7 @@ function QuizPage() {
                                             children: "goodfirstissues.dev ↗"
                                         }, void 0, false, {
                                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                            lineNumber: 249,
+                                            lineNumber: 248,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -552,19 +554,19 @@ function QuizPage() {
                                             children: "goodfirstissue.dev ↗"
                                         }, void 0, false, {
                                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                            lineNumber: 254,
+                                            lineNumber: 253,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                    lineNumber: 248,
+                                    lineNumber: 247,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 243,
+                            lineNumber: 242,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -576,19 +578,19 @@ function QuizPage() {
                             children: "← Back to repo"
                         }, void 0, false, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 263,
+                            lineNumber: 262,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                    lineNumber: 133,
+                    lineNumber: 132,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-            lineNumber: 121,
+            lineNumber: 120,
             columnNumber: 7
         }, this);
     }
@@ -653,7 +655,7 @@ function QuizPage() {
                         children: "Merge Path"
                     }, void 0, false, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                        lineNumber: 302,
+                        lineNumber: 301,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -663,7 +665,7 @@ function QuizPage() {
                         children: "/"
                     }, void 0, false, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                        lineNumber: 303,
+                        lineNumber: 302,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -675,7 +677,7 @@ function QuizPage() {
                         children: meta.name
                     }, void 0, false, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                        lineNumber: 304,
+                        lineNumber: 303,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -685,7 +687,7 @@ function QuizPage() {
                         children: "/"
                     }, void 0, false, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                        lineNumber: 307,
+                        lineNumber: 306,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -696,13 +698,13 @@ function QuizPage() {
                         children: "Quiz"
                     }, void 0, false, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                        lineNumber: 308,
+                        lineNumber: 307,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                lineNumber: 300,
+                lineNumber: 299,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -726,7 +728,7 @@ function QuizPage() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                        lineNumber: 315,
+                                        lineNumber: 314,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -738,13 +740,13 @@ function QuizPage() {
                                         children: DOMAIN_LABELS[q.domain] ?? q.domain
                                     }, void 0, false, {
                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                        lineNumber: 316,
+                                        lineNumber: 315,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                lineNumber: 314,
+                                lineNumber: 313,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -760,18 +762,18 @@ function QuizPage() {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                    lineNumber: 322,
+                                    lineNumber: 321,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                lineNumber: 321,
+                                lineNumber: 320,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                        lineNumber: 313,
+                        lineNumber: 312,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -786,7 +788,7 @@ function QuizPage() {
                                 children: q.question
                             }, void 0, false, {
                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                lineNumber: 331,
+                                lineNumber: 330,
                                 columnNumber: 11
                             }, this),
                             q.type === "multi" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -801,26 +803,26 @@ function QuizPage() {
                                         children: "☑"
                                     }, void 0, false, {
                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                        lineNumber: 337,
+                                        lineNumber: 336,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         children: "Multiple answers — select all that apply"
                                     }, void 0, false, {
                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                        lineNumber: 338,
+                                        lineNumber: 337,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                lineNumber: 335,
+                                lineNumber: 334,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                        lineNumber: 330,
+                        lineNumber: 329,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -847,20 +849,20 @@ function QuizPage() {
                                         children: q.type === "multi" ? ans.selected.includes(opt.id) ? "☑" : "☐" : ans.selected.includes(opt.id) ? "◉" : "○"
                                     }, void 0, false, {
                                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                        lineNumber: 361,
+                                        lineNumber: 360,
                                         columnNumber: 17
                                     }, this),
                                     opt.text
                                 ]
                             }, opt.id, true, {
                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                lineNumber: 349,
+                                lineNumber: 348,
                                 columnNumber: 15
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                        lineNumber: 344,
+                        lineNumber: 343,
                         columnNumber: 9
                     }, this),
                     ans.submitted && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -876,7 +878,7 @@ function QuizPage() {
                                 children: questionCorrect ? "✓ Correct" : "✗ Not quite"
                             }, void 0, false, {
                                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                lineNumber: 376,
+                                lineNumber: 375,
                                 columnNumber: 13
                             }, this),
                             q.options.filter((o)=>ans.selected.includes(o.id) || o.correct && !ans.selected.includes(o.id)).map((o)=>{
@@ -901,7 +903,7 @@ function QuizPage() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                            lineNumber: 399,
+                                            lineNumber: 398,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -911,7 +913,7 @@ function QuizPage() {
                                             children: o.text
                                         }, void 0, false, {
                                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                            lineNumber: 402,
+                                            lineNumber: 401,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -921,20 +923,20 @@ function QuizPage() {
                                             children: o.explanation
                                         }, void 0, false, {
                                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                            lineNumber: 403,
+                                            lineNumber: 402,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, o.id, true, {
                                     fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                                    lineNumber: 397,
+                                    lineNumber: 396,
                                     columnNumber: 19
                                 }, this);
                             })
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                        lineNumber: 374,
+                        lineNumber: 373,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -952,7 +954,7 @@ function QuizPage() {
                             children: "Submit"
                         }, void 0, false, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 413,
+                            lineNumber: 412,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: goNext,
@@ -965,24 +967,24 @@ function QuizPage() {
                             children: currentQ < total - 1 ? "Next question →" : "See results →"
                         }, void 0, false, {
                             fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                            lineNumber: 427,
+                            lineNumber: 426,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                        lineNumber: 411,
+                        lineNumber: 410,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-                lineNumber: 311,
+                lineNumber: 310,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
-        lineNumber: 298,
+        lineNumber: 297,
         columnNumber: 5
     }, this);
 }

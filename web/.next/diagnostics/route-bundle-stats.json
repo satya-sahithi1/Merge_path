@@ -1,10 +1,10 @@
 [
   {
     "route": "/repo/[repoId]/quiz",
-    "firstLoadUncompressedJsBytes": 484195,
+    "firstLoadUncompressedJsBytes": 484223,
     "firstLoadChunkPaths": [
       ".next/static/chunks/3fntmmi971322.js",
-      ".next/static/chunks/3ooz1nm33w5b4.js",
+      ".next/static/chunks/1yaj7bvvzbwnp.js",
       ".next/static/chunks/310vm2bl3xxpt.js",
       ".next/static/chunks/2mmpezlrfmbu5.js",
       ".next/static/chunks/1rj7ns8rte9vc.js",

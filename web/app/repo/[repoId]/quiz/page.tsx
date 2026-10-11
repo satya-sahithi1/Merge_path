@@ -82,11 +82,10 @@ export default function QuizPage() {
     if (q.type === "single") {
       return selected.length === 1 && correctIds.includes(selected[0]);
     }
-    // multi: must select all correct and no incorrect
-    return (
-      correctIds.length === selected.length &&
-      correctIds.every((id) => selected.includes(id))
-    );
+    // multi: at least one correct selected, and no wrong options selected
+    const hasAtLeastOneCorrect = selected.some((id) => correctIds.includes(id));
+    const hasNoWrong = selected.every((id) => correctIds.includes(id));
+    return hasAtLeastOneCorrect && hasNoWrong;
   }
 
   const totalCorrect = questions.filter((q, i) =>
