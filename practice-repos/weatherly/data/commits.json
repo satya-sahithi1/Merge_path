@@ -1,0 +1,62 @@
+[
+  {
+    "hash": "a3f91c",
+    "author": "kiran-weather-dev",
+    "date": "2025-06-12",
+    "message": "refactor: clean up formatting logic"
+  },
+  {
+    "hash": "b7e204",
+    "author": "kiran-weather-dev",
+    "date": "2025-06-10",
+    "message": "fix: handle missing wind data"
+  },
+  {
+    "hash": "c1d83a",
+    "author": "kiran-weather-dev",
+    "date": "2025-06-08",
+    "message": "feat: add humidity display"
+  },
+  {
+    "hash": "d09f55",
+    "author": "kiran-weather-dev",
+    "date": "2025-06-01",
+    "message": "chore: update requirements"
+  },
+  {
+    "hash": "e4b612",
+    "author": "kiran-weather-dev",
+    "date": "2025-05-22",
+    "message": "feat: add feels-like temperature"
+  },
+  {
+    "hash": "f2a038",
+    "author": "kiran-weather-dev",
+    "date": "2025-05-10",
+    "message": "Merge pull request #11 from kiran-weather-dev/format-temps"
+  },
+  {
+    "hash": "07c94d",
+    "author": "kiran-weather-dev",
+    "date": "2025-05-08",
+    "message": "feat: format temperature output"
+  },
+  {
+    "hash": "18e761",
+    "author": "kiran-weather-dev",
+    "date": "2025-04-30",
+    "message": "fix: handle None city name"
+  },
+  {
+    "hash": "29b340",
+    "author": "kiran-weather-dev",
+    "date": "2025-04-15",
+    "message": "feat: add wind speed display"
+  },
+  {
+    "hash": "3ad527",
+    "author": "kiran-weather-dev",
+    "date": "2025-03-01",
+    "message": "init: basic weather fetch and print"
+  }
+]

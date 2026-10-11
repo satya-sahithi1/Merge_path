@@ -1,0 +1,21 @@
+{
+  "id": "weatherly",
+  "name": "weatherly",
+  "description": "A minimal CLI tool for fetching and displaying current weather data.",
+  "language": "Python",
+  "stars": 203,
+  "forks": 31,
+  "owner": "kiran-weather-dev",
+  "health": "abandoned",
+  "last_commit_date": "2025-06-12",
+  "has_readme": true,
+  "has_contributing": false,
+  "has_ci": false,
+  "avg_pr_response_days": 0,
+  "open_issues": 5,
+  "open_prs": 4,
+  "stale_prs": 4,
+  "merged_prs_last_90_days": 0,
+  "maintainer_replies_in_issues": false,
+  "topics": ["python", "cli", "weather"]
+}

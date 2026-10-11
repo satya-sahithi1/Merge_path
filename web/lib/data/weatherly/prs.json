@@ -1,0 +1,59 @@
+[
+  {
+    "id": 11,
+    "title": "feat: format temperature output",
+    "state": "merged",
+    "author": "kiran-weather-dev",
+    "opened_at": "2025-05-07",
+    "merged_at": "2025-05-10",
+    "linked_issue": null,
+    "branch": "format-temps",
+    "description": "Added degree symbol and consistent decimal formatting to temperature output.",
+    "diff_summary": "src/weather.py: updated format_output to use f-string with °C suffix",
+    "review_comments": [],
+    "lesson": null,
+    "lesson_note": "The last merged PR — 14 months ago. Nothing since."
+  },
+  {
+    "id": 16,
+    "title": "fix: handle empty API response gracefully",
+    "state": "open",
+    "author": "lena-open-source",
+    "opened_at": "2025-10-18",
+    "merged_at": null,
+    "linked_issue": null,
+    "branch": "fix/empty-api-response",
+    "description": "Added a check for empty response before parsing. Prevents a crash when the API returns nothing.",
+    "diff_summary": "src/weather.py: added `if not data: return {'error': 'Empty response'}`",
+    "review_comments": [
+      {
+        "author": "kiran-weather-dev",
+        "date": "2025-10-18",
+        "body": "Thanks for the PR. Can you also add a test for this case?",
+        "resolved": false
+      },
+      {
+        "author": "lena-open-source",
+        "date": "2025-10-18",
+        "body": "Sure, added a test in the latest commit."
+      }
+    ],
+    "lesson": null,
+    "lesson_note": "Maintainer asked for a change 11 months ago. Contributor replied the same day. Maintainer never responded again. PR is still open."
+  },
+  {
+    "id": 19,
+    "title": "fix: handle missing 'main' key in API response",
+    "state": "open",
+    "author": "dev-rohan",
+    "opened_at": "2025-12-10",
+    "merged_at": null,
+    "linked_issue": 2,
+    "branch": "fix/issue-2-missing-main-key",
+    "description": "Fixes #2.\n\nAdded a check for the 'main' key before accessing it. Returns a clean error dict instead of raising KeyError.\n\nThe API format change was documented in their changelog. This handles it gracefully.",
+    "diff_summary": "src/weather.py: added `if 'main' not in data: return {'error': 'Unexpected API response format.'}`",
+    "review_comments": [],
+    "lesson": "good_newcomer_pr",
+    "lesson_note": "This PR already fixes issue #2 — correct diagnosis, clean fix, linked to the issue. The maintainer has never responded. It's been open 9 months."
+  }
+]

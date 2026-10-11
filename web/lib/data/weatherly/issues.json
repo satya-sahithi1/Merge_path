@@ -1,0 +1,204 @@
+[
+  {
+    "id": 2,
+    "title": "KeyError crash when fetching weather for some cities",
+    "state": "open",
+    "labels": ["bug"],
+    "opened_by": "preethi-codes",
+    "opened_at": "2025-03-03",
+    "assigned_to": null,
+    "body": "Getting a KeyError when I try to fetch weather for certain cities. Seems like the API changed its response format.\n\n```\nKeyError: 'main'\n```\n\nHappens with cities that return an error response instead of weather data. The 'main' key doesn't exist in those responses.\n\n**Steps to reproduce:**\n1. Call `parse_weather` with a response that doesn't have a 'main' key\n2. Observe: unhandled KeyError\n\n**Version:** 1.0.0\n**Python:** 3.12",
+    "comments": [
+      {
+        "author": "meera-writes-code",
+        "date": "2025-03-10",
+        "body": "Same issue here. The API docs mention the format changed in their latest version."
+      },
+      {
+        "author": "infra-nerd-9",
+        "date": "2025-04-02",
+        "body": "Is anyone working on this? PR #19 looks like it already has a fix."
+      }
+    ],
+    "lesson": "already_fixed_by_pr",
+    "lesson_feedback": "PR #19 has been open for 9 months with a correct fix. The maintainer never responded. Even if you wrote a fix, it won't get reviewed — the repo is abandoned.",
+    "reproduction": {
+      "issueId": "weatherly-2",
+      "buggyVersion": "1.0.0",
+      "fixedVersion": "1.1.0",
+      "reproductionSteps": [
+        { "instruction": "Open weather.py and find the parse_weather function." },
+        { "instruction": "Call parse_weather with a response missing the 'main' key: parse_weather({'cod': 404, 'message': 'city not found'})" },
+        { "instruction": "Observe what happens." }
+      ],
+      "expectedResult": "parse_weather returns {'error': 'Unexpected API response format.'}",
+      "buggyBehavior": {
+        "output": "KeyError: 'main' — unhandled exception, program crashes.",
+        "type": "crash",
+        "verifiedByTest": true
+      },
+      "fixedBehavior": {
+        "output": "Returns {'error': 'Unexpected API response format.'} — clean error, no crash.",
+        "type": "validation_error",
+        "verifiedByTest": true
+      },
+      "regressionTestId": "weatherly/missing-main-key"
+    }
+  },
+  {
+    "id": 3,
+    "title": "Is this project still maintained?",
+    "state": "open",
+    "labels": [],
+    "opened_by": "random-dev-42",
+    "opened_at": "2025-10-20",
+    "assigned_to": null,
+    "body": "Last commit was over a year ago and PRs are going unanswered. Is this project still being maintained? I'd like to contribute but it seems like nothing is getting reviewed.",
+    "comments": [
+      {
+        "author": "anon-contributor",
+        "date": "2025-11-05",
+        "body": "Same question. I opened a PR months ago with no response."
+      },
+      {
+        "author": "meera-writes-code",
+        "date": "2026-01-10",
+        "body": "I think it's abandoned. The maintainer's GitHub profile hasn't had any activity either."
+      }
+    ],
+    "lesson": "no_reproduction_steps",
+    "lesson_feedback": "This isn't a bug report — it's a signal. The maintainer hasn't replied to anything in 13 months. This repo isn't the right place for a first contribution.",
+    "reproduction": {
+      "issueId": "weatherly-3",
+      "buggyVersion": null,
+      "fixedVersion": null,
+      "reproductionSteps": [
+        { "instruction": "Check the date of the last commit in the Commits tab." },
+        { "instruction": "Count how many open PRs have no maintainer response." },
+        { "instruction": "Check whether the maintainer has replied to any issue in the last year." }
+      ],
+      "expectedResult": "A repo where the maintainer is responsive and PRs get reviewed.",
+      "buggyBehavior": {
+        "output": "Last commit 15+ months ago. 4 open PRs, all unanswered. Maintainer silent 13 months.",
+        "type": "wrong_output",
+        "verifiedByTest": false
+      },
+      "fixedBehavior": {
+        "output": "N/A — this is a repo health signal, not a bug.",
+        "type": "success",
+        "verifiedByTest": false
+      },
+      "regressionTestId": null
+    }
+  },
+  {
+    "id": 5,
+    "title": "Add Fahrenheit option",
+    "state": "open",
+    "labels": ["good first issue"],
+    "opened_by": "curious-dev",
+    "opened_at": "2025-08-14",
+    "assigned_to": null,
+    "body": "It would be nice to have a flag to display temperature in Fahrenheit instead of Celsius. Should be a simple addition to format_output.",
+    "comments": [],
+    "lesson": "good_first_issue_hard",
+    "lesson_feedback": "Technically a small change, but it's labeled good first issue on an abandoned repo. Nobody will review your PR. The label means nothing if the maintainer isn't there.",
+    "reproduction": {
+      "issueId": "weatherly-5",
+      "buggyVersion": null,
+      "fixedVersion": null,
+      "reproductionSteps": [
+        { "instruction": "Check when the maintainer last replied to any issue or PR." },
+        { "instruction": "Count how many open PRs are waiting for review." }
+      ],
+      "expectedResult": "A feature request with an active maintainer who will review contributions.",
+      "buggyBehavior": {
+        "output": "Open feature request on an abandoned repo. No maintainer activity in 13 months.",
+        "type": "wrong_output",
+        "verifiedByTest": false
+      },
+      "fixedBehavior": {
+        "output": "N/A — the issue itself is fine, but the repo context makes it a bad pick.",
+        "type": "success",
+        "verifiedByTest": false
+      },
+      "regressionTestId": null
+    }
+  },
+  {
+    "id": 7,
+    "title": "I'll fix the KeyError crash",
+    "state": "open",
+    "labels": ["bug"],
+    "opened_by": "anon-contributor",
+    "opened_at": "2025-11-20",
+    "assigned_to": null,
+    "body": "I'd like to take on issue #2. I know how to fix it — just need to check if 'main' exists before accessing it. Will have a PR up soon.",
+    "comments": [
+      {
+        "author": "random-dev-42",
+        "date": "2025-11-21",
+        "body": "Good luck — there's already a PR for this (#19) that's been ignored for months."
+      }
+    ],
+    "lesson": "claimed_never_started",
+    "lesson_feedback": "Claimed 10 months ago. No PR ever opened. The claim itself is an issue post, not a comment on issue #2. And even PR #19 which does have the fix has been ignored — the repo is abandoned.",
+    "reproduction": {
+      "issueId": "weatherly-7",
+      "buggyVersion": null,
+      "fixedVersion": null,
+      "reproductionSteps": [
+        { "instruction": "Check issue #2 to see if anyone has already claimed it." },
+        { "instruction": "Check PR #19 to see the current state of that fix." }
+      ],
+      "expectedResult": "A claimed issue where the contributor opened a PR and the maintainer is responsive.",
+      "buggyBehavior": {
+        "output": "Claimed 10 months ago. No PR ever opened. PR #19 by someone else also unanswered.",
+        "type": "wrong_output",
+        "verifiedByTest": false
+      },
+      "fixedBehavior": {
+        "output": "N/A — repo is abandoned, contributing here is not productive.",
+        "type": "success",
+        "verifiedByTest": false
+      },
+      "regressionTestId": null
+    }
+  },
+  {
+    "id": 9,
+    "title": "API key invalid?",
+    "state": "open",
+    "labels": [],
+    "opened_by": "frustrated-user-77",
+    "opened_at": "2026-02-28",
+    "assigned_to": null,
+    "body": "Getting an error about invalid API key. Not sure what's happening. Can someone help?",
+    "comments": [],
+    "lesson": "no_reproduction_steps",
+    "lesson_feedback": "No steps, no error message, no version, no API key source mentioned. Not enough information to help — and the maintainer won't reply anyway.",
+    "reproduction": {
+      "issueId": "weatherly-9",
+      "buggyVersion": null,
+      "fixedVersion": null,
+      "reproductionSteps": [
+        { "instruction": "Read the issue body carefully." },
+        { "instruction": "Check if there are steps to reproduce." },
+        { "instruction": "Check if an error message is included." },
+        { "instruction": "Check if a Python version or API key source is mentioned." }
+      ],
+      "expectedResult": "A bug report with steps, error output, version, and enough context to reproduce.",
+      "buggyBehavior": {
+        "output": "No steps, no error message, no version. Cannot be investigated.",
+        "type": "wrong_output",
+        "verifiedByTest": false
+      },
+      "fixedBehavior": {
+        "output": "N/A — needs more information from the reporter.",
+        "type": "success",
+        "verifiedByTest": false
+      },
+      "regressionTestId": null
+    }
+  }
+]
