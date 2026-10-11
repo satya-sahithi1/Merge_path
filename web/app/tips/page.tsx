@@ -103,7 +103,7 @@ export default function TipsPage() {
           {/* CTA */}
           <div className="flex justify-end pt-2">
             <button
-              onClick={() => router.push("/mission")}
+              onClick={() => router.push("/repos")}
               className="px-6 py-2.5 rounded-md text-sm font-medium transition-colors"
               style={{
                 background: "var(--accent)",

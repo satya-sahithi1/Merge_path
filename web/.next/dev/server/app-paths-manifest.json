@@ -2,8 +2,7 @@
   "/learn/page": "app/learn/page.js",
   "/mission/page": "app/mission/page.js",
   "/page": "app/page.js",
-  "/repo/[repoId]/issues/[issueId]/page": "app/repo/[repoId]/issues/[issueId]/page.js",
   "/repo/[repoId]/page": "app/repo/[repoId]/page.js",
-  "/repo/[repoId]/quiz/page": "app/repo/[repoId]/quiz/page.js",
+  "/repos/page": "app/repos/page.js",
   "/tips/page": "app/tips/page.js"
 }
