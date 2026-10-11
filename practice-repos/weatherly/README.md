@@ -1,6 +1,6 @@
 # weatherly
 
-A minimal command-line tool that fetches and displays current weather for a city using a weather API.
+A small Python module and CLI for parsing and displaying weather data from an API response.
 
 ## Requirements
 
@@ -31,6 +31,12 @@ print(format_output(parsed))
 # Temp: 28.4°C | Humidity: 72% | Partly cloudy
 ```
 
+## CLI
+
+```bash
+python src/cli.py London
+```
+
 ## Running tests
 
 ```bash
@@ -39,4 +45,4 @@ pytest tests/
 
 ## License
 
-MIT
+See [LICENSE](LICENSE).
