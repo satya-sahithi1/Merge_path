@@ -1,0 +1,62 @@
+[
+  {
+    "hash": "a1f3c2",
+    "author": "amaan-dev",
+    "date": "2026-09-12",
+    "message": "refactor: simplify grade lookup in calculator"
+  },
+  {
+    "hash": "b8e041",
+    "author": "amaan-dev",
+    "date": "2026-08-14",
+    "message": "Merge pull request #8 from preethi-codes/fix/reject-nonpositive-credits"
+  },
+  {
+    "hash": "c3d927",
+    "author": "preethi-codes",
+    "date": "2026-08-14",
+    "message": "test: add test for non-positive credit rejection"
+  },
+  {
+    "hash": "d5b614",
+    "author": "preethi-codes",
+    "date": "2026-08-10",
+    "message": "fix: reject non-positive credits in semester_gpa"
+  },
+  {
+    "hash": "e2a780",
+    "author": "amaan-dev",
+    "date": "2026-07-16",
+    "message": "Merge pull request #7 from meera-writes-code/docs/readme-example"
+  },
+  {
+    "hash": "f9c053",
+    "author": "meera-writes-code",
+    "date": "2026-07-14",
+    "message": "docs: fix cgpa example in README"
+  },
+  {
+    "hash": "07b319",
+    "author": "amaan-dev",
+    "date": "2026-06-02",
+    "message": "Merge pull request #5 from dev-rohan/fix/issue-3-add-aplus-bplus"
+  },
+  {
+    "hash": "18d46e",
+    "author": "dev-rohan",
+    "date": "2026-05-30",
+    "message": "fix: add A+ and B+ to GRADE_POINTS"
+  },
+  {
+    "hash": "29a5f1",
+    "author": "amaan-dev",
+    "date": "2026-04-15",
+    "message": "feat: add cgpa function"
+  },
+  {
+    "hash": "3bc82d",
+    "author": "amaan-dev",
+    "date": "2026-04-01",
+    "message": "init: add GRADE_POINTS and semester_gpa"
+  }
+]

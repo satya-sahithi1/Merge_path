@@ -1,0 +1,270 @@
+[
+  {
+    "id": 1,
+    "domain": "repo_health",
+    "question": "Which two signals best suggest a PR here would actually get reviewed?",
+    "type": "multi",
+    "options": [
+      {
+        "id": "a",
+        "text": "The repo has plenty of stars.",
+        "correct": false,
+        "explanation": "Stars show popularity, not review speed. A repo can have thousands of stars and an inactive maintainer."
+      },
+      {
+        "id": "b",
+        "text": "PRs get merged within days.",
+        "correct": true,
+        "explanation": "PR #5 merged in 3 days, #7 in 2, #8 in 4. That pattern tells you the maintainer is actively reviewing."
+      },
+      {
+        "id": "c",
+        "text": "The README is short.",
+        "correct": false,
+        "explanation": "README length says nothing about how quickly PRs get reviewed."
+      },
+      {
+        "id": "d",
+        "text": "Issues get replies within a day or two.",
+        "correct": true,
+        "explanation": "The maintainer replied to issue #6 the next day and to #9 the day after it was opened. That response time carries over to PRs."
+      },
+      {
+        "id": "e",
+        "text": "A LICENSE file exists.",
+        "correct": false,
+        "explanation": "A license sets reuse rights, not response times."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "domain": "repo_health",
+    "question": "What do the review comments on this repo's merged PRs suggest your PR should include?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A screenshot of the output.",
+        "correct": false,
+        "explanation": "This is a calculation library — there's nothing visual to screenshot."
+      },
+      {
+        "id": "b",
+        "text": "A changelog entry.",
+        "correct": false,
+        "explanation": "There's no changelog file in the repo."
+      },
+      {
+        "id": "c",
+        "text": "Tests covering your change.",
+        "correct": true,
+        "explanation": "The maintainer asked for tests in PR #8 before merging. That's the clearest signal of what they expect."
+      },
+      {
+        "id": "d",
+        "text": "A link to an issue in the PR title.",
+        "correct": false,
+        "explanation": "PR #5 fixed issue #3 and was merged without ever mentioning the issue number in the title. The maintainer didn't flag it."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "domain": "issue_judgment",
+    "question": "Which issue would you take?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "#2 — Support 4.0 GPA scale.",
+        "correct": false,
+        "explanation": "Labelled easy, but the thread lists three different 4.0 mappings and nobody has chosen one. You can't write the code until that decision is made."
+      },
+      {
+        "id": "b",
+        "text": "#3 — KeyError when using grade 'A+'.",
+        "correct": false,
+        "explanation": "This was fixed by PR #5 in June. The issue tracker was never updated because the PR didn't link it. Try the code before you start."
+      },
+      {
+        "id": "c",
+        "text": "#6 — cgpa() ignores credit weights.",
+        "correct": false,
+        "explanation": "The bug is confirmed and real, but it was assigned to another contributor on 2026-09-07. Check before stepping in."
+      },
+      {
+        "id": "d",
+        "text": "#9 — CGPA looks wrong sometimes.",
+        "correct": false,
+        "explanation": "No inputs, no expected vs actual values. The maintainer asked for more details and got no follow-up. You can't reproduce it."
+      },
+      {
+        "id": "e",
+        "text": "#10 — semester_gpa([]) raises ZeroDivisionError.",
+        "correct": true,
+        "explanation": "Confirmed by the maintainer, the fix is spelled out in the thread, unclaimed, and a test is explicitly requested. Everything you need is there."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "domain": "issue_judgment",
+    "question": "How much weight should the 'good first issue' label carry when you choose?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A lot — maintainers only add it to genuinely easy issues.",
+        "correct": false,
+        "explanation": "Labels reflect someone's opinion at the time they were added. Issue #2 has that label and hides an unresolved design question."
+      },
+      {
+        "id": "b",
+        "text": "Some — use it as a first filter, but read the thread to confirm.",
+        "correct": true,
+        "explanation": "The label is a useful starting point, not a guarantee. The thread is where you find out if the label still holds."
+      },
+      {
+        "id": "c",
+        "text": "None — labels are only guesses.",
+        "correct": false,
+        "explanation": "Labels are still a useful first filter. Ignoring them entirely slows you down."
+      },
+      {
+        "id": "d",
+        "text": "Only if the issue also has the bug label.",
+        "correct": false,
+        "explanation": "The bug label says what kind of issue it is. It says nothing about how hard it is to fix."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "domain": "issue_judgment",
+    "question": "Issue #9 says the CGPA \"sometimes\" differs from the college portal. What do you need before you could even try to reproduce it?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The reporter's operating system.",
+        "correct": false,
+        "explanation": "This is plain Python arithmetic. The OS rarely affects the result."
+      },
+      {
+        "id": "b",
+        "text": "Which college they attend.",
+        "correct": false,
+        "explanation": "Knowing the college might help you guess the grading scale, but you still can't run anything without the actual inputs."
+      },
+      {
+        "id": "c",
+        "text": "A screenshot of the portal page.",
+        "correct": false,
+        "explanation": "That shows the number they expected, not what inputs produced the wrong one."
+      },
+      {
+        "id": "d",
+        "text": "The exact grades and credits they entered.",
+        "correct": true,
+        "explanation": "Without the inputs you can't call the function, and without calling the function you can't compare outputs. That's the minimum needed — and it might also reveal whether this is just the weighting bug from #6."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "domain": "issue_judgment",
+    "question": "You follow an old bug report's steps on the current code and nothing goes wrong. What do you do?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Mark \"Can't reproduce\", then look for a related fix in the PR history.",
+        "correct": true,
+        "explanation": "That's the right call. Issue #3 was confirmed in May on the old code, then fixed by PR #5 on June 2. Running the steps today gives you 9.0 with no error."
+      },
+      {
+        "id": "b",
+        "text": "Mark \"Reproduced\" — others confirmed it earlier.",
+        "correct": false,
+        "explanation": "Those confirmations described the code at the time. You need to reproduce it on the current code."
+      },
+      {
+        "id": "c",
+        "text": "Reinstall everything, assuming your setup is broken.",
+        "correct": false,
+        "explanation": "The steps were clear and ran without error. Your setup is probably fine — the bug is gone."
+      },
+      {
+        "id": "d",
+        "text": "Mark \"Not enough info\" — the report is too old to trust.",
+        "correct": false,
+        "explanation": "An old report can still have complete steps. Age doesn't make it incomplete."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "domain": "contributing",
+    "question": "Issue #6 was assigned to another contributor a week ago and has no PR yet. You'd still like to work on it. What's the best move?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Start now and open your PR first.",
+        "correct": false,
+        "explanation": "That duplicates someone else's work and creates an awkward situation for the maintainer."
+      },
+      {
+        "id": "b",
+        "text": "Ask the maintainer to reassign it to you.",
+        "correct": false,
+        "explanation": "The maintainer assigned it on purpose. A week is too soon to ask for it back."
+      },
+      {
+        "id": "c",
+        "text": "Leave it to them and choose another issue.",
+        "correct": true,
+        "explanation": "A week is not long enough to assume someone has dropped it. Issue #10 is unclaimed and confirmed — start there."
+      },
+      {
+        "id": "d",
+        "text": "Comment asking if they've given up.",
+        "correct": false,
+        "explanation": "That reads as impatient after just one week. If the assignee had been silent for months, a polite check-in would be reasonable."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "domain": "review",
+    "question": "The maintainer asks you to make an empty semester return 0.0, but you think raising an error is cleaner. What do you do?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Push your version and explain it's cleaner.",
+        "correct": false,
+        "explanation": "That ignores a direct request from the person who owns the project."
+      },
+      {
+        "id": "b",
+        "text": "Close the PR and open another with your version.",
+        "correct": false,
+        "explanation": "That throws away the review thread and starts the cycle over."
+      },
+      {
+        "id": "c",
+        "text": "Keep arguing in the thread until they agree.",
+        "correct": false,
+        "explanation": "Repeated arguments cost goodwill and delay the merge. Make your case once."
+      },
+      {
+        "id": "d",
+        "text": "Share your reasoning once, then follow their call.",
+        "correct": true,
+        "explanation": "The maintainer owns the project's behaviour contract. They've already said what they want in the issue thread. You can note your view — once — but the decision is theirs."
+      }
+    ]
+  }
+]

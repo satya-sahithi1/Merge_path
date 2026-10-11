@@ -17,6 +17,11 @@ const REPO_BRIEFS: Record<string, { name: string; brief: string; language: strin
     brief: "A small Python module and CLI for parsing weather API responses.",
     language: "Python",
   },
+  "gradewise": {
+    name: "gradewise",
+    brief: "a CGPA and semester calculator.",
+    language: "Python",
+  },
 };
 
 type GridState = "loading" | "ready";
@@ -112,7 +117,7 @@ export default function ReposPage() {
 
         {gridState === "loading" ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {[0, 1].map((i) => (
+            {[0, 1, 2].map((i) => (
               <div key={i} className="rounded-lg border p-6 h-40" style={{ borderColor: "var(--border)", background: "var(--surface)" }} />
             ))}
           </div>

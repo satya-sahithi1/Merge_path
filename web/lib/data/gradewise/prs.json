@@ -1,0 +1,76 @@
+[
+  {
+    "id": 5,
+    "title": "fix: add A+ and B+ to GRADE_POINTS",
+    "state": "merged",
+    "author": "dev-rohan",
+    "opened_at": "2026-05-30",
+    "merged_at": "2026-06-02",
+    "linked_issue": 3,
+    "branch": "fix/issue-3-add-aplus-bplus",
+    "description": "Fixes #3.\n\n'A+' and 'B+' were missing from GRADE_POINTS so any course with those grades raised a KeyError.\n\n**Changes:**\n- `src/grades.py`: added A+ (9) and B+ (7) to GRADE_POINTS\n\n**Testing:**\n- Confirmed `semester_gpa([('A+', 3)])` and `semester_gpa([('B+', 3)])` both return correctly\n- All existing tests pass",
+    "diff_summary": "src/grades.py: added \"A+\": 9 and \"B+\": 7 entries to GRADE_POINTS",
+    "review_comments": [
+      {
+        "author": "amaan-dev",
+        "date": "2026-06-01",
+        "body": "Values look right. Merging. Thanks!"
+      }
+    ],
+    "lesson": "good_newcomer_pr",
+    "lesson_note": "Small scope, correct fix, no back-and-forth needed. The one miss: not using 'Fixes #3' in the description meant issue #3 stayed open after merge. Always link the issue."
+  },
+  {
+    "id": 7,
+    "title": "docs: fix cgpa example in README",
+    "state": "merged",
+    "author": "meera-writes-code",
+    "opened_at": "2026-07-14",
+    "merged_at": "2026-07-16",
+    "linked_issue": null,
+    "branch": "docs/readme-example",
+    "description": "The cgpa example in the README was using the wrong expected output. Updated it to match what the function actually returns.",
+    "diff_summary": "README.md: corrected expected cgpa value in usage example",
+    "review_comments": [
+      {
+        "author": "amaan-dev",
+        "date": "2026-07-15",
+        "body": "Good catch, thanks. Merging."
+      }
+    ],
+    "lesson": null,
+    "lesson_note": "Quick, clean docs fix. Merged in two days."
+  },
+  {
+    "id": 8,
+    "title": "fix: reject non-positive credits in semester_gpa",
+    "state": "merged",
+    "author": "preethi-codes",
+    "opened_at": "2026-08-10",
+    "merged_at": "2026-08-14",
+    "linked_issue": null,
+    "branch": "fix/reject-nonpositive-credits",
+    "description": "semester_gpa was silently accepting credits <= 0, which would produce a nonsense GPA or a division by zero.\n\nAdded a ValueError for any course with credits <= 0.\n\n**Changes:**\n- `src/calculator.py`: added guard for credits <= 0 in the loop\n\n**Testing:**\n- Added tests for credits=0 and credits=-1",
+    "diff_summary": "src/calculator.py: added `if credits <= 0: raise ValueError(...)` inside the course loop",
+    "review_comments": [
+      {
+        "author": "amaan-dev",
+        "date": "2026-08-11",
+        "body": "Thanks! The guard is correct. Can you add a test that explicitly checks a ValueError is raised? The tests you have check the happy path but not the error case.",
+        "resolved": true
+      },
+      {
+        "author": "preethi-codes",
+        "date": "2026-08-11",
+        "body": "Done — added `test_semester_gpa_rejects_zero_credits` and `test_semester_gpa_rejects_negative_credits`. Anything else?"
+      },
+      {
+        "author": "amaan-dev",
+        "date": "2026-08-14",
+        "body": "Perfect. Merging. Good work responding quickly to the review."
+      }
+    ],
+    "lesson": "polite_review_response",
+    "lesson_note": "The maintainer asked for tests on the error path specifically. The contributor added them the same day without pushback. That's what makes a PR easy to merge."
+  }
+]
