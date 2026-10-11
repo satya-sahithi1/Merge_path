@@ -1,0 +1,23 @@
+{
+  "id": "gradewise",
+  "name": "gradewise",
+  "description": "a CGPA and semester calculator",
+  "language": "Python",
+  "stars": 42,
+  "forks": 7,
+  "owner": "amaan-dev",
+  "health": "active",
+  "last_commit_date": "2026-09-12",
+  "has_readme": true,
+  "has_contributing": true,
+  "has_ci": true,
+  "avg_pr_response_days": 2,
+  "open_issues": 4,
+  "open_prs": 0,
+  "stale_prs": 0,
+  "merged_prs_last_90_days": 2,
+  "maintainer_replies_in_issues": true,
+  "topics": ["python", "cgpa", "grades", "beginner-friendly"],
+  "asOf": "2026-09-15",
+  "verdict": "worth-contributing"
+}

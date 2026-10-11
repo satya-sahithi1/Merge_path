@@ -9,21 +9,28 @@ Each class maps to a regressionTestId in issues.json.
 
 import sys
 import os
+import importlib.util
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+# Ensure repo root is on sys.path for src.* imports
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, REPO_ROOT)
 
 import pytest
 from src.calculator import semester_gpa, cgpa
-from scenarios.fixes.issue_6.calculator_fixed import (
-    cgpa as cgpa_fixed_6,
-    semester_gpa as semester_gpa_fixed_6,
-)
-from scenarios.fixes.issue_10.calculator_fixed import (
-    semester_gpa as semester_gpa_fixed_10,
-)
-from scenarios.history.issue_3.calculator_old import (
-    semester_gpa as semester_gpa_old_3,
-)
+
+
+def _load(rel_path):
+    """Load a module from a path relative to the repo root."""
+    abs_path = os.path.join(REPO_ROOT, rel_path)
+    spec = importlib.util.spec_from_file_location("_scenario_mod", abs_path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+_old3   = _load("scenarios/history/issue-3/calculator_old.py")
+_fix6   = _load("scenarios/fixes/issue-6/calculator_fixed.py")
+_fix10  = _load("scenarios/fixes/issue-10/calculator_fixed.py")
 
 
 # ---------------------------------------------------------------------------
@@ -37,12 +44,12 @@ class TestKeyErrorGrade:
     def test_old_raises_keyerror_on_aplus(self):
         """Pre-PR #5: KeyError when grade is 'A+'."""
         with pytest.raises(KeyError):
-            semester_gpa_old_3([("A+", 3)])
+            _old3.semester_gpa([("A+", 3)])
 
     def test_old_raises_keyerror_on_bplus(self):
         """Pre-PR #5: KeyError when grade is 'B+'."""
         with pytest.raises(KeyError):
-            semester_gpa_old_3([("B+", 3)])
+            _old3.semester_gpa([("B+", 3)])
 
     def test_head_aplus_works(self):
         """HEAD: 'A+' now resolves to 9 points — bug is fixed."""
@@ -59,7 +66,7 @@ class TestKeyErrorGrade:
 # regressionTestId: gradewise/cgpa-ignores-credits  (issue #6)
 # HEAD cgpa() averages semester GPAs without weighting by credits.
 # Fix: credit-weighted average across all courses in all semesters.
-# Spec example: sem1 = [("O",2)], sem2 = [("B",6)] → expected 7.0
+# Spec example: sem1 = [("O",2)], sem2 = [("B",6)] -> expected 7.0
 # ---------------------------------------------------------------------------
 
 class TestCgpaIgnoresCredits:
@@ -67,24 +74,24 @@ class TestCgpaIgnoresCredits:
     def test_buggy_cgpa_returns_wrong_value(self):
         """HEAD: cgpa ignores credits — returns 8.0 instead of 7.0."""
         sem1 = [("O", 2)]   # GPA = 10.0, 2 credits
-        sem2 = [("B", 6)]   # GPA = 6.0,  6 credits
+        sem2 = [("B", 6)]   # GPA =  6.0, 6 credits
         result = cgpa([sem1, sem2])
-        # Bug: unweighted average → (10 + 6) / 2 = 8.0
+        # Bug: unweighted average -> (10 + 6) / 2 = 8.0
         assert result == 8.0
 
     def test_fixed_cgpa_returns_correct_value(self):
         """Fix: credit-weighted cgpa returns 7.0."""
-        sem1 = [("O", 2)]   # 10 pts × 2 cr = 20
-        sem2 = [("B", 6)]   # 6 pts × 6 cr = 36
+        sem1 = [("O", 2)]   # 10 pts x 2 cr = 20
+        sem2 = [("B", 6)]   # 6 pts x 6 cr = 36
         # weighted: (20 + 36) / (2 + 6) = 56 / 8 = 7.0
-        result = cgpa_fixed_6([sem1, sem2])
+        result = _fix6.cgpa([sem1, sem2])
         assert result == 7.0
 
     def test_fixed_cgpa_equal_credits_unchanged(self):
-        """Fix: when all semesters have equal credits, result is same as before."""
+        """Fix: equal credits per semester gives same result as before."""
         sem1 = [("A", 4)]
         sem2 = [("A", 4)]
-        assert cgpa_fixed_6([sem1, sem2]) == 8.0
+        assert _fix6.cgpa([sem1, sem2]) == 8.0
 
 
 # ---------------------------------------------------------------------------
@@ -102,10 +109,10 @@ class TestEmptySemesterCrash:
 
     def test_fixed_empty_list_returns_zero(self):
         """Fix: semester_gpa([]) returns 0.0."""
-        result = semester_gpa_fixed_10([])
+        result = _fix10.semester_gpa([])
         assert result == 0.0
 
     def test_fixed_non_empty_still_works(self):
         """Fix: normal input still computes correctly after the guard."""
-        result = semester_gpa_fixed_10([("A", 4)])
+        result = _fix10.semester_gpa([("A", 4)])
         assert result == 8.0

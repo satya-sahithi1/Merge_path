@@ -1,0 +1,199 @@
+[
+  {
+    "id": 2,
+    "title": "Support 4.0 GPA scale",
+    "kind": "feature",
+    "state": "open",
+    "labels": ["good first issue"],
+    "opened_by": "curious-dev",
+    "opened_at": "2026-04-02",
+    "assigned_to": null,
+    "body": "It would be nice to support the 4.0 scale used by many international universities. The conversion table is out there so it should be easy to add a mode flag.\n\nWould be happy to contribute if this is welcome!",
+    "comments": [
+      {
+        "author": "amaan-dev",
+        "date": "2026-04-02",
+        "body": "Good idea. Should be easy enough — just a second GRADE_POINTS dict and a `scale` parameter. Feel free to pick it up."
+      },
+      {
+        "author": "random-dev-42",
+        "date": "2026-04-20",
+        "body": "Which 4.0 mapping are you thinking? There are at least three different ones — the standard US one, the WES conversion, and the one my university uses. They're not the same."
+      },
+      {
+        "author": "infra-nerd-9",
+        "date": "2026-08-30",
+        "body": "+1, would use this."
+      }
+    ],
+    "lesson": "good_first_issue_hard",
+    "lesson_feedback": "The maintainer called it easy, but the comments reveal the real problem: there is no single 4.0 scale. Without a decision on which mapping to use, you can't write the code. Starting here means you'd spend most of your time waiting for a design decision that hasn't been made.",
+    "reproduction": null
+  },
+  {
+    "id": 3,
+    "title": "KeyError when using grade 'A+'",
+    "kind": "bug",
+    "state": "open",
+    "correctOutcome": "cant_reproduce",
+    "labels": ["bug"],
+    "opened_by": "preethi-codes",
+    "opened_at": "2026-05-04",
+    "assigned_to": null,
+    "body": "Calling `semester_gpa([('A+', 3)])` raises a KeyError.\n\n```\nKeyError: 'A+'\n```\n\nLooked at GRADE_POINTS and A+ is just not there.\n\n**Steps to reproduce:**\n1. Import `semester_gpa` from `src/calculator.py`\n2. Call `semester_gpa([('A+', 3)])`\n3. Observe: KeyError: 'A+'\n\n**Python:** 3.12",
+    "comments": [
+      {
+        "author": "meera-writes-code",
+        "date": "2026-05-06",
+        "body": "Reproduced. B+ has the same issue. Seems like only A, B, C, O, F are in the dict."
+      },
+      {
+        "author": "dev-rohan",
+        "date": "2026-05-18",
+        "body": "Same here. Going to put in a fix."
+      }
+    ],
+    "lesson": "already_fixed_by_pr",
+    "lesson_feedback": "This issue is still open, but if you run the code today it works fine. PR #5 added 'A+' and 'B+' to GRADE_POINTS back in June — it just wasn't linked to this issue so the tracker was never updated. Always reproduce before you start: one line in the shell would have told you the bug is gone.",
+    "reproduction": {
+      "issueId": "gradewise-3",
+      "buggyVersion": "pre-PR#5",
+      "fixedVersion": "post-PR#5",
+      "reproductionSteps": [
+        { "instruction": "Open src/calculator.py and look at the GRADE_POINTS import." },
+        { "instruction": "Call semester_gpa([('A+', 3)])" },
+        { "instruction": "Observe the result." }
+      ],
+      "expectedResult": "semester_gpa returns 9.0",
+      "buggyBehavior": {
+        "output": "KeyError: 'A+' — 'A+' was missing from GRADE_POINTS before PR #5.",
+        "type": "crash",
+        "verifiedByTest": true
+      },
+      "fixedBehavior": {
+        "output": "9.0 — 'A+' is now in GRADE_POINTS (added by PR #5).",
+        "type": "success",
+        "verifiedByTest": true
+      },
+      "regressionTestId": "gradewise/keyerror-grade"
+    }
+  },
+  {
+    "id": 6,
+    "title": "cgpa() ignores credit weights — gives wrong result",
+    "kind": "bug",
+    "state": "open",
+    "correctOutcome": "reproduced",
+    "labels": ["bug"],
+    "opened_by": "infra-nerd-9",
+    "opened_at": "2026-06-10",
+    "assigned_to": "lena-open-source",
+    "body": "The `cgpa()` function just averages the semester GPAs without weighting by credits. Example:\n\n- Semester 1: one 2-credit 'O' course → GPA 10.0\n- Semester 2: one 6-credit 'B' course → GPA 6.0\n\nCurrent output: 8.0. Expected: 7.0 (because sem 2 has 3x the credits).\n\n**Steps to reproduce:**\n1. Run `cgpa([[('O', 2)], [('B', 6)]])`\n2. Compare: got 8.0, expected 7.0\n\n**Python:** 3.12",
+    "comments": [
+      {
+        "author": "amaan-dev",
+        "date": "2026-06-11",
+        "body": "Confirmed. The current implementation treats every semester equally regardless of credit load. It should weight each semester's contribution by its total credits."
+      },
+      {
+        "author": "lena-open-source",
+        "date": "2026-09-05",
+        "body": "I'd like to fix this. Is it okay if I take it?"
+      },
+      {
+        "author": "amaan-dev",
+        "date": "2026-09-07",
+        "body": "Assigned to you, go ahead. Please add a test with the exact example from the issue."
+      }
+    ],
+    "lesson": "claimed_never_started",
+    "lesson_feedback": "The maintainer confirmed the bug and it's real. But read the last two comments: someone was assigned to this three weeks ago and hasn't opened a PR yet. Before you start, leave a comment asking if they're still on it — otherwise you might duplicate their work.",
+    "reproduction": {
+      "issueId": "gradewise-6",
+      "buggyVersion": "HEAD",
+      "fixedVersion": "fixed",
+      "reproductionSteps": [
+        { "instruction": "Open src/calculator.py and find the cgpa function." },
+        { "instruction": "Run cgpa([[('O', 2)], [('B', 6)]])" },
+        { "instruction": "Compare the output to the expected value." }
+      ],
+      "expectedResult": "cgpa returns 7.0 — weighted by credits: (2×10 + 6×6) / (2+6) = 7.0",
+      "buggyBehavior": {
+        "output": "8.0 — cgpa averages semester GPAs without weighting: (10.0 + 6.0) / 2 = 8.0",
+        "type": "wrong_output",
+        "verifiedByTest": true
+      },
+      "fixedBehavior": {
+        "output": "7.0 — credit-weighted average: (20 + 36) / 8 = 7.0",
+        "type": "success",
+        "verifiedByTest": true
+      },
+      "regressionTestId": "gradewise/cgpa-ignores-credits"
+    }
+  },
+  {
+    "id": 9,
+    "title": "CGPA looks wrong sometimes",
+    "kind": "bug",
+    "state": "open",
+    "correctOutcome": "not_enough_info",
+    "labels": ["bug"],
+    "opened_by": "frustrated-user-77",
+    "opened_at": "2026-08-28",
+    "assigned_to": null,
+    "body": "I've been using this for a while and sometimes my CGPA comes out different from what my college portal shows. Not sure what's going on, maybe a bug?",
+    "comments": [
+      {
+        "author": "amaan-dev",
+        "date": "2026-08-29",
+        "body": "Hi, thanks for the report. Could you share the exact input you're passing — the grade and credit values for each semester? Also which Python version are you on? Hard to investigate without a reproducible case."
+      }
+    ],
+    "lesson": "no_reproduction_steps",
+    "lesson_feedback": "No inputs, no expected vs actual values, no Python version. The maintainer asked for more information and there's been no follow-up. You can't fix what you can't reproduce. Ask for the missing details — don't guess.",
+    "reproduction": null
+  },
+  {
+    "id": 10,
+    "title": "semester_gpa([]) raises ZeroDivisionError instead of returning 0.0",
+    "kind": "bug",
+    "state": "open",
+    "correctOutcome": "reproduced",
+    "labels": ["bug", "good first issue"],
+    "opened_by": "dev-rohan",
+    "opened_at": "2026-09-01",
+    "assigned_to": null,
+    "body": "Calling `semester_gpa([])` with an empty list raises a ZeroDivisionError instead of returning 0.0.\n\n```\nZeroDivisionError: division by zero\n```\n\nAn empty semester makes sense if a student took a leave — it should just return 0.0.\n\n**Steps to reproduce:**\n1. Import `semester_gpa` from `src/calculator.py`\n2. Call `semester_gpa([])`\n3. Observe: ZeroDivisionError\n\n**Python:** 3.12",
+    "comments": [
+      {
+        "author": "amaan-dev",
+        "date": "2026-09-02",
+        "body": "Confirmed. Empty semester should return 0.0. The fix is a one-liner at the top of the function. PRs welcome — please add a test."
+      }
+    ],
+    "lesson": "genuine_good_pick",
+    "lesson_feedback": "Good pick. Clear steps, reproduces immediately, maintainer confirmed the fix and the expected behaviour. One guard at the top of the function. Nobody has claimed it. This is exactly the kind of issue to start with.",
+    "reproduction": {
+      "issueId": "gradewise-10",
+      "buggyVersion": "HEAD",
+      "fixedVersion": "fixed",
+      "reproductionSteps": [
+        { "instruction": "Open src/calculator.py and find semester_gpa." },
+        { "instruction": "Call semester_gpa([])" },
+        { "instruction": "Observe the exception." }
+      ],
+      "expectedResult": "semester_gpa([]) returns 0.0",
+      "buggyBehavior": {
+        "output": "ZeroDivisionError: division by zero — total_credits is 0 when the list is empty.",
+        "type": "crash",
+        "verifiedByTest": true
+      },
+      "fixedBehavior": {
+        "output": "0.0 — early return when courses list is empty.",
+        "type": "success",
+        "verifiedByTest": true
+      },
+      "regressionTestId": "gradewise/empty-semester-crash"
+    }
+  }
+]

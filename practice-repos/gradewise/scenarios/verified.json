@@ -1,0 +1,36 @@
+{
+  "repo": "gradewise",
+  "generated_at": "2026-10-11T15:28:48.720389+00:00",
+  "all_pass": true,
+  "summary": "============================== 10 passed in 0.01s ==============================",
+  "regression_tests": [
+    {
+      "regressionTestId": "gradewise/keyerror-grade",
+      "verifiedByTest": true
+    },
+    {
+      "regressionTestId": "gradewise/cgpa-ignores-credits",
+      "verifiedByTest": true
+    },
+    {
+      "regressionTestId": "gradewise/empty-semester-crash",
+      "verifiedByTest": true
+    }
+  ],
+  "passed_count": 10,
+  "failed_count": 0,
+  "passed": [
+    "scenarios/test_scenarios.py::TestKeyErrorGrade::test_old_raises_keyerror_on_aplus PASSED [ 10%]",
+    "scenarios/test_scenarios.py::TestKeyErrorGrade::test_old_raises_keyerror_on_bplus PASSED [ 20%]",
+    "scenarios/test_scenarios.py::TestKeyErrorGrade::test_head_aplus_works PASSED [ 30%]",
+    "scenarios/test_scenarios.py::TestKeyErrorGrade::test_head_bplus_works PASSED [ 40%]",
+    "scenarios/test_scenarios.py::TestCgpaIgnoresCredits::test_buggy_cgpa_returns_wrong_value PASSED [ 50%]",
+    "scenarios/test_scenarios.py::TestCgpaIgnoresCredits::test_fixed_cgpa_returns_correct_value PASSED [ 60%]",
+    "scenarios/test_scenarios.py::TestCgpaIgnoresCredits::test_fixed_cgpa_equal_credits_unchanged PASSED [ 70%]",
+    "scenarios/test_scenarios.py::TestEmptySemesterCrash::test_buggy_empty_list_raises_zerodivision PASSED [ 80%]",
+    "scenarios/test_scenarios.py::TestEmptySemesterCrash::test_fixed_empty_list_returns_zero PASSED [ 90%]",
+    "scenarios/test_scenarios.py::TestEmptySemesterCrash::test_fixed_non_empty_still_works PASSED [100%]"
+  ],
+  "failed": [],
+  "stdout": "============================= test session starts ==============================\nplatform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /home/cse/sahithi/Merge_path/practice-repos/notes-app/.venv/bin/python3\ncachedir: .pytest_cache\nrootdir: /home/cse/sahithi/Merge_path/practice-repos/gradewise\ncollecting ... collected 10 items\n\nscenarios/test_scenarios.py::TestKeyErrorGrade::test_old_raises_keyerror_on_aplus PASSED [ 10%]\nscenarios/test_scenarios.py::TestKeyErrorGrade::test_old_raises_keyerror_on_bplus PASSED [ 20%]\nscenarios/test_scenarios.py::TestKeyErrorGrade::test_head_aplus_works PASSED [ 30%]\nscenarios/test_scenarios.py::TestKeyErrorGrade::test_head_bplus_works PASSED [ 40%]\nscenarios/test_scenarios.py::TestCgpaIgnoresCredits::test_buggy_cgpa_returns_wrong_value PASSED [ 50%]\nscenarios/test_scenarios.py::TestCgpaIgnoresCredits::test_fixed_cgpa_returns_correct_value PASSED [ 60%]\nscenarios/test_scenarios.py::TestCgpaIgnoresCredits::test_fixed_cgpa_equal_credits_unchanged PASSED [ 70%]\nscenarios/test_scenarios.py::TestEmptySemesterCrash::test_buggy_empty_list_raises_zerodivision PASSED [ 80%]\nscenarios/test_scenarios.py::TestEmptySemesterCrash::test_fixed_empty_list_returns_zero PASSED [ 90%]\nscenarios/test_scenarios.py::TestEmptySemesterCrash::test_fixed_non_empty_still_works PASSED [100%]\n\n============================== 10 passed in 0.01s ==============================\n"
+}

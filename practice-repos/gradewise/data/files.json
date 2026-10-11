@@ -1,0 +1,46 @@
+{
+  "tree": [
+    {
+      "name": "README.md",
+      "type": "file",
+      "content": "# gradewise\n\nA CGPA and semester GPA calculator for the 10-point grading scale.\n\n## Requirements\n\n- Python 3.10 or higher\n- pytest (for running tests)\n\n## Installation\n\n```bash\ngit clone https://github.com/amaan-dev/gradewise.git\ncd gradewise\npip install -r requirements.txt\n```\n\n## Usage\n\n```python\nfrom src.grades import GRADE_POINTS\nfrom src.calculator import semester_gpa, cgpa\n\n# Grades: O=10, A+=9, A=8, B+=7, B=6, C=5, F=0\n\n# Semester GPA — list of (grade, credits) tuples\ngpa = semester_gpa([(\"O\", 4), (\"A+\", 3), (\"B\", 3)])\nprint(gpa)  # 8.6\n\n# CGPA — list of semesters\nresult = cgpa([\n    [(\"O\", 4), (\"A\", 3)],\n    [(\"A+\", 3), (\"B+\", 4)],\n])\nprint(result)\n```\n\n## Running tests\n\n```bash\npytest tests/\n```\n\nAll tests must pass before you open a pull request.\n\n## Project structure\n\n```\ngradewise/\n├── src/\n│   ├── grades.py       # grade-point mapping\n│   └── calculator.py   # semester_gpa and cgpa\n├── tests/\n│   └── test_gradewise.py\n├── requirements.txt\n├── README.md\n└── CONTRIBUTING.md\n```\n\n## Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.\n\n## License\n\nMIT\n"
+    },
+    {
+      "name": "CONTRIBUTING.md",
+      "type": "file",
+      "content": "# Contributing to gradewise\n\nThanks for your interest. This is a small learning project — contributions are very welcome.\n\n## Before you start\n\n- Check the open issues. If you want to work on one, **leave a comment first** and wait for a response. This avoids duplicating effort.\n- If you find a new bug, open an issue before submitting a PR.\n- One issue per PR.\n\n## Setup\n\n```bash\ngit clone https://github.com/amaan-dev/gradewise.git\ncd gradewise\npip install -r requirements.txt\n```\n\n## Running tests\n\n```bash\npytest tests/\n```\n\nAll tests must pass. If you're fixing a bug, add a test that fails on the original code and passes after your fix.\n\n## Branch naming\n\n```\nfix/issue-<number>-short-description\nfeat/short-description\ndocs/short-description\n```\n\n## Opening a pull request\n\n- Use `Fixes #<issue-number>` in the description.\n- Keep it small and focused.\n- Respond to review feedback — we try to reply within 1–2 days.\n"
+    },
+    {
+      "name": "requirements.txt",
+      "type": "file",
+      "content": "pytest==8.3.3\n"
+    },
+    {
+      "name": "src",
+      "type": "dir",
+      "children": [
+        {
+          "name": "grades.py",
+          "type": "file",
+          "content": "GRADE_POINTS = {\n    \"O\": 10,\n    \"A+\": 9,\n    \"A\": 8,\n    \"B+\": 7,\n    \"B\": 6,\n    \"C\": 5,\n    \"F\": 0,\n}\n"
+        },
+        {
+          "name": "calculator.py",
+          "type": "file",
+          "content": "from src.grades import GRADE_POINTS\n\n\ndef semester_gpa(courses):\n    total_points = 0\n    total_credits = 0\n    for grade, credits in courses:\n        if credits <= 0:\n            raise ValueError(f\"Credits must be positive, got {credits}\")\n        total_points += GRADE_POINTS[grade] * credits\n        total_credits += credits\n    return round(total_points / total_credits, 2)\n\n\ndef cgpa(semesters):\n    gpas = [semester_gpa(sem) for sem in semesters]\n    return round(sum(gpas) / len(gpas), 2)\n"
+        }
+      ]
+    },
+    {
+      "name": "tests",
+      "type": "dir",
+      "children": [
+        {
+          "name": "test_gradewise.py",
+          "type": "file",
+          "content": "\"\"\"Tests for gradewise — HEAD version.\"\"\"\n\nimport sys\nimport os\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nimport pytest\nfrom src.grades import GRADE_POINTS\nfrom src.calculator import semester_gpa, cgpa\n\n\ndef test_grade_points_contains_expected_grades():\n    assert GRADE_POINTS[\"O\"] == 10\n    assert GRADE_POINTS[\"A+\"] == 9\n    assert GRADE_POINTS[\"A\"] == 8\n    assert GRADE_POINTS[\"B+\"] == 7\n    assert GRADE_POINTS[\"B\"] == 6\n    assert GRADE_POINTS[\"C\"] == 5\n    assert GRADE_POINTS[\"F\"] == 0\n\n\ndef test_semester_gpa_single_course():\n    result = semester_gpa([(\"A\", 4)])\n    assert result == 8.0\n\n\ndef test_semester_gpa_multiple_courses():\n    result = semester_gpa([(\"O\", 4), (\"B\", 3)])\n    expected = round((10 * 4 + 6 * 3) / 7, 2)\n    assert result == expected\n\n\ndef test_semester_gpa_rejects_zero_credits():\n    with pytest.raises(ValueError):\n        semester_gpa([(\"A\", 0)])\n\n\ndef test_semester_gpa_rejects_negative_credits():\n    with pytest.raises(ValueError):\n        semester_gpa([(\"A\", -1)])\n\n\ndef test_cgpa_two_equal_semesters():\n    sem1 = [(\"A\", 4), (\"B\", 3)]\n    sem2 = [(\"A\", 4), (\"B\", 3)]\n    g1 = semester_gpa(sem1)\n    g2 = semester_gpa(sem2)\n    result = cgpa([sem1, sem2])\n    assert result == round((g1 + g2) / 2, 2)\n\n\ndef test_semester_gpa_all_grades():\n    for grade in GRADE_POINTS:\n        result = semester_gpa([(grade, 3)])\n        assert result == float(GRADE_POINTS[grade])\n"
+        }
+      ]
+    }
+  ]
+}
