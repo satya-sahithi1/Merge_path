@@ -1,0 +1,34 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/tips/layout,_N_T_/tips/page,_N_T_/tips"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/tips/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 160,
+            "slots": null
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/3bdf36ee742298a80330172db03a1cbf43329063129687c779207f5bf57b8bb3/$/tips",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/tips/page"
+    },
+    "isFallback": false
+  }
+}

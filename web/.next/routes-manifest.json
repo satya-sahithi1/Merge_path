@@ -89,6 +89,18 @@
       "regex": "^/learn(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/learn(?:/)?$"
+    },
+    {
+      "page": "/mission",
+      "regex": "^/mission(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/mission(?:/)?$"
+    },
+    {
+      "page": "/tips",
+      "regex": "^/tips(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tips(?:/)?$"
     }
   ],
   "dataRoutes": [],

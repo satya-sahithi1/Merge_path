@@ -2,10 +2,12 @@
   "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/learn/page": "app/learn/page.js",
+  "/mission/page": "app/mission/page.js",
   "/page": "app/page.js",
   "/repo/[repoId]/file/page": "app/repo/[repoId]/file/page.js",
   "/repo/[repoId]/issues/[issueId]/page": "app/repo/[repoId]/issues/[issueId]/page.js",
   "/repo/[repoId]/page": "app/repo/[repoId]/page.js",
   "/repo/[repoId]/prs/[prId]/page": "app/repo/[repoId]/prs/[prId]/page.js",
-  "/repo/[repoId]/quiz/page": "app/repo/[repoId]/quiz/page.js"
+  "/repo/[repoId]/quiz/page": "app/repo/[repoId]/quiz/page.js",
+  "/tips/page": "app/tips/page.js"
 }

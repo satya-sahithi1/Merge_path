@@ -2,7 +2,7 @@
 **Report:** ui_report01  
 **Date:** 2026-10-10  
 **Source:** docs/ui_flow.md  
-**Status:** In progress — 2 of 8 parts complete  
+**Status:** In progress — 4 of 8 parts complete  
 **Last updated:** 2026-10-10
 
 ---
@@ -49,8 +49,8 @@ Each part will be implemented fully, the app built to verify no errors, and a re
 |---|---|---|---|---|
 | **Part 1** | Landing page — resume logic, correct button label and link based on `merge-path-step` | `/` | `reports/part1-landing.md` | ✓ Done |
 | **Part 2** | `/learn` — 3-card sequential flow, skip button ("I know what a fork is, skip this →"), "Got it →" to `/tips` | `/learn` | `reports/part2-learn.md` | ✓ Done |
-| **Part 3** | `/tips` — 5 tips on one screen, "I'm ready →" to `/mission` | `/tips` | `reports/part3-tips.md` | Pending |
-| **Part 4** | `/mission` — mission card, "Start exploring →" to `/repo/notes-app` | `/mission` | `reports/part4-mission.md` | Pending |
+| **Part 3** | `/tips` — 5 tips on one screen, "I'm ready →" to `/mission` | `/tips` | `reports/part3-tips.md` | ✓ Done |
+| **Part 4** | `/mission` — mission card, "Start exploring →" to `/repo/notes-app` | `/mission` | `reports/part3-part4.md` | ✓ Done |
 | **Part 5** | Event logger utility + step persistence — `merge-path-events` and `merge-path-step` in localStorage, shared hooks/utils | `web/lib/events.ts` (new) | `reports/part5-event-logger.md` | Pending |
 | **Part 6** | Mission banner on repo explorer — pinned, count-up timer, amber at 8:00, "I've chosen an issue →" gated on event log | `/repo/[repoId]` | `reports/part6-mission-banner.md` | Pending |
 | **Part 7** | Event logging hooks on issue detail and file viewer — `issue_open`, `comments_seen` (IntersectionObserver), `reproduce_tab`, `readme_open`, `contributing_open`, `file_open` | `/repo/[repoId]/issues/[issueId]`, `/repo/[repoId]/file` | `reports/part7-event-logging.md` | Pending |
@@ -84,6 +84,26 @@ Navigation:
 - Three progress dots above the card show past (filled green), current (white), upcoming (dim).
 
 Full detail: `reports/part2-learn.md`
+
+---
+
+### Part 3 — Tips (`/tips`)
+
+`web/app/tips/page.tsx` created as `"use client"`. `TIPS` is a module-level `const` array of 5 items. On mount, `useEffect` writes `merge-path-step = "tips"` to localStorage. All 5 tips displayed on a single screen — no pagination. Each tip is a bordered card with a numbered blue badge, headline in `text-primary`, and body in `text-secondary`.
+
+Navigation: one button "I'm ready →" at the bottom-right routes to `/mission` via `useRouter`. No skip button (nothing to skip past on this screen).
+
+Full detail: `reports/part3-tips.md`
+
+---
+
+### Part 4 — Mission (`/mission`)
+
+`web/app/mission/page.tsx` created as `"use client"`. On mount, `useEffect` writes `merge-path-step = "mission"` to localStorage. A single centred card contains: a small-caps `YOUR MISSION` label, the mission body ("You've just found this repo…"), a soft 3-minute hint, and a "Start exploring →" button routing to `/repo/notes-app` (hardcoded for v1). A "Go back" link below the card links to `/tips`.
+
+The destination sets the step to `"exploring"` on arrival (Part 6 — mission banner), so the `"mission"` step correctly represents "user has read the mission but hasn't entered the repo yet".
+
+Full detail: `reports/part3-part4.md`
 
 ---
 
