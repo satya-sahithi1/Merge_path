@@ -168,7 +168,7 @@
       {
         "author": "amaan-dev",
         "date": "2026-09-02",
-        "body": "Confirmed. Empty semester should return 0.0. The fix is a one-liner at the top of the function. PRs welcome — please add a test."
+        "body": "Confirmed. An empty semester should return 0.0 — add `if not courses: return 0.0` at the top of the function. PRs welcome, please include a test that calls `semester_gpa([])` and checks the return value."
       }
     ],
     "lesson": "genuine_good_pick",

@@ -8,28 +8,17 @@
     "merged_at": "2026-06-02",
     "linked_issue": 3,
     "branch": "fix/issue-3-add-aplus-bplus",
-    "description": "Fixes #3 (though it wasn't linked at the time — sorry!).\n\n'A+' and 'B+' were missing from GRADE_POINTS so any course with those grades raised a KeyError.\n\n**Changes:**\n- `src/grades.py`: added A+ (9) and B+ (7) to GRADE_POINTS\n\n**Testing:**\n- Called `semester_gpa([('A+', 3)])` and `semester_gpa([('B+', 3)])` manually\n- All existing tests still pass",
+    "description": "Fixes #3.\n\n'A+' and 'B+' were missing from GRADE_POINTS so any course with those grades raised a KeyError.\n\n**Changes:**\n- `src/grades.py`: added A+ (9) and B+ (7) to GRADE_POINTS\n\n**Testing:**\n- Confirmed `semester_gpa([('A+', 3)])` and `semester_gpa([('B+', 3)])` both return correctly\n- All existing tests pass",
     "diff_summary": "src/grades.py: added \"A+\": 9 and \"B+\": 7 entries to GRADE_POINTS",
     "review_comments": [
       {
         "author": "amaan-dev",
-        "date": "2026-05-31",
-        "body": "Thanks! The values are right. One thing — can you add a quick test that both A+ and B+ resolve without raising? Makes it easier to catch regressions.",
-        "resolved": true
-      },
-      {
-        "author": "dev-rohan",
         "date": "2026-06-01",
-        "body": "Added the tests. Let me know if the style looks okay."
-      },
-      {
-        "author": "amaan-dev",
-        "date": "2026-06-02",
-        "body": "Looks great. Merging. Thanks for the clean fix!"
+        "body": "Values look right. Merging. Thanks!"
       }
     ],
     "lesson": "good_newcomer_pr",
-    "lesson_note": "Small scope, correct values, responsive to review feedback. The one miss was not linking the PR to issue #3 — the issue stayed open as a result. Always use 'Fixes #N' in the description."
+    "lesson_note": "Small scope, correct fix, no back-and-forth needed. The one miss: not using 'Fixes #3' in the description meant issue #3 stayed open after merge. Always link the issue."
   },
   {
     "id": 7,
