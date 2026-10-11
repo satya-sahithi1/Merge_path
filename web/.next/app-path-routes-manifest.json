@@ -9,5 +9,6 @@
   "/repo/[repoId]/page": "/repo/[repoId]",
   "/repo/[repoId]/prs/[prId]/page": "/repo/[repoId]/prs/[prId]",
   "/repo/[repoId]/quiz/page": "/repo/[repoId]/quiz",
+  "/repos/page": "/repos",
   "/tips/page": "/tips"
 }

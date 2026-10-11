@@ -10,8 +10,8 @@ import gradewiseMeta   from "@/lib/data/gradewise/meta.json";
 
 const REPO_DATA: Record<string, { files: typeof notesFiles; meta: typeof notesMeta }> = {
   "notes-app": { files: notesFiles,    meta: notesMeta },
-  "weatherly":  { files: weatherlyFiles as typeof notesFiles, meta: weatherlyMeta as typeof notesMeta },
-  "gradewise":  { files: gradewiseFiles as typeof notesFiles, meta: gradewiseMeta as typeof notesMeta },
+  "weatherly":  { files: weatherlyFiles as unknown as typeof notesFiles, meta: weatherlyMeta as unknown as typeof notesMeta },
+  "gradewise":  { files: gradewiseFiles as unknown as typeof notesFiles, meta: gradewiseMeta as unknown as typeof notesMeta },
 };
 
 export default async function FileViewerPage({

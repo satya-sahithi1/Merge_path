@@ -18,8 +18,8 @@ type OutcomeChoice = "reproduced" | "cant_reproduce" | "not_enough_info" | null;
 
 const REPO_DATA: Record<string, { issues: typeof notesIssues; meta: typeof notesMeta }> = {
   "notes-app": { issues: notesIssues as typeof notesIssues, meta: notesMeta },
-  "weatherly":  { issues: weatherlyIssues as typeof notesIssues, meta: weatherlyMeta as typeof notesMeta },
-  "gradewise":  { issues: gradewiseIssues as typeof notesIssues, meta: gradewiseMeta as typeof notesMeta },
+  "weatherly":  { issues: weatherlyIssues as unknown as typeof notesIssues, meta: weatherlyMeta as unknown as typeof notesMeta },
+  "gradewise":  { issues: gradewiseIssues as unknown as typeof notesIssues, meta: gradewiseMeta as unknown as typeof notesMeta },
 };
 
 export default function IssuePage() {

@@ -15,8 +15,8 @@ import gradewiseMeta  from "@/lib/data/gradewise/meta.json";
 
 const REPO_DATA: Record<string, { quiz: typeof notesQuiz; meta: typeof notesMeta }> = {
   "notes-app": { quiz: notesQuiz,    meta: notesMeta },
-  "weatherly":  { quiz: weatherlyQuiz as typeof notesQuiz, meta: weatherlyMeta as typeof notesMeta },
-  "gradewise":  { quiz: gradewiseQuiz as typeof notesQuiz, meta: gradewiseMeta as typeof notesMeta },
+  "weatherly":  { quiz: weatherlyQuiz as unknown as typeof notesQuiz, meta: weatherlyMeta as unknown as typeof notesMeta },
+  "gradewise":  { quiz: gradewiseQuiz as unknown as typeof notesQuiz, meta: gradewiseMeta as unknown as typeof notesMeta },
 };
 
 const DOMAIN_LABELS: Record<string, string> = {

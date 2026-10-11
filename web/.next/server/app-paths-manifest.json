@@ -9,5 +9,6 @@
   "/repo/[repoId]/page": "app/repo/[repoId]/page.js",
   "/repo/[repoId]/prs/[prId]/page": "app/repo/[repoId]/prs/[prId]/page.js",
   "/repo/[repoId]/quiz/page": "app/repo/[repoId]/quiz/page.js",
+  "/repos/page": "app/repos/page.js",
   "/tips/page": "app/tips/page.js"
 }

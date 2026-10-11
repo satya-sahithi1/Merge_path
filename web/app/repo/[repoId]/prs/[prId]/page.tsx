@@ -11,8 +11,8 @@ import gradewiseMeta from "@/lib/data/gradewise/meta.json";
 
 const REPO_DATA: Record<string, { prs: typeof notesPRs; meta: typeof notesMeta }> = {
   "notes-app": { prs: notesPRs,      meta: notesMeta },
-  "weatherly":  { prs: weatherlyPRs as typeof notesPRs,  meta: weatherlyMeta as typeof notesMeta },
-  "gradewise":  { prs: gradewisePRs  as typeof notesPRs,  meta: gradewiseMeta as typeof notesMeta },
+  "weatherly":  { prs: weatherlyPRs as unknown as typeof notesPRs,  meta: weatherlyMeta as unknown as typeof notesMeta },
+  "gradewise":  { prs: gradewisePRs as unknown as typeof notesPRs,  meta: gradewiseMeta as unknown as typeof notesMeta },
 };
 
 export default async function PRPage({

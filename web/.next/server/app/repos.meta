@@ -1,0 +1,34 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/repos/layout,_N_T_/repos/page,_N_T_/repos"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/repos/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 160,
+            "slots": null
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/74f7d9ac9819a5b7bcd6971170beed077dfa3484eb0ec6b5e0512378f878c9f7/$/repos",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/repos/page"
+    },
+    "isFallback": false
+  }
+}
