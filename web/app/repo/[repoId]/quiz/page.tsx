@@ -6,8 +6,18 @@ import { useParams } from "next/navigation";
 import type { QuizQuestion, QuizOption } from "@/lib/types";
 
 // Imported at module level — resolved at build time
-import notesQuiz from "@/lib/data/notes-app/quiz.json";
-import notesMeta from "@/lib/data/notes-app/meta.json";
+import notesQuiz    from "@/lib/data/notes-app/quiz.json";
+import notesMeta    from "@/lib/data/notes-app/meta.json";
+import weatherlyQuiz  from "@/lib/data/weatherly/quiz.json";
+import weatherlyMeta  from "@/lib/data/weatherly/meta.json";
+import gradewiseQuiz  from "@/lib/data/gradewise/quiz.json";
+import gradewiseMeta  from "@/lib/data/gradewise/meta.json";
+
+const REPO_DATA: Record<string, { quiz: typeof notesQuiz; meta: typeof notesMeta }> = {
+  "notes-app": { quiz: notesQuiz,    meta: notesMeta },
+  "weatherly":  { quiz: weatherlyQuiz as typeof notesQuiz, meta: weatherlyMeta as typeof notesMeta },
+  "gradewise":  { quiz: gradewiseQuiz as typeof notesQuiz, meta: gradewiseMeta as typeof notesMeta },
+};
 
 const DOMAIN_LABELS: Record<string, string> = {
   repo_health: "Repo health",
@@ -28,8 +38,9 @@ export default function QuizPage() {
   const params = useParams();
   const repoId = params.repoId as string;
 
-  const questions = notesQuiz as QuizQuestion[];
-  const meta = notesMeta;
+  const repo = REPO_DATA[repoId] ?? REPO_DATA["notes-app"];
+  const questions = repo.quiz as QuizQuestion[];
+  const meta = repo.meta;
 
   // One AnswerState per question index
   const [answers, setAnswers] = useState<AnswerState[]>(

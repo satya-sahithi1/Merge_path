@@ -3,27 +3,35 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { getIssue, getMeta } from "@/lib/loader";
 import type { ReproductionScenario } from "@/lib/types";
 
-// This page is a client component so the reproduce tab can hold local state.
-// Data is imported at module level — Next.js resolves this at build time.
+// Load all repos' issues at build time so the client component can pick
+// the right one at runtime from the URL params.
 import notesIssues from "@/lib/data/notes-app/issues.json";
-import notesMeta from "@/lib/data/notes-app/meta.json";
+import notesMeta   from "@/lib/data/notes-app/meta.json";
+import weatherlyIssues from "@/lib/data/weatherly/issues.json";
+import weatherlyMeta   from "@/lib/data/weatherly/meta.json";
+import gradewiseIssues from "@/lib/data/gradewise/issues.json";
+import gradewiseMeta   from "@/lib/data/gradewise/meta.json";
 
 type OutcomeChoice = "reproduced" | "cant_reproduce" | "not_enough_info" | null;
 
+const REPO_DATA: Record<string, { issues: typeof notesIssues; meta: typeof notesMeta }> = {
+  "notes-app": { issues: notesIssues as typeof notesIssues, meta: notesMeta },
+  "weatherly":  { issues: weatherlyIssues as typeof notesIssues, meta: weatherlyMeta as typeof notesMeta },
+  "gradewise":  { issues: gradewiseIssues as typeof notesIssues, meta: gradewiseMeta as typeof notesMeta },
+};
+
 export default function IssuePage() {
   const params = useParams();
-  const repoId = params.repoId as string;
+  const repoId  = params.repoId as string;
   const issueId = Number(params.issueId);
 
-  // Load data directly from imported JSON
-  const issues = notesIssues as ReturnType<typeof getIssue>[];
-  const issue = issues.find((i) => i?.id === issueId);
-  const meta = notesMeta;
+  const repo   = REPO_DATA[repoId];
+  const issue  = repo?.issues.find((i) => i?.id === issueId);
+  const meta   = repo?.meta;
 
-  if (!issue) {
+  if (!issue || !meta) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--background)" }}>
         <p style={{ color: "var(--text-secondary)" }}>Issue not found.</p>
@@ -87,7 +95,7 @@ export default function IssuePage() {
           ))}
         </div>
 
-        {/* Reproduce tab */}
+        {/* Reproduce tab — only for bugs */}
         {issue.reproduction && (
           <ReproduceSection scenario={issue.reproduction as ReproductionScenario} />
         )}
@@ -151,10 +159,6 @@ function ReproduceSection({ scenario }: { scenario: ReproductionScenario }) {
   function getCorrectAnswer(): OutcomeChoice {
     if (isNoInfo) return "not_enough_info";
     if (scenario.buggyVersion === null) return "not_enough_info";
-    // If the current codebase is the fixed version, the bug can't be reproduced
-    // Issues marked already_fixed_by_pr won't have a null fixedVersion but the
-    // lesson tells us the fix is already in. We encode this via the issue lesson
-    // but for the reproduce tab, we check if fixedVersion is set and buggyBehavior type.
     return "reproduced";
   }
 
@@ -244,7 +248,7 @@ function ReproduceSection({ scenario }: { scenario: ReproductionScenario }) {
                             onClick={() => handleChoice(c)}
                             className="px-3 py-1.5 rounded text-sm border transition-colors"
                             style={{ borderColor: "var(--border)", color: "var(--text-primary)", background: "var(--surface)", cursor: "pointer" }}>
-                            {c === "reproduced" ? "✓ Reproduced" : c === "cant_reproduce" ? "✗ Can't reproduce" : "? Not enough info"}
+                            {c === "reproduced" ? "✓ Reproduced" : c === "cant_reproduce" ? "✗ Can&apos;t reproduce" : "? Not enough info"}
                           </button>
                         ))}
                       </div>
@@ -317,7 +321,7 @@ function ReproduceSection({ scenario }: { scenario: ReproductionScenario }) {
 
 function LabelBadge({ label }: { label: string }) {
   const colors: Record<string, { bg: string; color: string }> = {
-    "bug": { bg: "#3a1a1a", color: "#f85149" },
+    "bug":             { bg: "#3a1a1a", color: "#f85149" },
     "good first issue": { bg: "#1f3a5f", color: "#58a6ff" },
   };
   const style = colors[label] ?? { bg: "#2a2a2a", color: "var(--text-secondary)" };

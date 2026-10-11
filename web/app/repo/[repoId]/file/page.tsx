@@ -1,7 +1,18 @@
 import Link from "next/link";
-import notesFiles from "@/lib/data/notes-app/files.json";
-import notesMeta from "@/lib/data/notes-app/meta.json";
 import type { FileNode } from "@/lib/types";
+
+import notesFiles    from "@/lib/data/notes-app/files.json";
+import notesMeta     from "@/lib/data/notes-app/meta.json";
+import weatherlyFiles  from "@/lib/data/weatherly/files.json";
+import weatherlyMeta   from "@/lib/data/weatherly/meta.json";
+import gradewiseFiles  from "@/lib/data/gradewise/files.json";
+import gradewiseMeta   from "@/lib/data/gradewise/meta.json";
+
+const REPO_DATA: Record<string, { files: typeof notesFiles; meta: typeof notesMeta }> = {
+  "notes-app": { files: notesFiles,    meta: notesMeta },
+  "weatherly":  { files: weatherlyFiles as typeof notesFiles, meta: weatherlyMeta as typeof notesMeta },
+  "gradewise":  { files: gradewiseFiles as typeof notesFiles, meta: gradewiseMeta as typeof notesMeta },
+};
 
 export default async function FileViewerPage({
   params,
@@ -12,9 +23,10 @@ export default async function FileViewerPage({
 }) {
   const { repoId } = await params;
   const { name } = await searchParams;
-  const meta = notesMeta;
 
-  const tree = notesFiles.tree as FileNode[];
+  const repo = REPO_DATA[repoId];
+  const meta = repo?.meta ?? notesMeta;
+  const tree = (repo?.files.tree ?? notesFiles.tree) as FileNode[];
 
   function findFile(nodes: FileNode[], filename: string): { name: string; content: string } | undefined {
     for (const node of nodes) {
@@ -38,8 +50,9 @@ export default async function FileViewerPage({
   }
 
   const lines = file.content.split("\n");
-  const isPython = file.name.endsWith(".py");
+  const isPython   = file.name.endsWith(".py");
   const isMarkdown = file.name.endsWith(".md");
+  const isYaml     = file.name.endsWith(".yml") || file.name.endsWith(".yaml");
 
   return (
     <div className="min-h-screen" style={{ background: "var(--background)" }}>
@@ -75,7 +88,7 @@ export default async function FileViewerPage({
           <div className="px-4 py-2 border-b flex items-center justify-between"
             style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
             <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
-              {isPython ? "Python" : isMarkdown ? "Markdown" : "Text"}
+              {isPython ? "Python" : isMarkdown ? "Markdown" : isYaml ? "YAML" : "Text"}
             </span>
             <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
               {lines.length} lines · {file.content.length} bytes

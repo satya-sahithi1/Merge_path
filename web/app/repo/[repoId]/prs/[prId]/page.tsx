@@ -1,6 +1,19 @@
 import Link from "next/link";
-import notesPRs from "@/lib/data/notes-app/prs.json";
-import notesMeta from "@/lib/data/notes-app/meta.json";
+
+// Load all repos' PRs at build time so the server component can pick
+// the right one at runtime from the URL params.
+import notesPRs   from "@/lib/data/notes-app/prs.json";
+import notesMeta  from "@/lib/data/notes-app/meta.json";
+import weatherlyPRs  from "@/lib/data/weatherly/prs.json";
+import weatherlyMeta from "@/lib/data/weatherly/meta.json";
+import gradewisePRs  from "@/lib/data/gradewise/prs.json";
+import gradewiseMeta from "@/lib/data/gradewise/meta.json";
+
+const REPO_DATA: Record<string, { prs: typeof notesPRs; meta: typeof notesMeta }> = {
+  "notes-app": { prs: notesPRs,      meta: notesMeta },
+  "weatherly":  { prs: weatherlyPRs as typeof notesPRs,  meta: weatherlyMeta as typeof notesMeta },
+  "gradewise":  { prs: gradewisePRs  as typeof notesPRs,  meta: gradewiseMeta as typeof notesMeta },
+};
 
 export default async function PRPage({
   params,
@@ -8,9 +21,11 @@ export default async function PRPage({
   params: Promise<{ repoId: string; prId: string }>;
 }) {
   const { repoId, prId } = await params;
-  const prs = notesPRs as typeof notesPRs;
-  const pr = prs.find((p) => p.id === Number(prId));
-  const meta = notesMeta;
+
+  const repo = REPO_DATA[repoId];
+  const prs  = repo?.prs ?? [];
+  const pr   = prs.find((p) => p.id === Number(prId));
+  const meta = repo?.meta ?? notesMeta;
 
   if (!pr) {
     return (
@@ -21,7 +36,7 @@ export default async function PRPage({
   }
 
   const stateColor = pr.state === "merged" ? "#a371f7" : pr.state === "open" ? "#3fb950" : "#f85149";
-  const stateBg = pr.state === "merged" ? "#2d1e4f" : pr.state === "open" ? "#1a3a1a" : "#3a1a1a";
+  const stateBg    = pr.state === "merged" ? "#2d1e4f" : pr.state === "open" ? "#1a3a1a" : "#3a1a1a";
 
   return (
     <div className="min-h-screen" style={{ background: "var(--background)" }}>
@@ -134,7 +149,7 @@ export default async function PRPage({
           </div>
         )}
 
-        {/* Lesson note (visible — this is a learning tool) */}
+        {/* Lesson note */}
         {pr.lesson_note && (
           <div className="rounded-md p-4 text-sm space-y-1"
             style={{ background: "#1f2d1f", border: "1px solid #238636" }}>
