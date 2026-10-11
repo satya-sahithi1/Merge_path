@@ -3,60 +3,60 @@
     "hash": "a3f91c",
     "author": "kiran-weather-dev",
     "date": "2025-06-12",
-    "message": "refactor: clean up formatting logic"
+    "message": "refactor: extract format_output into its own function"
   },
   {
     "hash": "b7e204",
     "author": "kiran-weather-dev",
-    "date": "2025-06-10",
-    "message": "fix: handle missing wind data"
+    "date": "2025-06-08",
+    "message": "feat: add humidity to output"
   },
   {
     "hash": "c1d83a",
     "author": "kiran-weather-dev",
-    "date": "2025-06-08",
-    "message": "feat: add humidity display"
+    "date": "2025-06-01",
+    "message": "chore: update requirements.txt"
   },
   {
     "hash": "d09f55",
     "author": "kiran-weather-dev",
-    "date": "2025-06-01",
-    "message": "chore: update requirements"
+    "date": "2025-05-22",
+    "message": "feat: add get_weather entry point function"
   },
   {
     "hash": "e4b612",
-    "author": "kiran-weather-dev",
-    "date": "2025-05-22",
-    "message": "feat: add feels-like temperature"
-  },
-  {
-    "hash": "f2a038",
     "author": "kiran-weather-dev",
     "date": "2025-05-10",
     "message": "Merge pull request #11 from kiran-weather-dev/format-temps"
   },
   {
-    "hash": "07c94d",
+    "hash": "f2a038",
     "author": "kiran-weather-dev",
     "date": "2025-05-08",
-    "message": "feat: format temperature output"
+    "message": "feat: add degree symbol to temperature output"
+  },
+  {
+    "hash": "07c94d",
+    "author": "kiran-weather-dev",
+    "date": "2025-05-01",
+    "message": "feat: add cli.py entry point"
   },
   {
     "hash": "18e761",
     "author": "kiran-weather-dev",
-    "date": "2025-04-30",
-    "message": "fix: handle None city name"
+    "date": "2025-04-20",
+    "message": "feat: parse humidity from API response"
   },
   {
     "hash": "29b340",
     "author": "kiran-weather-dev",
-    "date": "2025-04-15",
-    "message": "feat: add wind speed display"
+    "date": "2025-04-10",
+    "message": "feat: parse weather description from response"
   },
   {
     "hash": "3ad527",
     "author": "kiran-weather-dev",
     "date": "2025-03-01",
-    "message": "init: basic weather fetch and print"
+    "message": "init: parse temperature from API response"
   }
 ]

@@ -1,0 +1,270 @@
+[
+  {
+    "id": 1,
+    "domain": "repo_health",
+    "question": "A friend asks whether they should contribute to weatherly. What do you tell them?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Yes, the open PRs show people are engaged here.",
+        "correct": false,
+        "explanation": "The contributors are engaged, but the maintainer isn't. Open PRs only mean people tried — they say nothing about whether anyone is reviewing."
+      },
+      {
+        "id": "b",
+        "text": "No, nobody seems to be reviewing PRs here.",
+        "correct": true,
+        "explanation": "The most recent merged PR is over a year old, four PRs are sitting open with no response, and the maintainer hasn't replied anywhere in almost a year. That's the clearest signal you can get."
+      },
+      {
+        "id": "c",
+        "text": "Not sure — wait and see if #22 gets answered.",
+        "correct": false,
+        "explanation": "Issue #22 has been open for weeks with no reply. The silence is already your answer."
+      },
+      {
+        "id": "d",
+        "text": "Yes, #5 is labelled good first issue.",
+        "correct": false,
+        "explanation": "Labels are set by maintainers and can be years old. This one was set about 16 months ago when the project was still active."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "domain": "repo_health",
+    "question": "Which two signals are the strongest evidence that nobody will review your PR? (Select two)",
+    "type": "multi",
+    "options": [
+      {
+        "id": "a",
+        "text": "There is no CONTRIBUTING.md.",
+        "correct": false,
+        "explanation": "Many small, healthy repos have no CONTRIBUTING.md. Absence of it alone doesn't signal abandonment."
+      },
+      {
+        "id": "b",
+        "text": "The most recent merged PR is over a year old.",
+        "correct": true,
+        "explanation": "If nothing has been merged in over a year, there is no evidence the maintainer is still reviewing anything."
+      },
+      {
+        "id": "c",
+        "text": "There are open PRs.",
+        "correct": false,
+        "explanation": "Busy, healthy repos have plenty of open PRs. Open PRs alone mean nothing — you need to look at whether they get responses."
+      },
+      {
+        "id": "d",
+        "text": "The maintainer's last reply anywhere is almost a year old.",
+        "correct": true,
+        "explanation": "If the maintainer hasn't replied to any issue or PR in almost a year, there is no reason to expect they will reply to yours."
+      },
+      {
+        "id": "e",
+        "text": "#5 has a good first issue label.",
+        "correct": false,
+        "explanation": "A label says nothing about whether anyone is reviewing. Labels are set once and rarely updated."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "domain": "issue_judgment",
+    "question": "You've decided to contribute to weatherly. Which issue would you take?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "#2 — Crash when the city isn't found.",
+        "correct": false,
+        "explanation": "This is a real, reproducible bug. But check the open PRs first — a fix has been sitting in PR #19 for 9 months with no response from the maintainer."
+      },
+      {
+        "id": "b",
+        "text": "#5 — Add Fahrenheit option.",
+        "correct": false,
+        "explanation": "The label is about 16 months old and nobody is reviewing PRs. The change being small doesn't help if there's nobody to merge it."
+      },
+      {
+        "id": "c",
+        "text": "#7 — IndexError when the weather list is empty.",
+        "correct": false,
+        "explanation": "A real bug, but someone claimed it in November and opened no PR since. Always ask before starting on a claimed issue."
+      },
+      {
+        "id": "d",
+        "text": "#20 — API key invalid?",
+        "correct": false,
+        "explanation": "No steps, no version, no traceback. There is not enough information to reproduce this, let alone fix it."
+      },
+      {
+        "id": "e",
+        "text": "None of these — I'd look for a different repo.",
+        "correct": true,
+        "explanation": "Every issue here has a problem: the repo is abandoned, fixes go unmerged, issues are claimed without follow-up, or reports lack enough information. The right call is to walk away."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "domain": "issue_judgment",
+    "question": "You've reproduced issue #2 and want to fix it. What do you check first?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Whether a fix already exists somewhere in the repo.",
+        "correct": true,
+        "explanation": "PR #19 has had a correct fix sitting open for 9 months. Writing the same fix again would duplicate work that is already being ignored."
+      },
+      {
+        "id": "b",
+        "text": "Whether your Python version matches the maintainer's.",
+        "correct": false,
+        "explanation": "Python version matters for compatibility, but it has no bearing on whether a fix already exists."
+      },
+      {
+        "id": "c",
+        "text": "Whether the original reporter has contributed elsewhere.",
+        "correct": false,
+        "explanation": "The reporter's contribution history is irrelevant to whether you should open a duplicate fix."
+      },
+      {
+        "id": "d",
+        "text": "How many reactions the issue has.",
+        "correct": false,
+        "explanation": "Reaction counts tell you how many people want a fix, not whether one already exists or whether anyone will review yours."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "domain": "issue_judgment",
+    "question": "Issue #5 is labelled good first issue and the change is small. What is the real problem with taking it?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Small changes need a test first.",
+        "correct": false,
+        "explanation": "Tests are good practice, but they aren't the reason this issue is a bad pick."
+      },
+      {
+        "id": "b",
+        "text": "Fahrenheit conversion is too hard for beginners.",
+        "correct": false,
+        "explanation": "The conversion itself is straightforward. Difficulty isn't the issue here."
+      },
+      {
+        "id": "c",
+        "text": "Nobody is around to review it.",
+        "correct": true,
+        "explanation": "The maintainer wrote this label about 16 months ago when the project was active. A good first issue label only helps if someone is there to review the PR. There isn't."
+      },
+      {
+        "id": "d",
+        "text": "The label only applies to documentation issues.",
+        "correct": false,
+        "explanation": "Good first issue applies to any kind of contribution. The label itself isn't the problem."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "domain": "repo_health",
+    "question": "Issue #2 says parse_weather crashes when the city isn't found. You call it with a normal weather response and it works fine. What do you do next?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Mark it \"Can't reproduce\" — it works on my machine.",
+        "correct": false,
+        "explanation": "You didn't use the input described in the report. A normal response isn't the failing case."
+      },
+      {
+        "id": "b",
+        "text": "Re-run it with the not-found response the report describes.",
+        "correct": true,
+        "explanation": "\"Can't reproduce\" only counts after you follow the reporter's exact steps. The crash happens with a not-found response, not a valid one."
+      },
+      {
+        "id": "c",
+        "text": "Mark it \"Reproduced\" — the report is detailed enough to trust.",
+        "correct": false,
+        "explanation": "Trusting the report without running the steps isn't reproducing. You need to confirm it yourself."
+      },
+      {
+        "id": "d",
+        "text": "Comment \"works for me\" and move on.",
+        "correct": false,
+        "explanation": "You tested the wrong input. This comment would be wrong and unhelpful."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "domain": "contributing",
+    "question": "You've decided weatherly isn't worth your time. What's the best next move?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Open a PR anyway to show interest.",
+        "correct": false,
+        "explanation": "A PR on an abandoned repo wastes your time and adds noise. It won't get reviewed."
+      },
+      {
+        "id": "b",
+        "text": "Comment on #22 and wait for an answer.",
+        "correct": false,
+        "explanation": "Issue #22 has already been open for weeks with no reply. Waiting costs you weeks more on a project that's shown no signs of life."
+      },
+      {
+        "id": "c",
+        "text": "Fork it and maintain it yourself.",
+        "correct": false,
+        "explanation": "Maintaining a fork is a months-long commitment. It's a valid path eventually, but not a first-contribution move."
+      },
+      {
+        "id": "d",
+        "text": "Apply the same checks to a different project.",
+        "correct": true,
+        "explanation": "Moving on isn't failing — it's the skill this repo is here to teach. You just saved yourself weeks of work on a dead end."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "domain": "review",
+    "question": "Look at PR #16. Who is the conversation waiting on?",
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The maintainer.",
+        "correct": true,
+        "explanation": "The maintainer asked for a test. The author added it the same day and said so. Everything the author was asked to do is done — the ball is entirely in the maintainer's court."
+      },
+      {
+        "id": "b",
+        "text": "The author, who still has changes to make.",
+        "correct": false,
+        "explanation": "The author replied the same day the changes were requested and confirmed the test was added. There is nothing left for them to do."
+      },
+      {
+        "id": "c",
+        "text": "A second reviewer.",
+        "correct": false,
+        "explanation": "There is no mention of a second reviewer being required. The thread only involves the maintainer and the author."
+      },
+      {
+        "id": "d",
+        "text": "Nobody — it's approved and ready to merge.",
+        "correct": false,
+        "explanation": "The maintainer never replied after the author added the test. It has not been approved."
+      }
+    ]
+  }
+]

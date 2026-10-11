@@ -12,7 +12,37 @@
     "diff_summary": "src/weather.py: updated format_output to use f-string with °C suffix",
     "review_comments": [],
     "lesson": null,
-    "lesson_note": "The last merged PR — 14 months ago. Nothing since."
+    "lesson_note": "The last merged PR. Everything after this has gone unanswered."
+  },
+  {
+    "id": 13,
+    "title": "docs: fix typo in README usage example",
+    "state": "open",
+    "author": "meera-writes-code",
+    "opened_at": "2025-07-02",
+    "merged_at": null,
+    "linked_issue": null,
+    "branch": "docs/readme-typo",
+    "description": "Fixed a typo in the README usage example — `get_weather` was spelled `get_weater`.",
+    "diff_summary": "README.md: one typo fixed",
+    "review_comments": [],
+    "lesson": null,
+    "lesson_note": "Docs fix opened 14 months ago. No response from maintainer."
+  },
+  {
+    "id": 14,
+    "title": "feat: add wind speed to output",
+    "state": "open",
+    "author": "curious-dev",
+    "opened_at": "2025-08-11",
+    "merged_at": null,
+    "linked_issue": null,
+    "branch": "feat/wind-speed-display",
+    "description": "Added wind speed from `data['wind']['speed']` to the formatted output string.",
+    "diff_summary": "src/weather.py: added wind speed field to format_output",
+    "review_comments": [],
+    "lesson": null,
+    "lesson_note": "Open 13 months. No response."
   },
   {
     "id": 16,
@@ -39,7 +69,7 @@
       }
     ],
     "lesson": null,
-    "lesson_note": "Maintainer asked for a change 11 months ago. Contributor replied the same day. Maintainer never responded again. PR is still open."
+    "lesson_note": "The maintainer asked for a change on the day it was opened. The contributor responded the same day. The maintainer never replied again — 11 months of silence."
   },
   {
     "id": 19,
@@ -50,10 +80,10 @@
     "merged_at": null,
     "linked_issue": 2,
     "branch": "fix/issue-2-missing-main-key",
-    "description": "Fixes #2.\n\nAdded a check for the 'main' key before accessing it. Returns a clean error dict instead of raising KeyError.\n\nThe API format change was documented in their changelog. This handles it gracefully.",
-    "diff_summary": "src/weather.py: added `if 'main' not in data: return {'error': 'Unexpected API response format.'}`",
+    "description": "Fixes #2.\n\nAdded a check for the 'main' key before accessing it. Returns a clean error dict instead of raising KeyError.\n\nTested with a 404-style response and a valid response.",
+    "diff_summary": "src/weather.py: added guard before data['main'] access",
     "review_comments": [],
     "lesson": "good_newcomer_pr",
-    "lesson_note": "This PR already fixes issue #2 — correct diagnosis, clean fix, linked to the issue. The maintainer has never responded. It's been open 9 months."
+    "lesson_note": "Correct fix, well-scoped, linked to the issue, includes description of what was tested. The maintainer never responded. It has been open 9 months."
   }
 ]
