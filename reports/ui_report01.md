@@ -2,7 +2,7 @@
 **Report:** ui_report01  
 **Date:** 2026-10-10  
 **Source:** docs/ui_flow.md  
-**Status:** In progress — 4 of 8 parts complete  
+**Status:** In progress — 5 of 8 parts complete  
 **Last updated:** 2026-10-10
 
 ---
@@ -51,7 +51,7 @@ Each part will be implemented fully, the app built to verify no errors, and a re
 | **Part 2** | `/learn` — 3-card sequential flow, skip button ("I know what a fork is, skip this →"), "Got it →" to `/tips` | `/learn` | `reports/part2-learn.md` | ✓ Done |
 | **Part 3** | `/tips` — 5 tips on one screen, "I'm ready →" to `/mission` | `/tips` | `reports/part3-tips.md` | ✓ Done |
 | **Part 4** | `/mission` — mission card, "Start exploring →" to `/repo/notes-app` | `/mission` | `reports/part3-part4.md` | ✓ Done |
-| **Part 5** | Event logger utility + step persistence — `merge-path-events` and `merge-path-step` in localStorage, shared hooks/utils | `web/lib/events.ts` (new) | `reports/part5-event-logger.md` | Pending |
+| **Part 5** | Event logger utility + step persistence — `merge-path-events` and `merge-path-step` in localStorage, shared hooks/utils | `web/lib/events.ts` (new) | `reports/part5-event-logger.md` | ✓ Done |
 | **Part 6** | Mission banner on repo explorer — pinned, count-up timer, amber at 8:00, "I've chosen an issue →" gated on event log | `/repo/[repoId]` | `reports/part6-mission-banner.md` | Pending |
 | **Part 7** | Event logging hooks on issue detail and file viewer — `issue_open`, `comments_seen` (IntersectionObserver), `reproduce_tab`, `readme_open`, `contributing_open`, `file_open` | `/repo/[repoId]/issues/[issueId]`, `/repo/[repoId]/file` | `reports/part7-event-logging.md` | Pending |
 | **Part 8** | `/repo/[repoId]/pick` placeholder — "You've picked an issue." message, back link | `/repo/[repoId]/pick` | `reports/part8-pick.md` | Pending |
@@ -104,6 +104,16 @@ Full detail: `reports/part3-tips.md`
 The destination sets the step to `"exploring"` on arrival (Part 6 — mission banner), so the `"mission"` step correctly represents "user has read the mission but hasn't entered the repo yet".
 
 Full detail: `reports/part3-part4.md`
+
+---
+
+### Part 5 — Event logger utility (`web/lib/events.ts`)
+
+Plain TypeScript utility module — no React, no hooks. Owns all reads and writes to `merge-path-events` in localStorage. Exports: `logEvent`, `getEvents`, `hasEvent`, `getEventsFor`, `clearEvents`, plus `LogEvent` and `EventType` types.
+
+Key design decisions: SSR-safe (`canUseStorage()` guard), parse-safe (try/catch around `JSON.parse`, validates array type), write-safe (swallows quota errors). `hasEvent` accepts an optional `target` so callers can check "any event of this type" or "this specific target". `logEvent` accepts an optional timestamp override as a test affordance.
+
+Full detail: `reports/part5-event-logger.md`
 
 ---
 
