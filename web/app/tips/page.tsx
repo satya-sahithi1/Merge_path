@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { motion, useReducedMotion } from "motion/react";
+import { fadeUp, staggerContainer, scaleIn, fastTransition, defaultTransition } from "@/lib/motion";
 
 // ── Tips data ──────────────────────────────────────────────────────────────
 
@@ -37,6 +39,7 @@ const TIPS = [
 
 export default function TipsPage() {
   const router = useRouter();
+  const shouldReduce = useReducedMotion();
 
   useEffect(() => {
     localStorage.setItem("merge-path-step", "tips");
@@ -58,20 +61,32 @@ export default function TipsPage() {
       <main className="flex-1 flex flex-col items-center px-4 py-12">
         <div className="max-w-xl w-full space-y-8">
           {/* Title */}
-          <div className="space-y-2">
+          <motion.div
+            className="space-y-2"
+            variants={shouldReduce ? {} : fadeUp}
+            initial="hidden"
+            animate="visible"
+          >
             <h1 className="text-xl font-semibold" style={{ color: "var(--text-primary)" }}>
               A few things before you go in
             </h1>
             <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
               These habits will save you time in the next 15 minutes and every contribution after.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Tips list */}
-          <div className="space-y-3">
+          {/* Tips list — staggered entrance triggered by viewport */}
+          <motion.div
+            className="space-y-3"
+            variants={shouldReduce ? {} : staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             {TIPS.map((tip) => (
-              <div
+              <motion.div
                 key={tip.number}
+                variants={shouldReduce ? {} : fadeUp}
                 className="rounded-lg border p-5 flex gap-4"
                 style={{ borderColor: "var(--border)", background: "var(--surface)" }}
               >
@@ -96,25 +111,34 @@ export default function TipsPage() {
                     {tip.body}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* CTA */}
-          <div className="flex justify-end pt-2">
-            <button
+          <motion.div
+            className="flex justify-end pt-2"
+            variants={shouldReduce ? {} : scaleIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+          >
+            <motion.button
               onClick={() => router.push("/repos")}
-              className="px-6 py-2.5 rounded-md text-sm font-medium transition-colors"
+              className="px-6 py-2.5 rounded-md text-sm font-medium"
               style={{
                 background: "var(--accent)",
                 color: "#fff",
                 cursor: "pointer",
                 border: "none",
               }}
+              whileHover={shouldReduce ? {} : { scale: 1.03, transition: fastTransition }}
+              whileTap={shouldReduce ? {} : { scale: 0.97, transition: { duration: 0.1 } }}
+              transition={defaultTransition}
             >
               I&apos;m ready →
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
       </main>
     </div>

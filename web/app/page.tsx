@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { clearAllProgress } from "@/lib/progress";
 import { REPO_IDS } from "@/lib/loader";
+import { fadeUp, staggerContainer, scaleIn } from "@/lib/motion";
 
 const STEP_ROUTES: Record<string, string> = {
   learn: "/learn",
@@ -20,6 +22,7 @@ type ResumeState = { status: "loading" } | { status: "fresh" } | { status: "resu
 
 export default function Home() {
   const [resume, setResume] = useState<ResumeState>({ status: "loading" });
+  const shouldReduce = useReducedMotion();
 
   useEffect(() => {
     const step = localStorage.getItem("merge-path-step");
@@ -46,6 +49,11 @@ export default function Home() {
       : "Start exploring →";
   const isLoading = resume.status === "loading";
 
+  // When reduced motion is requested, skip all Motion animation (instant display)
+  const containerVariants = shouldReduce ? {} : staggerContainer;
+  const itemVariants = shouldReduce ? {} : fadeUp;
+  const ctaVariants = shouldReduce ? {} : scaleIn;
+
   return (
     <main
       className="min-h-screen flex flex-col items-center justify-center px-4 grid-bg"
@@ -60,31 +68,40 @@ export default function Home() {
         }}
       />
 
-      <div className="relative max-w-xl w-full text-center space-y-6">
+      <motion.div
+        className="relative max-w-xl w-full text-center space-y-6"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Headline */}
-        <h1
-          className="text-3xl font-semibold animate-fade-up"
+        <motion.h1
+          className="text-3xl font-semibold"
           style={{ color: "var(--text-primary)" }}
+          variants={itemVariants}
         >
           Merge Path
-        </h1>
+        </motion.h1>
 
-        {/* Sub-lines staggered */}
-        <p
-          className="text-lg animate-fade-up stagger-2"
+        {/* Sub-lines */}
+        <motion.p
+          className="text-lg"
           style={{ color: "var(--text-secondary)" }}
+          variants={itemVariants}
         >
           Learn to tell in minutes whether a repo and an issue are worth your time.
-        </p>
-        <p
-          className="text-sm animate-fade-up stagger-3"
+        </motion.p>
+
+        <motion.p
+          className="text-sm"
           style={{ color: "var(--text-secondary)" }}
+          variants={itemVariants}
         >
           Practice on a fake repo. Get it wrong. It costs nothing here.
-        </p>
+        </motion.p>
 
         {/* CTA */}
-        <div className="animate-fade-up stagger-4">
+        <motion.div variants={ctaVariants}>
           {isLoading ? (
             <span
               className="inline-block px-6 py-3 rounded-md text-sm font-medium"
@@ -97,18 +114,28 @@ export default function Home() {
               Loading…
             </span>
           ) : (
-            <Link
-              href={buttonHref}
-              className="inline-block px-6 py-3 rounded-md text-sm font-medium btn-glow"
-              style={{ background: "var(--accent)", color: "#fff" }}
+            <motion.div
+              whileHover={shouldReduce ? {} : { scale: 1.03 }}
+              whileTap={shouldReduce ? {} : { scale: 0.97 }}
+              style={{ display: "inline-block" }}
             >
-              {buttonLabel}
-            </Link>
+              <Link
+                href={buttonHref}
+                className="inline-block px-6 py-3 rounded-md text-sm font-medium btn-glow"
+                style={{ background: "var(--accent)", color: "#fff" }}
+              >
+                {buttonLabel}
+              </Link>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
         {resume.status === "resume" && (
-          <p className="text-xs animate-fade-in stagger-5" style={{ color: "var(--text-secondary)" }}>
+          <motion.p
+            className="text-xs"
+            style={{ color: "var(--text-secondary)" }}
+            variants={itemVariants}
+          >
             or{" "}
             <button
               onClick={handleStartOver}
@@ -123,9 +150,9 @@ export default function Home() {
             >
               start over
             </button>
-          </p>
+          </motion.p>
         )}
-      </div>
+      </motion.div>
     </main>
   );
 }
