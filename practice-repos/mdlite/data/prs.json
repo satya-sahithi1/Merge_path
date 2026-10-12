@@ -1,0 +1,70 @@
+[
+  {
+    "id": 4,
+    "title": "fix: add __bold__ pattern to _inline",
+    "state": "merged",
+    "author": "riya-dev",
+    "opened_at": "2026-04-22",
+    "merged_at": "2026-04-22",
+    "linked_issue": 3,
+    "branch": "fix/issue-3-bold-underscore",
+    "description": "Fixes #3.\n\nThe `__bold__` syntax was missing from `_inline`. Only `**bold**` was handled.\n\n**Changes:**\n- `src/mdlite.py`: one regex pattern added to `_inline`\n\n**Testing:**\n- Added `test_bold_underscore` in `tests/test_mdlite.py`\n- All existing tests pass",
+    "diff_summary": "src/mdlite.py: added `re.sub(r'__(.+?)__', r'<strong>\\1</strong>', text)` to _inline, after the **bold** pattern",
+    "review_comments": [],
+    "lesson": "good_newcomer_pr",
+    "lesson_note": "Self-merged by the maintainer — a one-liner fix with a test added. No review cycle needed for such a small, contained change. Notice how the commit message and PR description both name the specific thing that changed and why."
+  },
+  {
+    "id": 7,
+    "title": "fix: escape raw HTML before inline processing",
+    "state": "merged",
+    "author": "dev-rohan",
+    "opened_at": "2026-07-14",
+    "merged_at": "2026-07-18",
+    "linked_issue": null,
+    "branch": "fix/escape-raw-html",
+    "description": "Adds `html.escape()` at the start of `_inline` so that raw HTML characters (`<`, `>`, `&`) are escaped before any regex substitution runs.\n\nThis prevents raw HTML from passing through unescaped into the output.\n\n**Changes:**\n- `src/mdlite.py`: `import html` added; `html.escape(text)` call added at the top of `_inline`\n\n**Testing:**\n- Added test for `<script>` passthrough\n- Confirmed `**bold**` still renders correctly after the escape step",
+    "diff_summary": "src/mdlite.py: added `import html` and `text = html.escape(text)` as first line of _inline",
+    "review_comments": [
+      {
+        "author": "riya-dev",
+        "date": "2026-07-15",
+        "body": "Thanks! The escape call is in the right place. One thing — the test only covers `<script>`. Can you add a case for `&` too? E.g. `render('A & B')` should produce `<p>A &amp; B</p>`.",
+        "resolved": true
+      },
+      {
+        "author": "dev-rohan",
+        "date": "2026-07-16",
+        "body": "Good point, added that test. Let me know if anything else."
+      },
+      {
+        "author": "riya-dev",
+        "date": "2026-07-18",
+        "body": "Looks great. Clean diff, tests cover both cases. Merging — thanks!"
+      }
+    ],
+    "lesson": "polite_review_response",
+    "lesson_note": "The maintainer asked for an extra test case — not to be difficult, but because `&` is a separate escape path that the first test didn't cover. The contributor added it without argument, thanked the reviewer, and the PR merged cleanly. That's how review is supposed to go."
+  },
+  {
+    "id": 9,
+    "title": "feat: support nested lists",
+    "state": "open",
+    "author": "kai-contributes",
+    "opened_at": "2026-09-28",
+    "merged_at": null,
+    "linked_issue": 8,
+    "branch": "feat/nested-lists",
+    "description": "Attempting to fix #8. Added recursive handling for indented `- ` lines inside the list block.\n\nNot 100% sure the indentation detection is correct — open to feedback.",
+    "diff_summary": "src/mdlite.py: modified the list block in render() to recursively collect indented lines and wrap them in a nested <ul>",
+    "review_comments": [
+      {
+        "author": "riya-dev",
+        "date": "2026-09-29",
+        "body": "Thanks for taking this on! The approach is reasonable but the indentation detection is off — you're checking for exactly 2 spaces but the test cases use 4. Also please add tests before I can merge this; right now there are none for the new behaviour.\n\nFeel free to push updates."
+      }
+    ],
+    "lesson": null,
+    "lesson_note": "This PR is stale — opened weeks ago, maintainer left clear feedback asking for fixes and tests, contributor has not responded. Issue #8 is still effectively unclaimed."
+  }
+]

@@ -1,0 +1,235 @@
+[
+  {
+    "id": 2,
+    "title": "Add support for nested lists",
+    "state": "open",
+    "labels": ["enhancement", "good first issue"],
+    "opened_by": "curious-dev",
+    "opened_at": "2026-03-10",
+    "assigned_to": null,
+    "body": "It would be great if `render()` could handle nested lists. Right now only flat `- item` lists work. Indented items come out as paragraphs.\n\n```python\nrender('- item one\\n  - nested\\n- item two')\n# Expected: nested <ul> inside the outer <li>\n# Actual:   indented line becomes a <p>\n```\n\nWould love to see this supported.",
+    "comments": [
+      {
+        "author": "riya-dev",
+        "date": "2026-03-11",
+        "body": "Good first issue — extend the list handling in the block step. Happy to review."
+      },
+      {
+        "author": "kai-dev",
+        "date": "2026-03-12",
+        "body": "Agreed, this comes up a lot. Would make the library a lot more practical."
+      },
+      {
+        "author": "weekend-hacker",
+        "date": "2026-06-20",
+        "body": "I started looking at this. The list parser would need a full rewrite to track indentation state properly — pausing for now, it's more involved than I expected."
+      }
+    ],
+    "lesson": "good_first_issue_hard",
+    "lesson_feedback": "The maintainer called it a good first issue, but a contributor who tried it found the list parser needs a full rewrite. The block step doesn't track indentation state at all — adding nested support isn't an extension, it's a redesign. The difficulty is invisible until you read the code.",
+    "reproduction": {
+      "issueId": "mdlite-2",
+      "buggyVersion": null,
+      "fixedVersion": null,
+      "reproductionSteps": [
+        { "instruction": "Call render('- item one\\n  - nested\\n- item two')." },
+        { "instruction": "Observe that the indented line is treated as a <p>, not a nested <li>." }
+      ],
+      "expectedResult": "Nested list items render inside an inner <ul>.",
+      "buggyBehavior": {
+        "output": "Indented list item becomes a <p> tag.",
+        "type": "wrong_output",
+        "verifiedByTest": false
+      },
+      "fixedBehavior": {
+        "output": "N/A — no fix exists yet.",
+        "type": "success",
+        "verifiedByTest": false
+      },
+      "regressionTestId": null
+    }
+  },
+  {
+    "id": 3,
+    "title": "Double-underscore bold (__bold__) renders as plain text",
+    "state": "open",
+    "labels": ["bug"],
+    "opened_by": "priya-learns",
+    "opened_at": "2026-04-10",
+    "assigned_to": null,
+    "body": "The README says both `**bold**` and `__bold__` should produce `<strong>`. But `__bold__` just passes through as plain text.\n\n```python\nrender('__bold__')\n# Returns: <p>__bold__</p>\n# Expected: <p><strong>bold</strong></p>\n```\n\n`**bold**` works fine. Only the double-underscore variant is broken.\n\n**Python:** 3.12",
+    "comments": [
+      {
+        "author": "riya-dev",
+        "date": "2026-04-10",
+        "body": "Confirmed. The `__` pattern is missing from `_inline` — only `**` is handled. Thanks for the report."
+      },
+      {
+        "author": "kai-dev",
+        "date": "2026-04-11",
+        "body": "Reproduced on Python 3.11 as well."
+      }
+    ],
+    "lesson": "already_fixed_by_commit",
+    "lesson_feedback": "This issue is still open in the tracker but the bug no longer exists. Check the commits tab — the fix landed on 2026-04-22. Reproducing it on HEAD would have caught this immediately: __bold__ now renders correctly.",
+    "reproduction": {
+      "issueId": "mdlite-3",
+      "buggyVersion": "pre-2026-04-22",
+      "fixedVersion": "HEAD",
+      "reproductionSteps": [
+        { "instruction": "Open src/mdlite.py and find the _inline function." },
+        { "instruction": "Call render('__bold__')." },
+        { "instruction": "Check whether the output is <p>__bold__</p> or <p><strong>bold</strong></p>." }
+      ],
+      "expectedResult": "render('__bold__') returns \"<p><strong>bold</strong></p>\"",
+      "buggyBehavior": {
+        "output": "Returns \"<p>__bold__</p>\" — underscore bold not recognised.",
+        "type": "wrong_output",
+        "verifiedByTest": true
+      },
+      "fixedBehavior": {
+        "output": "Returns \"<p><strong>bold</strong></p>\" — both bold variants work.",
+        "type": "success",
+        "verifiedByTest": true
+      },
+      "regressionTestId": "mdlite/bold-underscore"
+    }
+  },
+  {
+    "id": 5,
+    "title": "Raw HTML in input passes through into the output unchanged",
+    "state": "open",
+    "labels": ["bug", "good first issue"],
+    "opened_by": "sec-minded-dev",
+    "opened_at": "2026-08-02",
+    "assigned_to": null,
+    "body": "If you pass a string containing raw HTML to `render()`, it comes out unchanged inside a `<p>` tag.\n\n```python\nrender('<script>alert(1)</script>')\n# Returns: <p><script>alert(1)</script></p>\n```\n\nAny application that injects this output into a web page will execute the script. The library should escape `<`, `>`, and `&` before rendering.\n\n**Steps to reproduce:**\n1. Call `render('<script>alert(1)</script>')`\n2. Observe the output\n\n**Expected:** `<p>&lt;script&gt;alert(1)&lt;/script&gt;</p>`\n**Actual:** `<p><script>alert(1)</script></p>`\n\n**Python:** 3.12",
+    "comments": [
+      {
+        "author": "riya-dev",
+        "date": "2026-08-03",
+        "body": "Confirmed. The fix goes in `_inline` — call `html.escape(text)` at the very top, before any of the regex patterns run. Please include a test that fails on the current code and passes after your fix."
+      },
+      {
+        "author": "kai-dev",
+        "date": "2026-08-04",
+        "body": "Reproduced on Python 3.12 as well. The escape needs to happen before the regexes or the `&` in `&lt;` will get double-processed."
+      }
+    ],
+    "lesson": "genuine_good_pick",
+    "lesson_feedback": "Good pick. Clear reproduction steps, confirmed by two maintainers, fix location spelled out in the comments, no PR exists, and the scope is a single line in _inline. This is exactly the kind of issue worth starting with.",
+    "reproduction": {
+      "issueId": "mdlite-5",
+      "buggyVersion": "HEAD",
+      "fixedVersion": "fixed",
+      "reproductionSteps": [
+        { "instruction": "Open src/mdlite.py and find the _inline function." },
+        { "instruction": "Call render('<script>alert(1)</script>')." },
+        { "instruction": "Observe the return value." }
+      ],
+      "expectedResult": "render returns \"<p>&lt;script&gt;alert(1)&lt;/script&gt;</p>\"",
+      "buggyBehavior": {
+        "output": "Returns \"<p><script>alert(1)</script></p>\" — raw HTML passes through unchanged.",
+        "type": "wrong_output",
+        "verifiedByTest": true
+      },
+      "fixedBehavior": {
+        "output": "Returns \"<p>&lt;script&gt;alert(1)&lt;/script&gt;</p>\" — HTML characters are safely escaped.",
+        "type": "success",
+        "verifiedByTest": true
+      },
+      "regressionTestId": "mdlite/raw-html-passthrough"
+    }
+  },
+  {
+    "id": 6,
+    "title": "Links break sometimes",
+    "state": "open",
+    "labels": ["bug"],
+    "opened_by": "confused-first-timer",
+    "opened_at": "2026-08-20",
+    "assigned_to": null,
+    "body": "Sometimes when I use links in my markdown the output doesn't look right. Not sure what's happening.\n\nI'm using Python 3.11.",
+    "comments": [
+      {
+        "author": "riya-dev",
+        "date": "2026-08-21",
+        "body": "Hi, thanks for the report. Could you share the exact markdown string you're passing in and the output you're getting? A short code snippet like `render('[text](url)')` and what it returns would help a lot."
+      },
+      {
+        "author": "confused-first-timer",
+        "date": "2026-08-23",
+        "body": "It's all in a large file, I can't really paste it all here. The output just looks wrong in some cases."
+      }
+    ],
+    "lesson": "no_reproduction_steps",
+    "lesson_feedback": "No input, no output, no specific case. The maintainer asked for a code snippet two days after the report and the response was 'it's in a large file'. You cannot reproduce this, which means you cannot fix it. The right move is to wait for a proper example — or ask for one yourself.",
+    "reproduction": {
+      "issueId": "mdlite-6",
+      "buggyVersion": null,
+      "fixedVersion": null,
+      "reproductionSteps": [
+        { "instruction": "Read the issue body carefully." },
+        { "instruction": "Check whether a specific markdown input is provided." },
+        { "instruction": "Check whether the actual vs expected output is shown." }
+      ],
+      "expectedResult": "A reproducible code snippet showing the exact input and the wrong output.",
+      "buggyBehavior": {
+        "output": "Not enough information to reproduce. No input string or output provided.",
+        "type": "wrong_output",
+        "verifiedByTest": false
+      },
+      "fixedBehavior": {
+        "output": "N/A — cannot investigate without a reproduction case.",
+        "type": "success",
+        "verifiedByTest": false
+      },
+      "regressionTestId": null
+    }
+  },
+  {
+    "id": 8,
+    "title": "README example has a typo in the function call",
+    "state": "open",
+    "labels": ["docs"],
+    "opened_by": "weekend-hacker",
+    "opened_at": "2026-09-05",
+    "assigned_to": null,
+    "body": "The usage example in README.md has a typo in the function call — it says `form` instead of `from`.\n\n```\nform src.mdlite import render\n```\n\nShould be:\n\n```\nfrom src.mdlite import render\n```\n\nSmall fix but confusing for new users.",
+    "comments": [
+      {
+        "author": "riya-dev",
+        "date": "2026-09-06",
+        "body": "Good catch, typo fixes are welcome. Please use a `docs/` branch, e.g. `docs/readme-typo`."
+      },
+      {
+        "author": "priya-learns",
+        "date": "2026-09-11",
+        "body": "I'll fix this."
+      }
+    ],
+    "lesson": "claimed_active_pr",
+    "lesson_feedback": "A contributor has already claimed this and opened a draft PR (#9) on 2026-09-12. Starting on this without checking first would duplicate their work. Leave a comment asking for an update, or look for another issue.",
+    "reproduction": {
+      "issueId": "mdlite-8",
+      "buggyVersion": null,
+      "fixedVersion": null,
+      "reproductionSteps": [
+        { "instruction": "Open README.md and find the usage example." },
+        { "instruction": "Check the import line." }
+      ],
+      "expectedResult": "Import line reads: from src.mdlite import render",
+      "buggyBehavior": {
+        "output": "Import line reads: form src.mdlite import render — typo in README.",
+        "type": "wrong_output",
+        "verifiedByTest": false
+      },
+      "fixedBehavior": {
+        "output": "Import line reads: from src.mdlite import render",
+        "type": "success",
+        "verifiedByTest": false
+      },
+      "regressionTestId": null
+    }
+  }
+]

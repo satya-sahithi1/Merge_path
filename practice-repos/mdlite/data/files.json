@@ -1,0 +1,41 @@
+{
+  "tree": [
+    {
+      "name": "README.md",
+      "type": "file",
+      "content": "# mdlite\n\nA small Python library that converts Markdown to HTML. Handles headings, paragraphs, bold, italic, inline code, links, and flat lists.\n\n## Requirements\n\n- Python 3.10 or higher\n- pytest (for running tests)\n\n## Installation\n\n```bash\ngit clone https://github.com/riya-dev/mdlite.git\ncd mdlite\npip install -r requirements.txt\n```\n\n## Usage\n\n```python\nfrom src.mdlite import render\n\nhtml = render(\"# Hello\\n\\nThis is **bold** and *italic*.\")\nprint(html)\n# <h1>Hello</h1>\n# <p>This is <strong>bold</strong> and <em>italic</em>.</p>\n```\n\n## Running tests\n\n```bash\npytest tests/\n```\n\nAll tests must pass before you open a pull request. See CONTRIBUTING.md.\n\n## Supported syntax\n\n| Syntax | Output |\n|---|---|\n| `# Heading` | `<h1>` |\n| `**bold**` or `__bold__` | `<strong>` |\n| `*italic*` | `<em>` |\n| `` `code` `` | `<code>` |\n| `[text](url)` | `<a>` |\n| `- item` | `<ul><li>` |\n\n## Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.\n\n## License\n\nMIT\n"
+    },
+    {
+      "name": "CONTRIBUTING.md",
+      "type": "file",
+      "content": "# Contributing to mdlite\n\nThanks for your interest. Follow these rules — PRs that skip any step will be asked to fix before merge.\n\n## Rules\n\n1. **Branch naming:** `fix/<issue-number>-short-description` or `feat/short-description`\n2. **Tests required:** every change must include a test. Bug fixes must have a test that fails on the old code and passes after your fix.\n3. **Black formatting:** run `black src/ tests/` before committing. CI will fail if formatting is wrong.\n4. **CI must pass:** all tests and the formatter check run on every PR. Do not open a PR with a red CI.\n5. **Fill in the PR checklist:** the pull request template has a short checklist. Complete every item.\n\n## Setup\n\n```bash\npip install -r requirements.txt\npip install black\n```\n\n## Opening an issue first\n\nIf you want to fix something not already in the tracker, open an issue first and wait for a response.\n"
+    },
+    {
+      "name": "requirements.txt",
+      "type": "file",
+      "content": "pytest==8.3.3\n"
+    },
+    {
+      "name": "src",
+      "type": "dir",
+      "children": [
+        {
+          "name": "mdlite.py",
+          "type": "file",
+          "content": "import re\n\n\ndef render(text):\n    lines = text.split(\"\\n\")\n    output = []\n    i = 0\n    while i < len(lines):\n        line = lines[i]\n\n        if line.startswith(\"# \"):\n            output.append(f\"<h1>{_inline(line[2:])}</h1>\")\n            i += 1\n        elif line.startswith(\"## \"):\n            output.append(f\"<h2>{_inline(line[3:])}</h2>\")\n            i += 1\n        elif line.startswith(\"### \"):\n            output.append(f\"<h3>{_inline(line[4:])}</h3>\")\n            i += 1\n        elif line.startswith(\"- \"):\n            items = []\n            while i < len(lines) and lines[i].startswith(\"- \"):\n                items.append(f\"<li>{_inline(lines[i][2:])}</li>\")\n                i += 1\n            output.append(\"<ul>\" + \"\".join(items) + \"</ul>\")\n        elif line.strip() == \"\":\n            i += 1\n        else:\n            output.append(f\"<p>{_inline(line)}</p>\")\n            i += 1\n\n    return \"\\n\".join(output)\n\n\ndef _inline(text):\n    # BUG: raw HTML is not escaped before processing.\n    # A string like <script>alert(1)</script> passes through unchanged.\n    # Fix: add html.escape(text) here before the regex substitutions.\n    text = re.sub(r\"\\*\\*(.+?)\\*\\*\", r\"<strong>\\1</strong>\", text)\n    text = re.sub(r\"__(.+?)__\", r\"<strong>\\1</strong>\", text)\n    text = re.sub(r\"\\*(.+?)\\*\", r\"<em>\\1</em>\", text)\n    text = re.sub(r\"`(.+?)`\", r\"<code>\\1</code>\", text)\n    text = re.sub(r\"\\[(.+?)\\]\\((.+?)\\)\", r'<a href=\"\\2\">\\1</a>', text)\n    return text\n"
+        }
+      ]
+    },
+    {
+      "name": "tests",
+      "type": "dir",
+      "children": [
+        {
+          "name": "test_mdlite.py",
+          "type": "file",
+          "content": "\"\"\"Tests for mdlite — HEAD version.\"\"\"\n\nimport sys\nimport os\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nfrom src.mdlite import render\n\n\ndef test_h1_heading():\n    assert render(\"# Hello\") == \"<h1>Hello</h1>\"\n\n\ndef test_h2_heading():\n    assert render(\"## Sub\") == \"<h2>Sub</h2>\"\n\n\ndef test_paragraph():\n    assert render(\"plain text\") == \"<p>plain text</p>\"\n\n\ndef test_bold_asterisk():\n    assert render(\"**bold**\") == \"<p><strong>bold</strong></p>\"\n\n\ndef test_bold_underscore():\n    assert render(\"__bold__\") == \"<p><strong>bold</strong></p>\"\n\n\ndef test_emphasis():\n    assert render(\"*em*\") == \"<p><em>em</em></p>\"\n\n\ndef test_inline_code():\n    assert render(\"`code`\") == \"<p><code>code</code></p>\"\n\n\ndef test_link():\n    assert render(\"[click](http://example.com)\") == '<p><a href=\"http://example.com\">click</a></p>'\n\n\ndef test_flat_list():\n    md = \"- one\\n- two\\n- three\"\n    assert render(md) == \"<ul><li>one</li><li>two</li><li>three</li></ul>\"\n\n\ndef test_empty_input():\n    assert render(\"\") == \"\"\n\n\ndef test_blank_lines_ignored():\n    assert render(\"# Title\\n\\nparagraph\") == \"<h1>Title</h1>\\n<p>paragraph</p>\"\n\n\ndef test_heading_strips_inline():\n    assert render(\"# **bold** title\") == \"<h1><strong>bold</strong> title</h1>\"\n"
+        }
+      ]
+    }
+  ]
+}
