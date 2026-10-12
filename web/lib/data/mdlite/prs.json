@@ -1,0 +1,79 @@
+[
+  {
+    "id": 4,
+    "title": "test: add empty-input and blank-line tests",
+    "state": "merged",
+    "author": "priya-learns",
+    "opened_at": "2026-06-10",
+    "merged_at": "2026-06-10",
+    "linked_issue": null,
+    "branch": "test/empty-input",
+    "description": "Adds two missing tests:\n- `test_empty_input` — confirms `render('')` returns `''`\n- `test_blank_lines_ignored` — confirms blank lines between blocks don't produce output\n\nNo linked issue. I noticed these cases weren't covered while reading through the test file.\n\n**Changes:**\n- `tests/test_mdlite.py`: 2 test functions added\n\n**Testing:**\n- All existing tests still pass\n- Both new tests pass",
+    "diff_summary": "tests/test_mdlite.py: added test_empty_input and test_blank_lines_ignored",
+    "review_comments": [
+      {
+        "author": "riya-dev",
+        "date": "2026-06-10",
+        "body": "Nice addition — these edge cases should definitely be covered. Merging.",
+        "resolved": true
+      }
+    ],
+    "lesson": "good_newcomer_pr",
+    "lesson_note": "No linked issue, no bug to fix — just a contributor who read the test file, noticed a gap, and filled it cleanly. Small scope, passes CI, maintainer merged same day. You don't need a bug report to make a useful contribution."
+  },
+  {
+    "id": 7,
+    "title": "fix: strip trailing spaces from headings",
+    "state": "merged",
+    "author": "dev-rohan",
+    "opened_at": "2026-08-25",
+    "merged_at": "2026-08-28",
+    "linked_issue": null,
+    "branch": "fix/trailing-spaces",
+    "description": "Headings with trailing spaces produce output like `<h1>Hello   </h1>`. This strips them.\n\n**Changes:**\n- `src/mdlite.py`: `.rstrip()` added to the text slice in each heading branch\n\n**Testing:**\n- Added `test_heading_trailing_space` in `tests/test_mdlite.py`\n- All existing tests pass",
+    "diff_summary": "src/mdlite.py: changed line[2:] to line[2:].rstrip() (and equivalents for h2, h3)",
+    "review_comments": [
+      {
+        "author": "ci-bot",
+        "date": "2026-08-25",
+        "body": "`black --check` failed on `src/mdlite.py`. Please run `black src/ tests/` before pushing.",
+        "resolved": true
+      },
+      {
+        "author": "riya-dev",
+        "date": "2026-08-26",
+        "body": "The change looks correct but CI is red. Can you run `black src/ tests/` and push the result?",
+        "resolved": true
+      },
+      {
+        "author": "dev-rohan",
+        "date": "2026-08-27",
+        "body": "Done — pushed a formatting commit. CI is green now.",
+        "resolved": true
+      },
+      {
+        "author": "riya-dev",
+        "date": "2026-08-28",
+        "body": "Perfect. Clean diff, test included, CI passing. Merging — thanks!",
+        "resolved": true
+      }
+    ],
+    "lesson": "polite_review_response",
+    "lesson_note": "CI failed on the first push because of formatting. The maintainer didn't reject the PR — they asked for one specific fix. The contributor ran black, pushed the result, and the PR merged cleanly. A CI failure on your first push is normal; what matters is how you respond to it."
+  },
+  {
+    "id": 9,
+    "title": "docs: fix typo in README import example",
+    "state": "open",
+    "author": "priya-learns",
+    "opened_at": "2026-09-12",
+    "merged_at": null,
+    "linked_issue": 8,
+    "branch": "docs/readme-typo",
+    "description": "Fixes #8.\n\nThe usage example in README.md says `form src.mdlite import render` — changed to `from`.\n\n**Changes:**\n- `README.md`: one word corrected in the usage example\n\n**Draft:** still checking the rest of the README for other issues before marking ready.",
+    "diff_summary": "README.md: changed 'form src.mdlite import render' to 'from src.mdlite import render'",
+    "review_comments": [],
+    "lesson": null,
+    "lesson_note": "Draft PR opened by a contributor who claimed issue #8. Still in progress — no review yet."
+  }
+]

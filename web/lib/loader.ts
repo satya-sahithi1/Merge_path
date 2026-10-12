@@ -63,5 +63,5 @@ export function getQuiz(repoId: string): Quiz {
 }
 
 // All available repo IDs — add new repos here as they're written
-export const REPO_IDS = ["notes-app", "weatherly", "gradewise"] as const;
+export const REPO_IDS = ["notes-app", "weatherly", "gradewise", "mdlite"] as const;
 export type RepoId = (typeof REPO_IDS)[number];

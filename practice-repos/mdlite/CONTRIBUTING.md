@@ -1,14 +1,12 @@
 # Contributing to mdlite
 
-Thanks for your interest. Follow these rules — PRs that skip any step will be asked to fix before merge.
+Thanks for your interest in contributing.
 
-## Rules
+## Before you start
 
-1. **Branch naming:** `fix/<issue-number>-short-description` or `feat/short-description`
-2. **Tests required:** every change must include a test. Bug fixes must have a test that fails on the old code and passes after your fix.
-3. **Black formatting:** run `black src/ tests/` before committing. CI will fail if formatting is wrong.
-4. **CI must pass:** all tests and the formatter check run on every PR. Do not open a PR with a red CI.
-5. **Fill in the PR checklist:** the pull request template has a short checklist. Complete every item.
+Check the open issues. If you want to work on one, leave a comment first and wait for a reply. This avoids two people working on the same thing.
+
+If you find a new bug, open an issue before submitting a PR.
 
 ## Setup
 
@@ -17,6 +15,17 @@ pip install -r requirements.txt
 pip install black
 ```
 
-## Opening an issue first
+## Branch naming
 
-If you want to fix something not already in the tracker, open an issue first and wait for a response.
+Use `<type>/<short-desc>`, for example:
+
+- `fix/trailing-spaces`
+- `test/empty-input`
+- `docs/readme-typo`
+
+## Rules
+
+1. Every change needs a test. Bug fixes need a test that fails before and passes after.
+2. Run `black src/ tests/` before pushing. CI checks formatting.
+3. One issue per PR. Do not bundle fixes.
+4. Link the issue your PR fixes with `Fixes #<number>` in the description.

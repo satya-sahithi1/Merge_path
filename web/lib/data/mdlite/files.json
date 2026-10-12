@@ -1,0 +1,68 @@
+{
+  "tree": [
+    {
+      "name": "README.md",
+      "type": "file",
+      "content": "# mdlite\n\nA small Python library that converts Markdown to HTML. Handles headings, paragraphs, bold, italic, inline code, links, and flat lists.\n\n## Requirements\n\n- Python 3.10 or higher\n- pytest (for running tests)\n\n## Installation\n\n```bash\ngit clone https://github.com/riya-dev/mdlite.git\ncd mdlite\npip install -r requirements.txt\n```\n\n## Usage\n\n```python\nform src.mdlite import render\n\nhtml = render(\"# Hello\\n\\nThis is **bold** and *italic*.\")\nprint(html)\n# <h1>Hello</h1>\n# <p>This is <strong>bold</strong> and <em>italic</em>.</p>\n```\n\n## Running tests\n\n```bash\npytest tests/\n```\n\nAll tests must pass before you open a pull request. See CONTRIBUTING.md.\n\n## Supported syntax\n\n| Syntax | Output |\n|---|---|\n| `# Heading` | `<h1>` |\n| `**bold**` or `__bold__` | `<strong>` |\n| `*italic*` | `<em>` |\n| `` `code` `` | `<code>` |\n| `[text](url)` | `<a>` |\n| `- item` | `<ul><li>` |\n\n## Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.\n\n## License\n\nMIT\n"
+    },
+    {
+      "name": "CONTRIBUTING.md",
+      "type": "file",
+      "content": "# Contributing to mdlite\n\nThanks for your interest in contributing.\n\n## Before you start\n\nCheck the open issues. If you want to work on one, leave a comment first and wait for a reply. This avoids two people working on the same thing.\n\nIf you find a new bug, open an issue before submitting a PR.\n\n## Setup\n\n```bash\npip install -r requirements.txt\npip install black\n```\n\n## Branch naming\n\nUse `<type>/<short-desc>`, for example:\n\n- `fix/trailing-spaces`\n- `test/empty-input`\n- `docs/readme-typo`\n\n## Rules\n\n1. Every change needs a test. Bug fixes need a test that fails before and passes after.\n2. Run `black src/ tests/` before pushing. CI checks formatting.\n3. One issue per PR. Do not bundle fixes.\n4. Link the issue your PR fixes with `Fixes #<number>` in the description.\n"
+    },
+    {
+      "name": "requirements.txt",
+      "type": "file",
+      "content": "pytest==8.3.3\nblack==24.8.0\n"
+    },
+    {
+      "name": "LICENSE",
+      "type": "file",
+      "content": "MIT License\n\nCopyright (c) 2026 riya-dev\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
+    },
+    {
+      "name": ".github",
+      "type": "dir",
+      "children": [
+        {
+          "name": "PULL_REQUEST_TEMPLATE.md",
+          "type": "file",
+          "content": "## What does this PR do?\n\n<!-- Describe the change and why it's needed. -->\n\n## Checklist\n\n- [ ] I have read CONTRIBUTING.md\n- [ ] My branch follows the `<type>/<short-desc>` naming rule\n- [ ] I have added or updated tests\n- [ ] I ran `black src/ tests/` and CI is green\n- [ ] I linked the related issue (if any) with `Fixes #<number>`\n"
+        },
+        {
+          "name": "workflows",
+          "type": "dir",
+          "children": [
+            {
+              "name": "ci.yml",
+              "type": "file",
+              "content": "name: CI\n\non:\n  push:\n    branches: [main]\n  pull_request:\n    branches: [main]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - run: pip install -r requirements.txt\n      - run: black --check src/ tests/\n      - run: pytest tests/\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "src",
+      "type": "dir",
+      "children": [
+        {
+          "name": "mdlite.py",
+          "type": "file",
+          "content": "import re\n\n\ndef render(text):\n    lines = text.split(\"\\n\")\n    output = []\n    i = 0\n    while i < len(lines):\n        line = lines[i]\n\n        if line.startswith(\"# \"):\n            output.append(f\"<h1>{_inline(line[2:].rstrip())}</h1>\")\n            i += 1\n        elif line.startswith(\"## \"):\n            output.append(f\"<h2>{_inline(line[3:].rstrip())}</h2>\")\n            i += 1\n        elif line.startswith(\"### \"):\n            output.append(f\"<h3>{_inline(line[4:].rstrip())}</h3>\")\n            i += 1\n        elif line.startswith(\"- \"):\n            items = []\n            while i < len(lines) and lines[i].startswith(\"- \"):\n                items.append(f\"<li>{_inline(lines[i][2:])}</li>\")\n                i += 1\n            output.append(\"<ul>\" + \"\".join(items) + \"</ul>\")\n        elif line.strip() == \"\":\n            i += 1\n        else:\n            output.append(f\"<p>{_inline(line)}</p>\")\n            i += 1\n\n    return \"\\n\".join(output)\n\n\ndef _inline(text):\n    text = re.sub(r\"\\*\\*(.+?)\\*\\*\", r\"<strong>\\1</strong>\", text)\n    text = re.sub(r\"__(.+?)__\", r\"<strong>\\1</strong>\", text)\n    text = re.sub(r\"\\*(.+?)\\*\", r\"<em>\\1</em>\", text)\n    text = re.sub(r\"`(.+?)`\", r\"<code>\\1</code>\", text)\n    text = re.sub(r\"\\[(.+?)\\]\\((.+?)\\)\", r'<a href=\"\\2\">\\1</a>', text)\n    return text\n"
+        }
+      ]
+    },
+    {
+      "name": "tests",
+      "type": "dir",
+      "children": [
+        {
+          "name": "test_mdlite.py",
+          "type": "file",
+          "content": "\"\"\"Tests for mdlite — HEAD version.\"\"\"\n\nimport sys\nimport os\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nfrom src.mdlite import render\n\n\ndef test_h1_heading():\n    assert render(\"# Hello\") == \"<h1>Hello</h1>\"\n\n\ndef test_h2_heading():\n    assert render(\"## Sub\") == \"<h2>Sub</h2>\"\n\n\ndef test_paragraph():\n    assert render(\"plain text\") == \"<p>plain text</p>\"\n\n\ndef test_bold_asterisk():\n    assert render(\"**bold**\") == \"<p><strong>bold</strong></p>\"\n\n\ndef test_bold_underscore():\n    assert render(\"__bold__\") == \"<p><strong>bold</strong></p>\"\n\n\ndef test_emphasis():\n    assert render(\"*em*\") == \"<p><em>em</em></p>\"\n\n\ndef test_inline_code():\n    assert render(\"`code`\") == \"<p><code>code</code></p>\"\n\n\ndef test_link():\n    assert render(\"[click](http://example.com)\") == '<p><a href=\"http://example.com\">click</a></p>'\n\n\ndef test_flat_list():\n    md = \"- one\\n- two\\n- three\"\n    assert render(md) == \"<ul><li>one</li><li>two</li><li>three</li></ul>\"\n\n\ndef test_empty_input():\n    assert render(\"\") == \"\"\n\n\ndef test_blank_lines_ignored():\n    assert render(\"# Title\\n\\nparagraph\") == \"<h1>Title</h1>\\n<p>paragraph</p>\"\n\n\ndef test_heading_trailing_space():\n    assert render(\"# Hello   \") == \"<h1>Hello</h1>\"\n\n\ndef test_heading_inline_bold():\n    assert render(\"# **bold** title\") == \"<h1><strong>bold</strong> title</h1>\"\n"
+        }
+      ]
+    }
+  ]
+}

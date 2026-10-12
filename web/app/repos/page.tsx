@@ -22,6 +22,11 @@ const REPO_BRIEFS: Record<string, { name: string; brief: string; language: strin
     brief: "a CGPA and semester calculator.",
     language: "Python",
   },
+  "mdlite": {
+    name: "mdlite",
+    brief: "A small Python library that converts Markdown to HTML.",
+    language: "Python",
+  },
 };
 
 type GridState = "loading" | "ready";
@@ -117,7 +122,7 @@ export default function ReposPage() {
 
         {gridState === "loading" ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {[0, 1, 2].map((i) => (
+            {[0, 1, 2, 3].map((i) => (
               <div key={i} className="rounded-lg border p-6 h-40" style={{ borderColor: "var(--border)", background: "var(--surface)" }} />
             ))}
           </div>

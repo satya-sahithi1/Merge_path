@@ -1,0 +1,23 @@
+{
+  "id": "mdlite",
+  "name": "mdlite",
+  "description": "A small Python library that converts Markdown to HTML. Handles headings, paragraphs, bold, italic, inline code, links, and flat lists.",
+  "language": "Python",
+  "stars": 54,
+  "forks": 8,
+  "owner": "riya-dev",
+  "health": "active",
+  "last_commit_date": "2026-09-13",
+  "has_readme": true,
+  "has_contributing": true,
+  "has_ci": true,
+  "avg_pr_response_days": 2,
+  "open_issues": 5,
+  "open_prs": 1,
+  "stale_prs": 0,
+  "merged_prs_last_90_days": 2,
+  "maintainer_replies_in_issues": true,
+  "topics": ["python", "markdown", "html", "parser", "beginner-friendly"],
+  "verdict": "worth-contributing",
+  "asOf": "2026-09-15"
+}

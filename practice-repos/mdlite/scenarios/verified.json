@@ -1,8 +1,8 @@
 {
   "repo": "mdlite",
-  "generated_at": "2026-10-11T17:05:12.394777+00:00",
+  "generated_at": "2026-10-12T04:31:17.839477+00:00",
   "all_pass": true,
-  "summary": "============================== 5 passed in 0.01s ===============================",
+  "summary": "============================== 5 passed in 0.02s ===============================",
   "regression_tests": [
     {
       "regressionTestId": "mdlite/bold-underscore",
@@ -23,5 +23,5 @@
     "scenarios/test_scenarios.py::TestRawHtmlPassthrough::test_fixed_normal_markdown_still_works PASSED [100%]"
   ],
   "failed": [],
-  "stdout": "============================= test session starts ==============================\nplatform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /home/cse/sahithi/Merge_path/practice-repos/notes-app/.venv/bin/python3\ncachedir: .pytest_cache\nrootdir: /home/cse/sahithi/Merge_path/practice-repos/mdlite\ncollecting ... collected 5 items\n\nscenarios/test_scenarios.py::TestBoldUnderscore::test_old_returns_plain_text PASSED [ 20%]\nscenarios/test_scenarios.py::TestBoldUnderscore::test_head_renders_strong PASSED [ 40%]\nscenarios/test_scenarios.py::TestRawHtmlPassthrough::test_head_passes_script_tag_through PASSED [ 60%]\nscenarios/test_scenarios.py::TestRawHtmlPassthrough::test_fixed_escapes_script_tag PASSED [ 80%]\nscenarios/test_scenarios.py::TestRawHtmlPassthrough::test_fixed_normal_markdown_still_works PASSED [100%]\n\n============================== 5 passed in 0.01s ===============================\n"
+  "stdout": "============================= test session starts ==============================\nplatform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /home/cse/sahithi/Merge_path/practice-repos/notes-app/.venv/bin/python3\ncachedir: .pytest_cache\nrootdir: /home/cse/sahithi/Merge_path/practice-repos/mdlite\ncollecting ... collected 5 items\n\nscenarios/test_scenarios.py::TestBoldUnderscore::test_old_returns_plain_text PASSED [ 20%]\nscenarios/test_scenarios.py::TestBoldUnderscore::test_head_renders_strong PASSED [ 40%]\nscenarios/test_scenarios.py::TestRawHtmlPassthrough::test_head_passes_script_tag_through PASSED [ 60%]\nscenarios/test_scenarios.py::TestRawHtmlPassthrough::test_fixed_escapes_script_tag PASSED [ 80%]\nscenarios/test_scenarios.py::TestRawHtmlPassthrough::test_fixed_normal_markdown_still_works PASSED [100%]\n\n============================== 5 passed in 0.02s ===============================\n"
 }

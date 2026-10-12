@@ -1,0 +1,62 @@
+[
+  {
+    "hash": "0d3f1a",
+    "author": "riya-dev",
+    "date": "2026-03-06",
+    "message": "feat: add flat list rendering"
+  },
+  {
+    "hash": "a2f9c1",
+    "author": "riya-dev",
+    "date": "2026-04-22",
+    "message": "fix: support __bold__ (refs #3)"
+  },
+  {
+    "hash": "3b1e6f",
+    "author": "riya-dev",
+    "date": "2026-05-10",
+    "message": "chore: add LICENSE, requirements.txt and CONTRIBUTING.md"
+  },
+  {
+    "hash": "4f9a2d",
+    "author": "riya-dev",
+    "date": "2026-05-12",
+    "message": "ci: add workflow with pytest and black check, add PR template"
+  },
+  {
+    "hash": "5c3d8e",
+    "author": "priya-learns",
+    "date": "2026-06-10",
+    "message": "test: add empty-input and blank-line tests"
+  },
+  {
+    "hash": "6a7b1c",
+    "author": "riya-dev",
+    "date": "2026-06-10",
+    "message": "Merge pull request #4 from priya-learns/test/empty-input"
+  },
+  {
+    "hash": "7e4f3b",
+    "author": "dev-rohan",
+    "date": "2026-08-25",
+    "message": "fix: strip trailing spaces from headings (with test)"
+  },
+  {
+    "hash": "8d2c5a",
+    "author": "dev-rohan",
+    "date": "2026-08-27",
+    "message": "style: format with black"
+  },
+  {
+    "hash": "9c1b4e",
+    "author": "riya-dev",
+    "date": "2026-08-28",
+    "message": "Merge pull request #7 from dev-rohan/fix/trailing-spaces"
+  },
+  {
+    "hash": "b3f7d2",
+    "author": "riya-dev",
+    "date": "2026-09-13",
+    "message": "chore: pin black version in requirements"
+  }
+]

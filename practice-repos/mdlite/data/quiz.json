@@ -1,0 +1,310 @@
+[
+  {
+    "id": 1,
+    "domain": "repo_reading",
+    "question": "Before opening a PR here, which of these tell you what it has to satisfy to be merged? (Select all that apply)",
+    "type": "multi",
+    "data_deps": ["CONTRIBUTING.md exists", "PULL_REQUEST_TEMPLATE.md exists", "ci.yml exists"],
+    "options": [
+      {
+        "id": "a",
+        "text": "The LICENSE file.",
+        "correct": false,
+        "explanation": "A license sets what others may do with the code, not what a PR must contain."
+      },
+      {
+        "id": "b",
+        "text": "CONTRIBUTING.md.",
+        "correct": true,
+        "explanation": "CONTRIBUTING.md lists the written rules: tests required, black formatting, one issue per PR, and the branch naming pattern."
+      },
+      {
+        "id": "c",
+        "text": "The pull request template.",
+        "correct": true,
+        "explanation": "The PR template is the checklist you fill in when you open a PR. It makes the rules concrete at submission time."
+      },
+      {
+        "id": "d",
+        "text": "The CI workflow file.",
+        "correct": true,
+        "explanation": "ci.yml shows exactly which automated checks run on every PR — pytest and a black formatting check. A PR with either failing will not be merged."
+      },
+      {
+        "id": "e",
+        "text": "The repo's star count.",
+        "correct": false,
+        "explanation": "Stars show popularity, not what a PR must contain."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "domain": "repo_reading",
+    "question": "Based on the issue threads, how long should you expect to wait for a first reply from a maintainer?",
+    "type": "single",
+    "data_deps": ["maintainer_replies_in_issues is true", "issues #3 #5 #6 #8 have same-day or next-day maintainer replies"],
+    "options": [
+      {
+        "id": "a",
+        "text": "Within the hour.",
+        "correct": false,
+        "explanation": "No issue thread shows a reply that fast."
+      },
+      {
+        "id": "b",
+        "text": "A day or two.",
+        "correct": true,
+        "explanation": "Across the issues, the maintainer replied the same day or the day after in every thread. PR #7 also went from opened to merged in three days, including a round of changes."
+      },
+      {
+        "id": "c",
+        "text": "About a week.",
+        "correct": false,
+        "explanation": "That pattern belongs to repos where maintainers have gone quiet. The replies here come the next day."
+      },
+      {
+        "id": "d",
+        "text": "A month or more.",
+        "correct": false,
+        "explanation": "There is no gap that long anywhere in the issue or PR threads."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "domain": "issue_judgment",
+    "question": "Which issue would you take?",
+    "type": "single",
+    "data_deps": [
+      "issue {hardFirstIssueId} lesson=good_first_issue_hard",
+      "issue {commitFixedIssueId} lesson=already_fixed_by_commit",
+      "issue {goodPickId} lesson=genuine_good_pick",
+      "issue {vagueIssueId} lesson=no_reproduction_steps",
+      "issue {claimedIssueId} lesson=claimed_active_pr"
+    ],
+    "data_templates": {
+      "goodPickId": 5,
+      "commitFixedIssueId": 3,
+      "claimedIssueId": 8,
+      "vagueIssueId": 6,
+      "hardFirstIssueId": 2
+    },
+    "options": [
+      {
+        "id": "a",
+        "text": "#2 — Support nested lists.",
+        "correct": false,
+        "explanation": "Labelled good first issue, but a contributor who started on it paused because the list parser needs a full rewrite to track indentation state. The difficulty is invisible until you read the thread."
+      },
+      {
+        "id": "b",
+        "text": "#3 — __bold__ isn't rendered.",
+        "correct": false,
+        "explanation": "Try the code first. Commit a2f9c1 on 2026-04-22 fixed this. The issue is still open in the tracker, but the bug is gone."
+      },
+      {
+        "id": "c",
+        "text": "#5 — Raw HTML isn't escaped.",
+        "correct": true,
+        "explanation": "Confirmed by two maintainers, fix location spelled out in the thread, no PR exists, and the scope is a single line in _inline. This is exactly the kind of issue worth starting with."
+      },
+      {
+        "id": "d",
+        "text": "#6 — Links break sometimes.",
+        "correct": false,
+        "explanation": "No input, no output, no specific case. The maintainer asked for a snippet and the reporter said they can't paste the file. You can't reproduce this."
+      },
+      {
+        "id": "e",
+        "text": "#8 — Typo in the README.",
+        "correct": false,
+        "explanation": "priya-learns commented and opened draft PR #9 on 2026-09-12 fixing the same typo. Starting now would duplicate their work."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "domain": "issue_judgment",
+    "question": "You run #3's reproduction steps on the current code and nothing goes wrong, yet the issue is still open. Which explanation fits the repo's history?",
+    "type": "single",
+    "data_deps": [
+      "issue {commitFixedIssueId} lesson=already_fixed_by_commit",
+      "commit a2f9c1 message contains refs #3",
+      "no PR references issue #3"
+    ],
+    "data_templates": {
+      "commitFixedIssueId": 3
+    },
+    "options": [
+      {
+        "id": "a",
+        "text": "The reporter was mistaken and it was never a bug.",
+        "correct": false,
+        "explanation": "A maintainer confirmed it in the thread the day it was reported."
+      },
+      {
+        "id": "b",
+        "text": "A merged PR fixed it and the issue was never closed.",
+        "correct": false,
+        "explanation": "No PR in the history mentions or links issue #3. Search the PRs before assuming one fixed it."
+      },
+      {
+        "id": "c",
+        "text": "A direct commit fixed it; nobody closed the issue.",
+        "correct": true,
+        "explanation": "Commit a2f9c1 on 2026-04-22 says \"fix: support __bold__ (refs #3)\". Fixes can land without a PR — the commit history is where you find them."
+      },
+      {
+        "id": "d",
+        "text": "It only fails on some Python versions.",
+        "correct": false,
+        "explanation": "Nothing in the thread mentions Python version differences. Both confirmed reporters were just confirming the same behaviour."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "domain": "issue_judgment",
+    "question": "#8 is a one-line README typo — it looks perfect for a beginner. What should you check before taking it?",
+    "type": "single",
+    "data_deps": [
+      "issue {claimedIssueId} lesson=claimed_active_pr",
+      "PR #9 linked_issue=8 state=open"
+    ],
+    "data_templates": {
+      "claimedIssueId": 8
+    },
+    "options": [
+      {
+        "id": "a",
+        "text": "Whether it's already claimed or has an open PR.",
+        "correct": true,
+        "explanation": "Small issues get claimed quickly. A contributor commented on 2026-09-11 and opened draft PR #9 on 2026-09-12. Starting now would duplicate their work."
+      },
+      {
+        "id": "b",
+        "text": "Whether docs fixes are accepted here.",
+        "correct": false,
+        "explanation": "The maintainer replied on 2026-09-06 saying typo fixes are welcome and even specified the branch naming. Docs contributions are clearly accepted."
+      },
+      {
+        "id": "c",
+        "text": "Whether the same typo appears in other files too.",
+        "correct": false,
+        "explanation": "Checking for duplicate typos is reasonable after you confirm the issue is unclaimed. It's not what should come first."
+      },
+      {
+        "id": "d",
+        "text": "Whether CI is green on the main branch.",
+        "correct": false,
+        "explanation": "CI status on main tells you about the repo's health, not whether someone already has this issue covered."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "domain": "reproduction",
+    "question": "#6 says links break sometimes. The reporter says their markdown is in a large file and they can't paste it all. What's the most useful next step?",
+    "type": "single",
+    "data_deps": [
+      "issue {vagueIssueId} lesson=no_reproduction_steps",
+      "issue {vagueIssueId} reporter reply says they can't paste the file"
+    ],
+    "data_templates": {
+      "vagueIssueId": 6
+    },
+    "options": [
+      {
+        "id": "a",
+        "text": "Rewrite the link handling and hope it covers the problem.",
+        "correct": false,
+        "explanation": "A fix without a reproduction case can't be checked. You might change behavior that was already correct."
+      },
+      {
+        "id": "b",
+        "text": "Mark it \"Reproduced\" — the reporter has a file that breaks.",
+        "correct": false,
+        "explanation": "You have nothing you can run yourself. A file you can't see isn't a reproduction."
+      },
+      {
+        "id": "c",
+        "text": "Close it, since the reporter has gone quiet.",
+        "correct": false,
+        "explanation": "Closing isn't your call, and the reporter may just need guidance on how to shrink the example."
+      },
+      {
+        "id": "d",
+        "text": "Ask for the shortest input that still fails.",
+        "correct": true,
+        "explanation": "A whole file isn't a reproduction. Shrinking it to the smallest failing input is the standard move — and it's also how you isolate what's actually broken."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "domain": "contributing",
+    "question": "You're fixing #5. Which branch name follows this repo's rules?",
+    "type": "single",
+    "data_deps": ["CONTRIBUTING.md branch rule is <type>/<short-desc>"],
+    "options": [
+      {
+        "id": "a",
+        "text": "my-fix",
+        "correct": false,
+        "explanation": "No type prefix, and the description says nothing about what was changed."
+      },
+      {
+        "id": "b",
+        "text": "fix/escape-html",
+        "correct": true,
+        "explanation": "Type prefix fix/, followed by a short description with hyphens. Matches the pattern shown in CONTRIBUTING.md exactly."
+      },
+      {
+        "id": "c",
+        "text": "escape-html",
+        "correct": false,
+        "explanation": "Has a description but no type prefix. The rule requires both."
+      },
+      {
+        "id": "d",
+        "text": "Fix_Escape_HTML",
+        "correct": false,
+        "explanation": "Uses underscores and mixed case instead of a lowercase-with-hyphens style, and swaps the slash for nothing."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "domain": "review",
+    "question": "Your PR's CI run fails, and only on the black --check step. What do you do?",
+    "type": "single",
+    "data_deps": ["ci.yml has a separate black --check step"],
+    "options": [
+      {
+        "id": "a",
+        "text": "Remove the black step from the CI workflow so it passes.",
+        "correct": false,
+        "explanation": "Changing the rules to make the check pass is not the same as following them. A reviewer would notice immediately."
+      },
+      {
+        "id": "b",
+        "text": "Open a new PR with the formatting fixed.",
+        "correct": false,
+        "explanation": "That abandons the existing PR and its review thread. Fix and push to the same branch instead."
+      },
+      {
+        "id": "c",
+        "text": "Run black, commit, push to the same branch.",
+        "correct": true,
+        "explanation": "Running black src/ tests/ locally, committing the formatted result, and pushing re-runs CI on the same PR. PR #7 shows exactly this: CI flagged formatting, the contributor fixed it and pushed, CI went green."
+      },
+      {
+        "id": "d",
+        "text": "Ask a maintainer to merge it anyway.",
+        "correct": false,
+        "explanation": "That asks them to overlook a rule they set and enforced in CI. The fix takes one command."
+      }
+    ]
+  }
+]

@@ -1,70 +1,79 @@
 [
   {
     "id": 4,
-    "title": "fix: add __bold__ pattern to _inline",
+    "title": "test: add empty-input and blank-line tests",
     "state": "merged",
-    "author": "riya-dev",
-    "opened_at": "2026-04-22",
-    "merged_at": "2026-04-22",
-    "linked_issue": 3,
-    "branch": "fix/issue-3-bold-underscore",
-    "description": "Fixes #3.\n\nThe `__bold__` syntax was missing from `_inline`. Only `**bold**` was handled.\n\n**Changes:**\n- `src/mdlite.py`: one regex pattern added to `_inline`\n\n**Testing:**\n- Added `test_bold_underscore` in `tests/test_mdlite.py`\n- All existing tests pass",
-    "diff_summary": "src/mdlite.py: added `re.sub(r'__(.+?)__', r'<strong>\\1</strong>', text)` to _inline, after the **bold** pattern",
-    "review_comments": [],
-    "lesson": "good_newcomer_pr",
-    "lesson_note": "Self-merged by the maintainer — a one-liner fix with a test added. No review cycle needed for such a small, contained change. Notice how the commit message and PR description both name the specific thing that changed and why."
-  },
-  {
-    "id": 7,
-    "title": "fix: escape raw HTML before inline processing",
-    "state": "merged",
-    "author": "dev-rohan",
-    "opened_at": "2026-07-14",
-    "merged_at": "2026-07-18",
+    "author": "priya-learns",
+    "opened_at": "2026-06-10",
+    "merged_at": "2026-06-10",
     "linked_issue": null,
-    "branch": "fix/escape-raw-html",
-    "description": "Adds `html.escape()` at the start of `_inline` so that raw HTML characters (`<`, `>`, `&`) are escaped before any regex substitution runs.\n\nThis prevents raw HTML from passing through unescaped into the output.\n\n**Changes:**\n- `src/mdlite.py`: `import html` added; `html.escape(text)` call added at the top of `_inline`\n\n**Testing:**\n- Added test for `<script>` passthrough\n- Confirmed `**bold**` still renders correctly after the escape step",
-    "diff_summary": "src/mdlite.py: added `import html` and `text = html.escape(text)` as first line of _inline",
+    "branch": "test/empty-input",
+    "description": "Adds two missing tests:\n- `test_empty_input` — confirms `render('')` returns `''`\n- `test_blank_lines_ignored` — confirms blank lines between blocks don't produce output\n\nNo linked issue. I noticed these cases weren't covered while reading through the test file.\n\n**Changes:**\n- `tests/test_mdlite.py`: 2 test functions added\n\n**Testing:**\n- All existing tests still pass\n- Both new tests pass",
+    "diff_summary": "tests/test_mdlite.py: added test_empty_input and test_blank_lines_ignored",
     "review_comments": [
       {
         "author": "riya-dev",
-        "date": "2026-07-15",
-        "body": "Thanks! The escape call is in the right place. One thing — the test only covers `<script>`. Can you add a case for `&` too? E.g. `render('A & B')` should produce `<p>A &amp; B</p>`.",
+        "date": "2026-06-10",
+        "body": "Nice addition — these edge cases should definitely be covered. Merging.",
+        "resolved": true
+      }
+    ],
+    "lesson": "good_newcomer_pr",
+    "lesson_note": "No linked issue, no bug to fix — just a contributor who read the test file, noticed a gap, and filled it cleanly. Small scope, passes CI, maintainer merged same day. You don't need a bug report to make a useful contribution."
+  },
+  {
+    "id": 7,
+    "title": "fix: strip trailing spaces from headings",
+    "state": "merged",
+    "author": "dev-rohan",
+    "opened_at": "2026-08-25",
+    "merged_at": "2026-08-28",
+    "linked_issue": null,
+    "branch": "fix/trailing-spaces",
+    "description": "Headings with trailing spaces produce output like `<h1>Hello   </h1>`. This strips them.\n\n**Changes:**\n- `src/mdlite.py`: `.rstrip()` added to the text slice in each heading branch\n\n**Testing:**\n- Added `test_heading_trailing_space` in `tests/test_mdlite.py`\n- All existing tests pass",
+    "diff_summary": "src/mdlite.py: changed line[2:] to line[2:].rstrip() (and equivalents for h2, h3)",
+    "review_comments": [
+      {
+        "author": "ci-bot",
+        "date": "2026-08-25",
+        "body": "`black --check` failed on `src/mdlite.py`. Please run `black src/ tests/` before pushing.",
+        "resolved": true
+      },
+      {
+        "author": "riya-dev",
+        "date": "2026-08-26",
+        "body": "The change looks correct but CI is red. Can you run `black src/ tests/` and push the result?",
         "resolved": true
       },
       {
         "author": "dev-rohan",
-        "date": "2026-07-16",
-        "body": "Good point, added that test. Let me know if anything else."
+        "date": "2026-08-27",
+        "body": "Done — pushed a formatting commit. CI is green now.",
+        "resolved": true
       },
       {
         "author": "riya-dev",
-        "date": "2026-07-18",
-        "body": "Looks great. Clean diff, tests cover both cases. Merging — thanks!"
+        "date": "2026-08-28",
+        "body": "Perfect. Clean diff, test included, CI passing. Merging — thanks!",
+        "resolved": true
       }
     ],
     "lesson": "polite_review_response",
-    "lesson_note": "The maintainer asked for an extra test case — not to be difficult, but because `&` is a separate escape path that the first test didn't cover. The contributor added it without argument, thanked the reviewer, and the PR merged cleanly. That's how review is supposed to go."
+    "lesson_note": "CI failed on the first push because of formatting. The maintainer didn't reject the PR — they asked for one specific fix. The contributor ran black, pushed the result, and the PR merged cleanly. A CI failure on your first push is normal; what matters is how you respond to it."
   },
   {
     "id": 9,
-    "title": "feat: support nested lists",
+    "title": "docs: fix typo in README import example",
     "state": "open",
-    "author": "kai-contributes",
-    "opened_at": "2026-09-28",
+    "author": "priya-learns",
+    "opened_at": "2026-09-12",
     "merged_at": null,
     "linked_issue": 8,
-    "branch": "feat/nested-lists",
-    "description": "Attempting to fix #8. Added recursive handling for indented `- ` lines inside the list block.\n\nNot 100% sure the indentation detection is correct — open to feedback.",
-    "diff_summary": "src/mdlite.py: modified the list block in render() to recursively collect indented lines and wrap them in a nested <ul>",
-    "review_comments": [
-      {
-        "author": "riya-dev",
-        "date": "2026-09-29",
-        "body": "Thanks for taking this on! The approach is reasonable but the indentation detection is off — you're checking for exactly 2 spaces but the test cases use 4. Also please add tests before I can merge this; right now there are none for the new behaviour.\n\nFeel free to push updates."
-      }
-    ],
+    "branch": "docs/readme-typo",
+    "description": "Fixes #8.\n\nThe usage example in README.md says `form src.mdlite import render` — changed to `from`.\n\n**Changes:**\n- `README.md`: one word corrected in the usage example\n\n**Draft:** still checking the rest of the README for other issues before marking ready.",
+    "diff_summary": "README.md: changed 'form src.mdlite import render' to 'from src.mdlite import render'",
+    "review_comments": [],
     "lesson": null,
-    "lesson_note": "This PR is stale — opened weeks ago, maintainer left clear feedback asking for fixes and tests, contributor has not responded. Issue #8 is still effectively unclaimed."
+    "lesson_note": "Draft PR opened by a contributor who claimed issue #8. Still in progress — no review yet."
   }
 ]
