@@ -147,7 +147,7 @@ export default function QuizPage() {
 
         <div className="max-w-2xl mx-auto px-4 py-10 space-y-8">
           {/* Score */}
-          <div className="rounded-md border p-6 text-center space-y-3"
+          <div className="rounded-md border p-6 text-center space-y-3 animate-scale-in"
             style={{ borderColor: "var(--border)", background: band.bg }}>
             <div className="text-5xl font-bold" style={{ color: band.color }}>
               {totalCorrect}/{total}
@@ -173,7 +173,7 @@ export default function QuizPage() {
                 <div className="flex-1 h-2 rounded-full overflow-hidden"
                   style={{ background: "var(--surface)" }}>
                   <div
-                    className="h-2 rounded-full"
+                    className="h-2 rounded-full animate-progress"
                     style={{
                       width: `${(correct / total) * 100}%`,
                       background: correct === total ? "#3fb950" : correct > 0 ? "#d29922" : "#f85149",
@@ -199,7 +199,7 @@ export default function QuizPage() {
                 answers[i].selected.includes(o.id)
               );
               return (
-                <div key={q.id} className="rounded-md border overflow-hidden"
+                <div key={q.id} className={`rounded-md border overflow-hidden animate-fade-up stagger-${Math.min(i + 1, 8)}`}
                   style={{ borderColor: correct ? "#238636" : "#da3633" }}>
                   <div className="px-4 py-2 flex items-center gap-2 border-b"
                     style={{
@@ -341,8 +341,8 @@ export default function QuizPage() {
           </div>
         </div>
 
-        {/* Question */}
-        <div className="space-y-2">
+      {/* Question — re-mounts on each question change via key, triggering the animation */}
+        <div key={currentQ} className="space-y-2 animate-fade-up">
           <p className="text-base font-medium" style={{ color: "var(--text-primary)", lineHeight: 1.6 }}>
             {q.question}
           </p>
@@ -356,7 +356,7 @@ export default function QuizPage() {
         </div>
 
         {/* Options */}
-        <div className="space-y-2">
+        <div key={`opts-${currentQ}`} className="space-y-2 animate-fade-up stagger-2">
           {q.options.map((opt) => {
             const state = optionState(opt);
             const style = stateStyles[state];
@@ -388,7 +388,7 @@ export default function QuizPage() {
         {ans.submitted && (
           <div className="space-y-2">
             {/* Overall result */}
-            <div className="rounded-md px-4 py-3 text-sm font-medium"
+            <div className={`rounded-md px-4 py-3 text-sm font-medium ${questionCorrect ? "pulse-correct" : ""}`}
               style={{
                 background: questionCorrect ? "#1a3a1a" : "#3a1a1a",
                 border: `1px solid ${questionCorrect ? "#238636" : "#da3633"}`,
@@ -404,12 +404,12 @@ export default function QuizPage() {
                   ans.selected.includes(o.id) ||
                   (o.correct && !ans.selected.includes(o.id))
               )
-              .map((o) => {
+              .map((o, idx) => {
                 const wasSelected = ans.selected.includes(o.id);
                 const isRight = o.correct;
                 const labelColor = isRight ? "#3fb950" : "#f85149";
                 return (
-                  <div key={o.id} className="rounded-md border px-4 py-3 space-y-1 text-sm"
+                  <div key={o.id} className={`rounded-md border px-4 py-3 space-y-1 text-sm animate-fade-up stagger-${Math.min(idx + 1, 8)}`}
                     style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
                     <p className="text-xs font-medium" style={{ color: labelColor }}>
                       {isRight ? "✓ Correct" : "✗ Wrong"}{!wasSelected ? " (you didn't pick this)" : ""}

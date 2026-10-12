@@ -1,10 +1,10 @@
 [
   {
     "route": "/",
-    "firstLoadUncompressedJsBytes": 587284,
+    "firstLoadUncompressedJsBytes": 587628,
     "firstLoadChunkPaths": [
       ".next/static/chunks/3fntmmi971322.js",
-      ".next/static/chunks/1qlr7gr3u9td5.js",
+      ".next/static/chunks/21e24ogs89pyz.js",
       ".next/static/chunks/2ryiqcy8ws6s3.js",
       ".next/static/chunks/1u14hq9u8qbvt.js",
       ".next/static/chunks/310vm2bl3xxpt.js",
@@ -16,10 +16,10 @@
   },
   {
     "route": "/repos",
-    "firstLoadUncompressedJsBytes": 581927,
+    "firstLoadUncompressedJsBytes": 582024,
     "firstLoadChunkPaths": [
       ".next/static/chunks/3fntmmi971322.js",
-      ".next/static/chunks/3lzhjhpcse2g2.js",
+      ".next/static/chunks/06jt5uow-jpx_.js",
       ".next/static/chunks/2ryiqcy8ws6s3.js",
       ".next/static/chunks/1u14hq9u8qbvt.js",
       ".next/static/chunks/310vm2bl3xxpt.js",
@@ -46,10 +46,10 @@
   },
   {
     "route": "/repo/[repoId]/quiz",
-    "firstLoadUncompressedJsBytes": 510596,
+    "firstLoadUncompressedJsBytes": 510800,
     "firstLoadChunkPaths": [
       ".next/static/chunks/3fntmmi971322.js",
-      ".next/static/chunks/39tlp1whfkouh.js",
+      ".next/static/chunks/37_5_jlkms2qk.js",
       ".next/static/chunks/310vm2bl3xxpt.js",
       ".next/static/chunks/2mmpezlrfmbu5.js",
       ".next/static/chunks/1rj7ns8rte9vc.js",
@@ -59,10 +59,10 @@
   },
   {
     "route": "/repo/[repoId]/issues/[issueId]",
-    "firstLoadUncompressedJsBytes": 507190,
+    "firstLoadUncompressedJsBytes": 507427,
     "firstLoadChunkPaths": [
       ".next/static/chunks/3fntmmi971322.js",
-      ".next/static/chunks/3il5gt59_g3fw.js",
+      ".next/static/chunks/2vi2ahi5s-wti.js",
       ".next/static/chunks/310vm2bl3xxpt.js",
       ".next/static/chunks/2mmpezlrfmbu5.js",
       ".next/static/chunks/1rj7ns8rte9vc.js",

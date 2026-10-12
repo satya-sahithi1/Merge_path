@@ -244,7 +244,7 @@ function QuizPage() {
                     className: "max-w-2xl mx-auto px-4 py-10 space-y-8",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "rounded-md border p-6 text-center space-y-3",
+                            className: "rounded-md border p-6 text-center space-y-3 animate-scale-in",
                             style: {
                                 borderColor: "var(--border)",
                                 background: band.bg
@@ -327,7 +327,7 @@ function QuizPage() {
                                                     background: "var(--surface)"
                                                 },
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "h-2 rounded-full",
+                                                    className: "h-2 rounded-full animate-progress",
                                                     style: {
                                                         width: `${correct / total * 100}%`,
                                                         background: correct === total ? "#3fb950" : correct > 0 ? "#d29922" : "#f85149"
@@ -388,7 +388,7 @@ function QuizPage() {
                                     const correctOptions = q.options.filter((o)=>o.correct);
                                     const selectedOptions = q.options.filter((o)=>answers[i].selected.includes(o.id));
                                     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "rounded-md border overflow-hidden",
+                                        className: `rounded-md border overflow-hidden animate-fade-up stagger-${Math.min(i + 1, 8)}`,
                                         style: {
                                             borderColor: correct ? "#238636" : "#da3633"
                                         },
@@ -810,7 +810,7 @@ function QuizPage() {
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-2",
+                        className: "space-y-2 animate-fade-up",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-base font-medium",
@@ -853,13 +853,13 @@ function QuizPage() {
                                 columnNumber: 13
                             }, this)
                         ]
-                    }, void 0, true, {
+                    }, currentQ, true, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
                         lineNumber: 345,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-2",
+                        className: "space-y-2 animate-fade-up stagger-2",
                         children: q.options.map((opt)=>{
                             const state = optionState(opt);
                             const style = stateStyles[state];
@@ -893,7 +893,7 @@ function QuizPage() {
                                 columnNumber: 15
                             }, this);
                         })
-                    }, void 0, false, {
+                    }, `opts-${currentQ}`, false, {
                         fileName: "[project]/app/repo/[repoId]/quiz/page.tsx",
                         lineNumber: 359,
                         columnNumber: 9
@@ -902,7 +902,7 @@ function QuizPage() {
                         className: "space-y-2",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "rounded-md px-4 py-3 text-sm font-medium",
+                                className: `rounded-md px-4 py-3 text-sm font-medium ${questionCorrect ? "pulse-correct" : ""}`,
                                 style: {
                                     background: questionCorrect ? "#1a3a1a" : "#3a1a1a",
                                     border: `1px solid ${questionCorrect ? "#238636" : "#da3633"}`,
@@ -914,12 +914,12 @@ function QuizPage() {
                                 lineNumber: 391,
                                 columnNumber: 13
                             }, this),
-                            q.options.filter((o)=>ans.selected.includes(o.id) || o.correct && !ans.selected.includes(o.id)).map((o)=>{
+                            q.options.filter((o)=>ans.selected.includes(o.id) || o.correct && !ans.selected.includes(o.id)).map((o, idx)=>{
                                 const wasSelected = ans.selected.includes(o.id);
                                 const isRight = o.correct;
                                 const labelColor = isRight ? "#3fb950" : "#f85149";
                                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "rounded-md border px-4 py-3 space-y-1 text-sm",
+                                    className: `rounded-md border px-4 py-3 space-y-1 text-sm animate-fade-up stagger-${Math.min(idx + 1, 8)}`,
                                     style: {
                                         borderColor: "var(--border)",
                                         background: "var(--surface)"
