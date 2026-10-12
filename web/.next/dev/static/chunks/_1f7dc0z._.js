@@ -18,33 +18,43 @@ var _s = __turbopack_context__.k.signature();
 const CARDS = [
     {
         number: 1,
-        headline: "Public code isn't always open source.",
-        body: "Open source means the code is public and its license lets you use, change and share it. A public repo with no license is a different story: by default, you don't have permission to reuse it.",
-        smallLine: "Always check for a LICENSE file.",
+        headline: "Public code ≠ Open source.",
+        body: "Anyone can view a public repository. But an open source license gives people permission to use, modify, and share its code.",
+        bullets: null,
+        smallLine: "Always check the license.",
+        closingLine: null,
         visual: "license"
     },
     {
         number: 2,
-        headline: "You can't push to someone else's project. So how does anyone contribute?",
-        body: "You fork it (make your own copy), change your copy, and open a pull request, which asks the maintainers to take your change. It's a request, not a gift: a person has to review it, and they might say no or ask for changes.",
+        headline: "You don't need to own a project to improve it.",
+        body: "Find a problem. Fix it. Ask the maintainers to review your changes.",
+        bullets: null,
         smallLine: null,
+        closingLine: "Your code. Their project. One step toward making it better.",
         visual: "fork-flow"
     },
     {
         number: 3,
-        headline: "The hard part isn't the code.",
-        body: "It's choosing: which repo is alive, which issue is still real, whether someone is already on it. Beginners often get stuck there, before they write a line. That's what you're about to practice.",
+        headline: "The hardest part? Finding the right issue.",
+        body: "Not every repository is active. Not every issue needs fixing. And not every project is beginner-friendly.",
+        bullets: [
+            "🟢 Active",
+            "🐛 In need of a real fix",
+            "🌱 Right for your skill level"
+        ],
         smallLine: null,
+        closingLine: "Your first contribution starts with the right choice.",
         visual: "loop"
     }
 ];
 // ── Visuals ────────────────────────────────────────────────────────────────
 function LicenseVisual() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex gap-3 justify-center flex-wrap",
+        className: "flex gap-4 justify-center flex-wrap",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "rounded-md border p-4 w-44 space-y-2",
+                className: "rounded-md border p-4 w-48 space-y-2.5",
                 style: {
                     borderColor: "#238636",
                     background: "#0d1f0d"
@@ -54,34 +64,31 @@ function LicenseVisual() {
                         className: "flex items-center gap-1.5",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                style: {
-                                    color: "#3fb950"
-                                },
                                 children: "📁"
                             }, void 0, false, {
                                 fileName: "[project]/app/learn/page.tsx",
-                                lineNumber: 45,
+                                lineNumber: 51,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "text-xs font-medium",
+                                className: "text-xs font-semibold",
                                 style: {
                                     color: "var(--text-primary)"
                                 },
                                 children: "cool-project"
                             }, void 0, false, {
                                 fileName: "[project]/app/learn/page.tsx",
-                                lineNumber: 46,
+                                lineNumber: 52,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/learn/page.tsx",
-                        lineNumber: 44,
+                        lineNumber: 50,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full",
+                        className: "inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium",
                         style: {
                             background: "#1a3a1a",
                             color: "#3fb950",
@@ -90,28 +97,28 @@ function LicenseVisual() {
                         children: "✓ MIT License"
                     }, void 0, false, {
                         fileName: "[project]/app/learn/page.tsx",
-                        lineNumber: 50,
+                        lineNumber: 56,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-xs",
+                        className: "text-xs leading-relaxed",
                         style: {
                             color: "#3fb950"
                         },
-                        children: "Free to use, modify and share."
+                        children: "Open source. Use, modify & share under its terms."
                     }, void 0, false, {
                         fileName: "[project]/app/learn/page.tsx",
-                        lineNumber: 56,
+                        lineNumber: 62,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/learn/page.tsx",
-                lineNumber: 40,
+                lineNumber: 46,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "rounded-md border p-4 w-44 space-y-2",
+                className: "rounded-md border p-4 w-48 space-y-2.5",
                 style: {
                     borderColor: "#da3633",
                     background: "#1f0d0d"
@@ -121,34 +128,31 @@ function LicenseVisual() {
                         className: "flex items-center gap-1.5",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                style: {
-                                    color: "#f85149"
-                                },
                                 children: "📁"
                             }, void 0, false, {
                                 fileName: "[project]/app/learn/page.tsx",
-                                lineNumber: 67,
+                                lineNumber: 73,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "text-xs font-medium",
+                                className: "text-xs font-semibold",
                                 style: {
                                     color: "var(--text-primary)"
                                 },
                                 children: "other-project"
                             }, void 0, false, {
                                 fileName: "[project]/app/learn/page.tsx",
-                                lineNumber: 68,
+                                lineNumber: 74,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/learn/page.tsx",
-                        lineNumber: 66,
+                        lineNumber: 72,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full",
+                        className: "inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium",
                         style: {
                             background: "#3a1a1a",
                             color: "#f85149",
@@ -157,147 +161,186 @@ function LicenseVisual() {
                         children: "⚠ No license"
                     }, void 0, false, {
                         fileName: "[project]/app/learn/page.tsx",
-                        lineNumber: 72,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-xs",
+                        className: "text-xs leading-relaxed",
                         style: {
                             color: "#f85149"
                         },
-                        children: "No permission to reuse by default."
+                        children: "Visible, but not open source by default."
                     }, void 0, false, {
                         fileName: "[project]/app/learn/page.tsx",
-                        lineNumber: 78,
+                        lineNumber: 84,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/learn/page.tsx",
-                lineNumber: 62,
+                lineNumber: 68,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/learn/page.tsx",
-        lineNumber: 38,
+        lineNumber: 44,
         columnNumber: 5
     }, this);
 }
 _c = LicenseVisual;
 function ForkFlowVisual() {
-    const box = (label, sub, accent)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "rounded-md border px-4 py-3 text-center w-32",
-            style: {
-                borderColor: accent ? "var(--accent)" : "var(--border)",
-                background: accent ? "#0d1f0d" : "var(--surface)"
-            },
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-xs font-medium",
-                    style: {
-                        color: "var(--text-primary)"
-                    },
-                    children: label
-                }, void 0, false, {
-                    fileName: "[project]/app/learn/page.tsx",
-                    lineNumber: 95,
-                    columnNumber: 7
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-xs mt-0.5",
-                    style: {
-                        color: "var(--text-secondary)"
-                    },
-                    children: sub
-                }, void 0, false, {
-                    fileName: "[project]/app/learn/page.tsx",
-                    lineNumber: 96,
-                    columnNumber: 7
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/app/learn/page.tsx",
-            lineNumber: 88,
-            columnNumber: 5
-        }, this);
-    const arrow = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-            className: "text-lg self-center",
-            style: {
-                color: "var(--text-secondary)"
-            },
-            children: "→"
-        }, void 0, false, {
-            fileName: "[project]/app/learn/page.tsx",
-            lineNumber: 101,
-            columnNumber: 5
-        }, this);
+    const steps = [
+        {
+            emoji: "🍴",
+            label: "Fork"
+        },
+        {
+            emoji: "🛠️",
+            label: "Fix"
+        },
+        {
+            emoji: "📤",
+            label: "Pull Request"
+        },
+        {
+            emoji: "👀",
+            label: "Review"
+        }
+    ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex items-center justify-center gap-2 flex-wrap",
-        children: [
-            box("Their repo", "main project"),
-            arrow(),
-            box("Your fork", "your copy", true),
-            arrow(),
-            box("Pull request", "back to them")
-        ]
-    }, void 0, true, {
+        children: steps.map((step, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex items-center gap-2",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex flex-col items-center gap-1 px-4 py-3 rounded-md",
+                        style: {
+                            background: "var(--surface)",
+                            border: "1px solid var(--border)",
+                            minWidth: "72px"
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "text-lg",
+                                children: step.emoji
+                            }, void 0, false, {
+                                fileName: "[project]/app/learn/page.tsx",
+                                lineNumber: 108,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "text-xs font-medium",
+                                style: {
+                                    color: "var(--text-primary)"
+                                },
+                                children: step.label
+                            }, void 0, false, {
+                                fileName: "[project]/app/learn/page.tsx",
+                                lineNumber: 109,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/learn/page.tsx",
+                        lineNumber: 104,
+                        columnNumber: 11
+                    }, this),
+                    i < steps.length - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "text-base",
+                        style: {
+                            color: "var(--text-secondary)"
+                        },
+                        children: "→"
+                    }, void 0, false, {
+                        fileName: "[project]/app/learn/page.tsx",
+                        lineNumber: 114,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, step.label, true, {
+                fileName: "[project]/app/learn/page.tsx",
+                lineNumber: 103,
+                columnNumber: 9
+            }, this))
+    }, void 0, false, {
         fileName: "[project]/app/learn/page.tsx",
-        lineNumber: 105,
+        lineNumber: 101,
         columnNumber: 5
     }, this);
 }
 _c1 = ForkFlowVisual;
 function LoopVisual() {
-    const steps = [
-        "Pick",
-        "Reproduce",
-        "Fix",
-        "PR",
-        "Review"
+    const issues = [
+        {
+            label: "🟢 Active",
+            title: "Fix broken dark mode toggle",
+            suitable: true
+        },
+        {
+            label: "⚪ Stale",
+            title: "Add i18n support",
+            suitable: false
+        },
+        {
+            label: "🔴 Complex",
+            title: "Refactor entire auth layer",
+            suitable: false
+        }
     ];
-    const highlighted = [
-        0,
-        1
-    ]; // first two
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex items-center justify-center gap-1 flex-wrap",
-        children: steps.map((s, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex items-center gap-1",
+        className: "flex flex-col gap-2 w-full max-w-xs mx-auto",
+        children: issues.map((issue)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex items-center gap-3 px-3 py-2.5 rounded-md",
+                style: {
+                    background: issue.suitable ? "#0d1f0d" : "var(--surface)",
+                    border: `1px solid ${issue.suitable ? "#238636" : "var(--border)"}`
+                },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        className: "text-xs px-3 py-1.5 rounded-md font-medium",
+                        className: "text-xs font-medium whitespace-nowrap",
                         style: {
-                            background: highlighted.includes(i) ? "#1f3a5f" : "var(--surface)",
-                            color: highlighted.includes(i) ? "var(--link)" : "var(--text-secondary)",
-                            border: `1px solid ${highlighted.includes(i) ? "#388bfd" : "var(--border)"}`
+                            color: issue.suitable ? "#3fb950" : "var(--text-secondary)"
                         },
-                        children: s
+                        children: issue.label
                     }, void 0, false, {
                         fileName: "[project]/app/learn/page.tsx",
-                        lineNumber: 123,
+                        lineNumber: 140,
                         columnNumber: 11
                     }, this),
-                    i < steps.length - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        className: "text-xs",
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "text-xs flex-1",
                         style: {
-                            color: "var(--border)"
+                            color: issue.suitable ? "var(--text-primary)" : "var(--text-secondary)"
                         },
-                        children: "→"
+                        children: issue.title
                     }, void 0, false, {
                         fileName: "[project]/app/learn/page.tsx",
-                        lineNumber: 134,
+                        lineNumber: 143,
+                        columnNumber: 11
+                    }, this),
+                    issue.suitable && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "text-xs px-2 py-0.5 rounded-full font-medium",
+                        style: {
+                            background: "#1a3a1a",
+                            color: "#3fb950",
+                            border: "1px solid #238636"
+                        },
+                        children: "← pick this"
+                    }, void 0, false, {
+                        fileName: "[project]/app/learn/page.tsx",
+                        lineNumber: 147,
                         columnNumber: 13
                     }, this)
                 ]
-            }, s, true, {
+            }, issue.title, true, {
                 fileName: "[project]/app/learn/page.tsx",
-                lineNumber: 122,
+                lineNumber: 132,
                 columnNumber: 9
             }, this))
     }, void 0, false, {
         fileName: "[project]/app/learn/page.tsx",
-        lineNumber: 120,
+        lineNumber: 130,
         columnNumber: 5
     }, this);
 }
@@ -305,17 +348,17 @@ _c2 = LoopVisual;
 function Visual({ type }) {
     if (type === "license") return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(LicenseVisual, {}, void 0, false, {
         fileName: "[project]/app/learn/page.tsx",
-        lineNumber: 143,
+        lineNumber: 161,
         columnNumber: 34
     }, this);
     if (type === "fork-flow") return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ForkFlowVisual, {}, void 0, false, {
         fileName: "[project]/app/learn/page.tsx",
-        lineNumber: 144,
+        lineNumber: 162,
         columnNumber: 36
     }, this);
     if (type === "loop") return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(LoopVisual, {}, void 0, false, {
         fileName: "[project]/app/learn/page.tsx",
-        lineNumber: 145,
+        lineNumber: 163,
         columnNumber: 31
     }, this);
     return null;
@@ -363,7 +406,7 @@ function LearnPage() {
                         children: "Merge Path"
                     }, void 0, false, {
                         fileName: "[project]/app/learn/page.tsx",
-                        lineNumber: 181,
+                        lineNumber: 199,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -378,13 +421,13 @@ function LearnPage() {
                         children: "I know what a fork is, skip this"
                     }, void 0, false, {
                         fileName: "[project]/app/learn/page.tsx",
-                        lineNumber: 184,
+                        lineNumber: 202,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/learn/page.tsx",
-                lineNumber: 177,
+                lineNumber: 195,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -401,12 +444,12 @@ function LearnPage() {
                                     }
                                 }, i, false, {
                                     fileName: "[project]/app/learn/page.tsx",
-                                    lineNumber: 204,
+                                    lineNumber: 222,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/app/learn/page.tsx",
-                            lineNumber: 202,
+                            lineNumber: 220,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -428,7 +471,7 @@ function LearnPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/learn/page.tsx",
-                                    lineNumber: 225,
+                                    lineNumber: 243,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -439,7 +482,7 @@ function LearnPage() {
                                     children: card.headline
                                 }, void 0, false, {
                                     fileName: "[project]/app/learn/page.tsx",
-                                    lineNumber: 233,
+                                    lineNumber: 251,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -451,8 +494,26 @@ function LearnPage() {
                                     children: card.body
                                 }, void 0, false, {
                                     fileName: "[project]/app/learn/page.tsx",
-                                    lineNumber: 238,
+                                    lineNumber: 256,
                                     columnNumber: 13
+                                }, this),
+                                card.bullets && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                                    className: "space-y-1.5 pl-1",
+                                    children: card.bullets.map((b)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                            className: "text-sm",
+                                            style: {
+                                                color: "var(--text-secondary)"
+                                            },
+                                            children: b
+                                        }, b, false, {
+                                            fileName: "[project]/app/learn/page.tsx",
+                                            lineNumber: 264,
+                                            columnNumber: 19
+                                        }, this))
+                                }, void 0, false, {
+                                    fileName: "[project]/app/learn/page.tsx",
+                                    lineNumber: 262,
+                                    columnNumber: 15
                                 }, this),
                                 card.smallLine && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-xs px-3 py-2 rounded-md",
@@ -464,7 +525,7 @@ function LearnPage() {
                                     children: card.smallLine
                                 }, void 0, false, {
                                     fileName: "[project]/app/learn/page.tsx",
-                                    lineNumber: 244,
+                                    lineNumber: 273,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -473,18 +534,29 @@ function LearnPage() {
                                         type: card.visual
                                     }, void 0, false, {
                                         fileName: "[project]/app/learn/page.tsx",
-                                        lineNumber: 258,
+                                        lineNumber: 287,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/learn/page.tsx",
-                                    lineNumber: 257,
+                                    lineNumber: 286,
                                     columnNumber: 13
+                                }, this),
+                                card.closingLine && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-xs text-center",
+                                    style: {
+                                        color: "var(--text-secondary)"
+                                    },
+                                    children: card.closingLine
+                                }, void 0, false, {
+                                    fileName: "[project]/app/learn/page.tsx",
+                                    lineNumber: 292,
+                                    columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/learn/page.tsx",
-                            lineNumber: 220,
+                            lineNumber: 238,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -501,29 +573,29 @@ function LearnPage() {
                                 children: isLast ? "Show me the repo" : "Next"
                             }, void 0, false, {
                                 fileName: "[project]/app/learn/page.tsx",
-                                lineNumber: 264,
+                                lineNumber: 300,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/learn/page.tsx",
-                            lineNumber: 263,
+                            lineNumber: 299,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/learn/page.tsx",
-                    lineNumber: 200,
+                    lineNumber: 218,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/learn/page.tsx",
-                lineNumber: 199,
+                lineNumber: 217,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/learn/page.tsx",
-        lineNumber: 175,
+        lineNumber: 193,
         columnNumber: 5
     }, this);
 }
