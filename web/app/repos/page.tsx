@@ -123,18 +123,23 @@ export default function ReposPage() {
         {gridState === "loading" ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="rounded-lg border p-6 h-40" style={{ borderColor: "var(--border)", background: "var(--surface)" }} />
+              <div
+                key={i}
+                className="rounded-lg border p-6 h-40 animate-pulse"
+                style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+              />
             ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {liveRepoIds.map((repoId) => (
+            {liveRepoIds.map((repoId, index) => (
               <RepoCard
                 key={repoId}
                 repoId={repoId}
                 brief={REPO_BRIEFS[repoId]}
                 progress={progress[repoId] ?? { status: "not_started" }}
                 href={repoHref(repoId)}
+                index={index}
               />
             ))}
           </div>
@@ -145,14 +150,16 @@ export default function ReposPage() {
 }
 
 function RepoCard({
-  brief, progress, href,
+  brief, progress, href, index,
 }: {
   repoId: string;
   brief: { name: string; brief: string; language: string };
   progress: RepoProgress;
   href: string;
+  index: number;
 }) {
   const { status } = progress;
+  const staggerClass = `stagger-${Math.min(index + 1, 8)}`;
 
   const badge =
     status === "complete"
@@ -166,7 +173,7 @@ function RepoCard({
   return (
     <a
       href={href}
-      className="rounded-lg border p-6 flex flex-col gap-4 hover:bg-white/5 block"
+      className={`rounded-lg border p-6 flex flex-col gap-4 card-hover animate-fade-up ${staggerClass} block`}
       style={{ borderColor, background: "var(--surface)", textDecoration: "none" }}
     >
       <div className="flex items-start justify-between gap-2">
@@ -193,7 +200,7 @@ function RepoCard({
             <span>{Math.round((progress.score / progress.maxScore) * 100)}%</span>
           </div>
           <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "var(--background)" }}>
-            <div className="h-1.5 rounded-full" style={{
+            <div className="h-1.5 rounded-full animate-progress" style={{
               width: `${(progress.score / progress.maxScore) * 100}%`,
               background: progress.score / progress.maxScore >= 0.7 ? "#3fb950" : progress.score / progress.maxScore >= 0.5 ? "#d29922" : "#f85149",
             }} />

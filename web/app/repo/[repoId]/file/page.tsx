@@ -7,11 +7,14 @@ import weatherlyFiles  from "@/lib/data/weatherly/files.json";
 import weatherlyMeta   from "@/lib/data/weatherly/meta.json";
 import gradewiseFiles  from "@/lib/data/gradewise/files.json";
 import gradewiseMeta   from "@/lib/data/gradewise/meta.json";
+import mdliteFiles  from "@/lib/data/mdlite/files.json";
+import mdliteMeta   from "@/lib/data/mdlite/meta.json";
 
 const REPO_DATA: Record<string, { files: typeof notesFiles; meta: typeof notesMeta }> = {
   "notes-app": { files: notesFiles,    meta: notesMeta },
   "weatherly":  { files: weatherlyFiles as unknown as typeof notesFiles, meta: weatherlyMeta as unknown as typeof notesMeta },
   "gradewise":  { files: gradewiseFiles as unknown as typeof notesFiles, meta: gradewiseMeta as unknown as typeof notesMeta },
+  "mdlite":     { files: mdliteFiles as unknown as typeof notesFiles, meta: mdliteMeta as unknown as typeof notesMeta },
 };
 
 export default async function FileViewerPage({

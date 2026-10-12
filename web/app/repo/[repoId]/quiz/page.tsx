@@ -12,18 +12,23 @@ import weatherlyQuiz  from "@/lib/data/weatherly/quiz.json";
 import weatherlyMeta  from "@/lib/data/weatherly/meta.json";
 import gradewiseQuiz  from "@/lib/data/gradewise/quiz.json";
 import gradewiseMeta  from "@/lib/data/gradewise/meta.json";
+import mdliteQuiz  from "@/lib/data/mdlite/quiz.json";
+import mdliteMeta  from "@/lib/data/mdlite/meta.json";
 
 const REPO_DATA: Record<string, { quiz: typeof notesQuiz; meta: typeof notesMeta }> = {
   "notes-app": { quiz: notesQuiz,    meta: notesMeta },
   "weatherly":  { quiz: weatherlyQuiz as unknown as typeof notesQuiz, meta: weatherlyMeta as unknown as typeof notesMeta },
   "gradewise":  { quiz: gradewiseQuiz as unknown as typeof notesQuiz, meta: gradewiseMeta as unknown as typeof notesMeta },
+  "mdlite":     { quiz: mdliteQuiz as unknown as typeof notesQuiz, meta: mdliteMeta as unknown as typeof notesMeta },
 };
 
 const DOMAIN_LABELS: Record<string, string> = {
   repo_health: "Repo health",
-  contributing: "CONTRIBUTING.md",
+  repo_reading: "Repo reading",
+  contributing: "Contributing",
   issue_judgment: "Issue judgment",
   git_workflow: "Git workflow",
+  reproduction: "Reproduction",
   review: "Review",
 };
 

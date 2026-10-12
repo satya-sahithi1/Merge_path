@@ -55,7 +55,9 @@ export type ReproductionScenario = {
 export type LessonTag =
   | "genuine_good_pick"
   | "claimed_never_started"
+  | "claimed_active_pr"
   | "already_fixed_by_pr"
+  | "already_fixed_by_commit"
   | "good_first_issue_hard"
   | "no_reproduction_steps"
   | "good_newcomer_pr"
@@ -125,9 +127,11 @@ export type QuizOption = {
 
 export type QuizDomain =
   | "repo_health"
+  | "repo_reading"
   | "contributing"
   | "issue_judgment"
   | "git_workflow"
+  | "reproduction"
   | "review";
 
 export type QuizQuestion = {

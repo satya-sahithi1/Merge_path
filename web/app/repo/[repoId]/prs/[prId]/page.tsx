@@ -8,11 +8,14 @@ import weatherlyPRs  from "@/lib/data/weatherly/prs.json";
 import weatherlyMeta from "@/lib/data/weatherly/meta.json";
 import gradewisePRs  from "@/lib/data/gradewise/prs.json";
 import gradewiseMeta from "@/lib/data/gradewise/meta.json";
+import mdlitePRs  from "@/lib/data/mdlite/prs.json";
+import mdliteMeta from "@/lib/data/mdlite/meta.json";
 
 const REPO_DATA: Record<string, { prs: typeof notesPRs; meta: typeof notesMeta }> = {
   "notes-app": { prs: notesPRs,      meta: notesMeta },
   "weatherly":  { prs: weatherlyPRs as unknown as typeof notesPRs,  meta: weatherlyMeta as unknown as typeof notesMeta },
   "gradewise":  { prs: gradewisePRs as unknown as typeof notesPRs,  meta: gradewiseMeta as unknown as typeof notesMeta },
+  "mdlite":     { prs: mdlitePRs as unknown as typeof notesPRs,  meta: mdliteMeta as unknown as typeof notesMeta },
 };
 
 export default async function PRPage({

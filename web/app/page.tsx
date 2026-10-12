@@ -38,39 +38,89 @@ export default function Home() {
   }
 
   const buttonHref = resume.status === "resume" ? resume.href : "/learn";
-  const buttonLabel = resume.status === "loading" ? "Loading…" : resume.status === "resume" ? "Continue →" : "Start exploring →";
+  const buttonLabel =
+    resume.status === "loading"
+      ? "Loading…"
+      : resume.status === "resume"
+      ? "Continue →"
+      : "Start exploring →";
   const isLoading = resume.status === "loading";
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4" style={{ background: "var(--background)" }}>
-      <div className="max-w-xl w-full text-center space-y-6">
-        <h1 className="text-3xl font-semibold" style={{ color: "var(--text-primary)" }}>
+    <main
+      className="min-h-screen flex flex-col items-center justify-center px-4 grid-bg"
+      style={{ background: "var(--background)" }}
+    >
+      {/* Radial vignette over the grid so text stays readable */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, var(--background) 100%)",
+        }}
+      />
+
+      <div className="relative max-w-xl w-full text-center space-y-6">
+        {/* Headline */}
+        <h1
+          className="text-3xl font-semibold animate-fade-up"
+          style={{ color: "var(--text-primary)" }}
+        >
           Merge Path
         </h1>
-        <p className="text-lg" style={{ color: "var(--text-secondary)" }}>
+
+        {/* Sub-lines staggered */}
+        <p
+          className="text-lg animate-fade-up stagger-2"
+          style={{ color: "var(--text-secondary)" }}
+        >
           Learn to tell in minutes whether a repo and an issue are worth your time.
         </p>
-        <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+        <p
+          className="text-sm animate-fade-up stagger-3"
+          style={{ color: "var(--text-secondary)" }}
+        >
           Practice on a fake repo. Get it wrong. It costs nothing here.
         </p>
 
-        {isLoading ? (
-          <span className="inline-block px-6 py-3 rounded-md text-sm font-medium"
-            style={{ background: "var(--surface)", color: "var(--text-secondary)", cursor: "default" }}>
-            Loading…
-          </span>
-        ) : (
-          <Link href={buttonHref} className="inline-block px-6 py-3 rounded-md text-sm font-medium transition-colors"
-            style={{ background: "var(--accent)", color: "#fff" }}>
-            {buttonLabel}
-          </Link>
-        )}
+        {/* CTA */}
+        <div className="animate-fade-up stagger-4">
+          {isLoading ? (
+            <span
+              className="inline-block px-6 py-3 rounded-md text-sm font-medium"
+              style={{
+                background: "var(--surface)",
+                color: "var(--text-secondary)",
+                cursor: "default",
+              }}
+            >
+              Loading…
+            </span>
+          ) : (
+            <Link
+              href={buttonHref}
+              className="inline-block px-6 py-3 rounded-md text-sm font-medium btn-glow"
+              style={{ background: "var(--accent)", color: "#fff" }}
+            >
+              {buttonLabel}
+            </Link>
+          )}
+        </div>
 
         {resume.status === "resume" && (
-          <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
+          <p className="text-xs animate-fade-in stagger-5" style={{ color: "var(--text-secondary)" }}>
             or{" "}
-            <button onClick={handleStartOver}
-              style={{ color: "var(--text-secondary)", background: "none", border: "none", cursor: "pointer", padding: 0, textDecoration: "underline" }}>
+            <button
+              onClick={handleStartOver}
+              style={{
+                color: "var(--text-secondary)",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+                textDecoration: "underline",
+              }}
+            >
               start over
             </button>
           </p>

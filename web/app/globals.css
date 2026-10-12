@@ -22,3 +22,123 @@ body {
 
 a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
+
+/* ── Keyframes ───────────────────────────────────────────────────────────── */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes progress-grow {
+  from { width: 0%; }
+}
+
+@keyframes pulse-once {
+  0%   { box-shadow: 0 0 0 0 rgba(35, 134, 54, 0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(35, 134, 54, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(35, 134, 54, 0); }
+}
+
+/* ── Utility animation classes ───────────────────────────────────────────── */
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease both;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.45s ease both;
+}
+
+.animate-fade-down {
+  animation: fade-down 0.3s ease both;
+}
+
+.animate-slide-right {
+  animation: slide-in-right 0.35s ease both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease both;
+}
+
+/* Stagger helpers — apply to children via nth-child in JS or direct class */
+.stagger-1  { animation-delay: 0.05s; }
+.stagger-2  { animation-delay: 0.10s; }
+.stagger-3  { animation-delay: 0.15s; }
+.stagger-4  { animation-delay: 0.20s; }
+.stagger-5  { animation-delay: 0.25s; }
+.stagger-6  { animation-delay: 0.30s; }
+.stagger-7  { animation-delay: 0.35s; }
+.stagger-8  { animation-delay: 0.40s; }
+
+/* Progress bar — animated grow */
+.animate-progress {
+  animation: progress-grow 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0.1s;
+}
+
+/* Hover lift card */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Row hover highlight */
+.row-hover {
+  transition: background 0.15s ease;
+}
+.row-hover:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Subtle grid background for landing page */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(48, 54, 61, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(48, 54, 61, 0.4) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+}
+
+/* Glow accent for CTA buttons */
+.btn-glow {
+  transition: box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.btn-glow:hover {
+  box-shadow: 0 0 16px rgba(35, 134, 54, 0.45);
+  opacity: 0.92;
+}
+
+/* Tab content transition */
+.tab-fade {
+  animation: fade-up 0.25s ease both;
+}
+
+/* Pulse once on correct answer */
+.pulse-correct {
+  animation: pulse-once 0.6s ease;
+}

@@ -33,7 +33,7 @@ export default async function RepoPage({
 
       <div className="max-w-5xl mx-auto px-4 py-6 space-y-4">
         {/* Repo header */}
-        <div className="space-y-1">
+        <div className="space-y-1 animate-fade-down">
           <div className="flex items-center gap-2">
             <span style={{ color: "var(--text-secondary)" }} className="text-sm">
               {meta.owner}
@@ -107,10 +107,10 @@ export default async function RepoPage({
         </div>
 
         {/* Tab content */}
-        {tab === "files" && <FileTreeView nodes={fileTree.tree} repoId={repoId} />}
-        {tab === "issues" && <IssueListView issues={issues} repoId={repoId} />}
-        {tab === "prs" && <PRListView prs={prs} repoId={repoId} />}
-        {tab === "commits" && <CommitsView commits={commits} />}
+        {tab === "files" && <div className="tab-fade"><FileTreeView nodes={fileTree.tree} repoId={repoId} /></div>}
+        {tab === "issues" && <div className="tab-fade"><IssueListView issues={issues} repoId={repoId} /></div>}
+        {tab === "prs" && <div className="tab-fade"><PRListView prs={prs} repoId={repoId} /></div>}
+        {tab === "commits" && <div className="tab-fade"><CommitsView commits={commits} /></div>}
 
         {/* Take quiz CTA */}
         <div className="rounded-md border p-4 flex items-center justify-between gap-4"
@@ -189,7 +189,7 @@ function IssueListView({ issues, repoId }: { issues: ReturnType<typeof getIssues
         <Link
           key={issue.id}
           href={`/repo/${repoId}/issues/${issue.id}`}
-          className="flex items-start gap-3 px-4 py-3 border-b hover:bg-white/5 block"
+          className="flex items-start gap-3 px-4 py-3 border-b row-hover block"
           style={{ borderColor: i === issues.length - 1 ? "transparent" : "var(--border)" }}
         >
           <span style={{ color: "#3fb950", marginTop: 2 }}>●</span>
@@ -222,7 +222,7 @@ function PRListView({ prs, repoId }: { prs: ReturnType<typeof getPRs>; repoId: s
         <Link
           key={pr.id}
           href={`/repo/${repoId}/prs/${pr.id}`}
-          className="flex items-start gap-3 px-4 py-3 border-b hover:bg-white/5 block"
+          className="flex items-start gap-3 px-4 py-3 border-b row-hover block"
           style={{ borderColor: i === prs.length - 1 ? "transparent" : "var(--border)" }}
         >
           <span style={{ color: pr.state === "merged" ? "#a371f7" : pr.state === "open" ? "#3fb950" : "#f85149", marginTop: 2 }}>

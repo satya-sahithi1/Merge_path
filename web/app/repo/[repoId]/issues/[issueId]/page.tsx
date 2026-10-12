@@ -13,6 +13,8 @@ import weatherlyIssues from "@/lib/data/weatherly/issues.json";
 import weatherlyMeta   from "@/lib/data/weatherly/meta.json";
 import gradewiseIssues from "@/lib/data/gradewise/issues.json";
 import gradewiseMeta   from "@/lib/data/gradewise/meta.json";
+import mdliteIssues from "@/lib/data/mdlite/issues.json";
+import mdliteMeta   from "@/lib/data/mdlite/meta.json";
 
 type OutcomeChoice = "reproduced" | "cant_reproduce" | "not_enough_info" | null;
 
@@ -20,6 +22,7 @@ const REPO_DATA: Record<string, { issues: typeof notesIssues; meta: typeof notes
   "notes-app": { issues: notesIssues as typeof notesIssues, meta: notesMeta },
   "weatherly":  { issues: weatherlyIssues as unknown as typeof notesIssues, meta: weatherlyMeta as unknown as typeof notesMeta },
   "gradewise":  { issues: gradewiseIssues as unknown as typeof notesIssues, meta: gradewiseMeta as unknown as typeof notesMeta },
+  "mdlite":     { issues: mdliteIssues as unknown as typeof notesIssues, meta: mdliteMeta as unknown as typeof notesMeta },
 };
 
 export default function IssuePage() {
@@ -55,7 +58,7 @@ export default function IssuePage() {
 
       <div className="max-w-4xl mx-auto px-4 py-6 space-y-6">
         {/* Issue title */}
-        <div className="space-y-2">
+        <div className="space-y-2 animate-fade-down">
           <h1 className="text-xl font-semibold" style={{ color: "var(--text-primary)" }}>
             {issue.title}
             <span className="text-lg font-normal ml-2" style={{ color: "var(--text-secondary)" }}>#{issue.id}</span>
@@ -77,27 +80,32 @@ export default function IssuePage() {
         {/* Issue body + comments thread */}
         <div className="space-y-4">
           {/* OP body */}
-          <CommentCard
-            author={issue.opened_by}
-            date={issue.opened_at}
-            body={issue.body}
-            isOP
-          />
-
-          {/* Comments */}
-          {issue.comments.map((comment, i) => (
+          <div className="animate-fade-up stagger-1">
             <CommentCard
-              key={i}
-              author={comment.author}
-              date={comment.date}
-              body={comment.body}
+              author={issue.opened_by}
+              date={issue.opened_at}
+              body={issue.body}
+              isOP
             />
+          </div>
+
+          {/* Comments — staggered */}
+          {issue.comments.map((comment, i) => (
+            <div key={i} className={`animate-fade-up stagger-${Math.min(i + 2, 8)}`}>
+              <CommentCard
+                author={comment.author}
+                date={comment.date}
+                body={comment.body}
+              />
+            </div>
           ))}
         </div>
 
         {/* Reproduce tab — only for bugs */}
         {issue.reproduction && (
-          <ReproduceSection scenario={issue.reproduction as ReproductionScenario} />
+          <div className="animate-slide-right stagger-4">
+            <ReproduceSection scenario={issue.reproduction as ReproductionScenario} />
+          </div>
         )}
       </div>
     </div>
@@ -159,6 +167,8 @@ function ReproduceSection({ scenario }: { scenario: ReproductionScenario }) {
   function getCorrectAnswer(): OutcomeChoice {
     if (isNoInfo) return "not_enough_info";
     if (scenario.buggyVersion === null) return "not_enough_info";
+    // fixedVersion === "HEAD" means the fix is already in the current code
+    if (scenario.fixedVersion === "HEAD") return "cant_reproduce";
     return "reproduced";
   }
 
@@ -272,7 +282,7 @@ function ReproduceSection({ scenario }: { scenario: ReproductionScenario }) {
               </p>
               <p className="text-sm" style={{ color: "var(--text-primary)" }}>
                 {correctAnswer === "reproduced" && "This bug is still present in the current code. The buggy behavior is confirmed."}
-                {correctAnswer === "cant_reproduce" && "This bug was already fixed in a merged PR. If you'd checked the closed PRs first, you'd have found it."}
+                {correctAnswer === "cant_reproduce" && "This bug is already fixed in the current code. Check the commit history — a fix landed after this issue was opened and the issue was never closed."}
                 {correctAnswer === "not_enough_info" && "There's not enough information in this report to reproduce the bug. Ask for steps, version, and error output."}
               </p>
             </div>
