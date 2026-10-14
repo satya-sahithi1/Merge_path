@@ -83,17 +83,9 @@ export default function Home() {
           Merge Path
         </motion.h1>
 
-        {/* Sub-lines */}
+        {/* Sub-line */}
         <motion.p
-          className="text-lg"
-          style={{ color: "var(--text-secondary)" }}
-          variants={itemVariants}
-        >
-          Learn to tell in minutes whether a repo and an issue are worth your time.
-        </motion.p>
-
-        <motion.p
-          className="text-sm"
+          className="text-xl"
           style={{ color: "var(--text-secondary)" }}
           variants={itemVariants}
         >
