@@ -2,7 +2,17 @@ import Link from "next/link";
 import { getMeta, getIssues, getPRs, getCommits, getFileTree } from "@/lib/loader";
 import type { FileNode } from "@/lib/types";
 import { AnimatedSection, AnimatedList, AnimatedItem } from "./AnimatedSection";
-import { StarIcon, ForkIcon, FolderIcon, FileIcon, IssueOpenIcon, PROpenIcon, PRMergedIcon, PRClosedIcon, CommitIcon } from "@/app/components/GithubIcons";
+import {
+  StarIcon,
+  ForkIcon,
+  FolderIcon,
+  FileIcon,
+  CommitIcon,
+  GlobeIcon,
+  CheckIcon,
+} from "@/app/components/GithubIcons";
+import IssueListClient from "@/app/components/IssueListClient";
+import PRListClient from "@/app/components/PRListClient";
 
 export default async function RepoPage({
   params,
@@ -56,7 +66,9 @@ export default async function RepoPage({
             <div className="flex items-center gap-4 text-xs" style={{ color: "var(--text-secondary)" }}>
               <span className="flex items-center gap-1"><StarIcon size={14} /> {meta.stars}</span>
               <span className="flex items-center gap-1"><ForkIcon size={14} /> {meta.forks}</span>
-              <span>🌐 {meta.language}</span>
+              <span className="flex items-center gap-1">
+                <GlobeIcon size={14} /> {meta.language}
+              </span>
               {meta.topics.map((t) => (
                 <span key={t} className="px-2 py-0.5 rounded-full"
                   style={{ background: "#1f3a5f", color: "var(--link)" }}>
@@ -82,10 +94,14 @@ export default async function RepoPage({
               Last commit: {meta.last_commit_date}
             </span>
             {meta.has_contributing && (
-              <span style={{ color: "#3fb950" }}>✓ CONTRIBUTING.md</span>
+              <span className="flex items-center gap-1" style={{ color: "#3fb950" }}>
+                <CheckIcon size={13} /> CONTRIBUTING.md
+              </span>
             )}
             {meta.has_ci && (
-              <span style={{ color: "#3fb950" }}>✓ CI</span>
+              <span className="flex items-center gap-1" style={{ color: "#3fb950" }}>
+                <CheckIcon size={13} /> CI
+              </span>
             )}
           </div>
         </AnimatedSection>
@@ -114,7 +130,7 @@ export default async function RepoPage({
           </div>
         </AnimatedSection>
 
-        {/* Tab content — each tab fades in on navigation */}
+        {/* Tab content */}
         {tab === "files" && (
           <AnimatedSection delay={0.05} className="tab-fade">
             <FileTreeView nodes={fileTree.tree} repoId={repoId} />
@@ -122,12 +138,12 @@ export default async function RepoPage({
         )}
         {tab === "issues" && (
           <AnimatedSection delay={0.05} className="tab-fade">
-            <IssueListView issues={issues} repoId={repoId} />
+            <IssueListClient issues={issues as Parameters<typeof IssueListClient>[0]["issues"]} repoId={repoId} />
           </AnimatedSection>
         )}
         {tab === "prs" && (
           <AnimatedSection delay={0.05} className="tab-fade">
-            <PRListView prs={prs} repoId={repoId} />
+            <PRListClient prs={prs as Parameters<typeof PRListClient>[0]["prs"]} repoId={repoId} />
           </AnimatedSection>
         )}
         {tab === "commits" && (
@@ -212,86 +228,6 @@ function FileNodeRow({ node, repoId, depth }: { node: FileNode; repoId: string; 
   );
 }
 
-// ── Issue list ─────────────────────────────────────────────────────────────
-
-function IssueListView({ issues, repoId }: { issues: ReturnType<typeof getIssues>; repoId: string }) {
-  return (
-    <div className="rounded-md border overflow-hidden" style={{ borderColor: "var(--border)" }}>
-      <AnimatedList>
-        {issues.map((issue, i) => (
-          <AnimatedItem key={issue.id}>
-            <Link
-              href={`/repo/${repoId}/issues/${issue.id}`}
-              className="flex items-start gap-3 px-4 py-3 border-b row-hover block"
-              style={{ borderColor: i === issues.length - 1 ? "transparent" : "var(--border)" }}
-            >
-              <IssueOpenIcon size={16} style={{ color: "#3fb950", marginTop: 2, flexShrink: 0 }} />
-              <div className="flex-1 space-y-1">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
-                    {issue.title}
-                  </span>
-                  {issue.labels.map((label) => (
-                    <LabelBadge key={label} label={label} />
-                  ))}
-                </div>
-                <div className="text-xs" style={{ color: "var(--text-secondary)" }}>
-                  #{issue.id} opened {issue.opened_at} by {issue.opened_by}
-                  {issue.comments.length > 0 && ` · ${issue.comments.length} comments`}
-                </div>
-              </div>
-            </Link>
-          </AnimatedItem>
-        ))}
-      </AnimatedList>
-    </div>
-  );
-}
-
-// ── PR list ────────────────────────────────────────────────────────────────
-
-function PRListView({ prs, repoId }: { prs: ReturnType<typeof getPRs>; repoId: string }) {
-  return (
-    <div className="rounded-md border overflow-hidden" style={{ borderColor: "var(--border)" }}>
-      <AnimatedList>
-        {prs.map((pr, i) => (
-          <AnimatedItem key={pr.id}>
-            <Link
-              href={`/repo/${repoId}/prs/${pr.id}`}
-              className="flex items-start gap-3 px-4 py-3 border-b row-hover block"
-              style={{ borderColor: i === prs.length - 1 ? "transparent" : "var(--border)" }}
-            >
-              {pr.state === "merged" ? (
-                <PRMergedIcon size={16} style={{ color: "#a371f7", marginTop: 2, flexShrink: 0 }} />
-              ) : pr.state === "open" ? (
-                <PROpenIcon size={16} style={{ color: "#3fb950", marginTop: 2, flexShrink: 0 }} />
-              ) : (
-                <PRClosedIcon size={16} style={{ color: "#f85149", marginTop: 2, flexShrink: 0 }} />
-              )}
-              <div className="flex-1 space-y-1">
-                <span className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
-                  {pr.title}
-                </span>
-                <div className="text-xs" style={{ color: "var(--text-secondary)" }}>
-                  #{pr.id} {pr.state === "merged" ? `merged ${pr.merged_at}` : `opened ${pr.opened_at}`} by {pr.author}
-                  {pr.linked_issue && ` · fixes #${pr.linked_issue}`}
-                </div>
-              </div>
-              <span className="text-xs px-2 py-0.5 rounded-full capitalize"
-                style={{
-                  background: pr.state === "merged" ? "#2d1e4f" : pr.state === "open" ? "#1a3a1a" : "#3a1a1a",
-                  color: pr.state === "merged" ? "#a371f7" : pr.state === "open" ? "#3fb950" : "#f85149",
-                }}>
-                {pr.state}
-              </span>
-            </Link>
-          </AnimatedItem>
-        ))}
-      </AnimatedList>
-    </div>
-  );
-}
-
 // ── Commits ────────────────────────────────────────────────────────────────
 
 function CommitsView({ commits }: { commits: ReturnType<typeof getCommits> }) {
@@ -321,20 +257,5 @@ function CommitsView({ commits }: { commits: ReturnType<typeof getCommits> }) {
         ))}
       </AnimatedList>
     </div>
-  );
-}
-
-// ── Shared ─────────────────────────────────────────────────────────────────
-
-function LabelBadge({ label }: { label: string }) {
-  const colors: Record<string, { bg: string; color: string }> = {
-    "bug": { bg: "#3a1a1a", color: "#f85149" },
-    "good first issue": { bg: "#1f3a5f", color: "#58a6ff" },
-  };
-  const style = colors[label] ?? { bg: "#2a2a2a", color: "var(--text-secondary)" };
-  return (
-    <span className="text-xs px-2 py-0.5 rounded-full" style={style}>
-      {label}
-    </span>
   );
 }

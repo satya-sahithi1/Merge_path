@@ -48,11 +48,11 @@
     ]
   },
   {
-    "route": "/learn",
-    "firstLoadUncompressedJsBytes": 591371,
+    "route": "/repo/[repoId]",
+    "firstLoadUncompressedJsBytes": 601299,
     "firstLoadChunkPaths": [
       ".next/static/chunks/0h2qsuyze9ds1.js",
-      ".next/static/chunks/1h3df8r7o45to.js",
+      ".next/static/chunks/2qye3qabgcmcp.js",
       ".next/static/chunks/3dpndzb3wz--j.js",
       ".next/static/chunks/310vm2bl3xxpt.js",
       ".next/static/chunks/2mmpezlrfmbu5.js",
@@ -62,11 +62,11 @@
     ]
   },
   {
-    "route": "/repo/[repoId]",
-    "firstLoadUncompressedJsBytes": 585551,
+    "route": "/learn",
+    "firstLoadUncompressedJsBytes": 595212,
     "firstLoadChunkPaths": [
       ".next/static/chunks/0h2qsuyze9ds1.js",
-      ".next/static/chunks/0xp3ll48ult1y.js",
+      ".next/static/chunks/1w0xskhih0wys.js",
       ".next/static/chunks/3dpndzb3wz--j.js",
       ".next/static/chunks/310vm2bl3xxpt.js",
       ".next/static/chunks/2mmpezlrfmbu5.js",
