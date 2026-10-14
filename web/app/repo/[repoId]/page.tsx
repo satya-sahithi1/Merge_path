@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getMeta, getIssues, getPRs, getCommits, getFileTree } from "@/lib/loader";
 import type { FileNode } from "@/lib/types";
 import { AnimatedSection, AnimatedList, AnimatedItem } from "./AnimatedSection";
+import { StarIcon, ForkIcon, FolderIcon, FileIcon, IssueOpenIcon, PROpenIcon, PRMergedIcon, PRClosedIcon, CommitIcon } from "@/app/components/GithubIcons";
 
 export default async function RepoPage({
   params,
@@ -53,8 +54,8 @@ export default async function RepoPage({
               {meta.description}
             </p>
             <div className="flex items-center gap-4 text-xs" style={{ color: "var(--text-secondary)" }}>
-              <span>⭐ {meta.stars}</span>
-              <span>🍴 {meta.forks}</span>
+              <span className="flex items-center gap-1"><StarIcon size={14} /> {meta.stars}</span>
+              <span className="flex items-center gap-1"><ForkIcon size={14} /> {meta.forks}</span>
               <span>🌐 {meta.language}</span>
               {meta.topics.map((t) => (
                 <span key={t} className="px-2 py-0.5 rounded-full"
@@ -187,7 +188,7 @@ function FileNodeRow({ node, repoId, depth }: { node: FileNode; repoId: string; 
         <AnimatedItem>
           <div className="flex items-center gap-2 px-4 py-1.5 border-b text-sm"
             style={{ borderColor: "var(--border)", paddingLeft: `${16 + indent}px`, color: "var(--text-primary)" }}>
-            <span style={{ color: "#d29922" }}>📁</span>
+            <FolderIcon size={16} style={{ color: "#d29922", flexShrink: 0 }} />
             <span>{node.name}</span>
           </div>
         </AnimatedItem>
@@ -204,7 +205,7 @@ function FileNodeRow({ node, repoId, depth }: { node: FileNode; repoId: string; 
         className="flex items-center gap-2 px-4 py-1.5 border-b text-sm hover:underline block"
         style={{ borderColor: "var(--border)", paddingLeft: `${16 + indent}px`, color: "var(--link)" }}
       >
-        <span>📄</span>
+        <FileIcon size={16} style={{ flexShrink: 0 }} />
         <span>{node.name}</span>
       </Link>
     </AnimatedItem>
@@ -224,7 +225,7 @@ function IssueListView({ issues, repoId }: { issues: ReturnType<typeof getIssues
               className="flex items-start gap-3 px-4 py-3 border-b row-hover block"
               style={{ borderColor: i === issues.length - 1 ? "transparent" : "var(--border)" }}
             >
-              <span style={{ color: "#3fb950", marginTop: 2 }}>●</span>
+              <IssueOpenIcon size={16} style={{ color: "#3fb950", marginTop: 2, flexShrink: 0 }} />
               <div className="flex-1 space-y-1">
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
@@ -260,9 +261,13 @@ function PRListView({ prs, repoId }: { prs: ReturnType<typeof getPRs>; repoId: s
               className="flex items-start gap-3 px-4 py-3 border-b row-hover block"
               style={{ borderColor: i === prs.length - 1 ? "transparent" : "var(--border)" }}
             >
-              <span style={{ color: pr.state === "merged" ? "#a371f7" : pr.state === "open" ? "#3fb950" : "#f85149", marginTop: 2 }}>
-                {pr.state === "merged" ? "⬟" : "●"}
-              </span>
+              {pr.state === "merged" ? (
+                <PRMergedIcon size={16} style={{ color: "#a371f7", marginTop: 2, flexShrink: 0 }} />
+              ) : pr.state === "open" ? (
+                <PROpenIcon size={16} style={{ color: "#3fb950", marginTop: 2, flexShrink: 0 }} />
+              ) : (
+                <PRClosedIcon size={16} style={{ color: "#f85149", marginTop: 2, flexShrink: 0 }} />
+              )}
               <div className="flex-1 space-y-1">
                 <span className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
                   {pr.title}
@@ -300,7 +305,7 @@ function CommitsView({ commits }: { commits: ReturnType<typeof getCommits> }) {
               style={{ borderColor: i === commits.length - 1 ? "transparent" : "var(--border)" }}
             >
               <div className="flex items-center gap-3">
-                <span style={{ color: "var(--text-secondary)" }}>◎</span>
+                <CommitIcon size={16} style={{ color: "var(--text-secondary)", flexShrink: 0 }} />
                 <span style={{ color: "var(--text-primary)" }}>{commit.message}</span>
               </div>
               <div className="flex items-center gap-4 text-xs" style={{ color: "var(--text-secondary)" }}>

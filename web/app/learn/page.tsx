@@ -12,6 +12,8 @@ import {
   defaultTransition,
 } from "@/lib/motion";
 
+import { ForkIcon, PROpenIcon, CodeReviewIcon, WrenchIcon, FolderIcon } from "@/app/components/GithubIcons";
+
 // ── Card data ──────────────────────────────────────────────────────────────
 
 const CARDS = [
@@ -57,9 +59,9 @@ function LicenseVisual() {
         style={{ borderColor: "#238636", background: "#0d1f0d" }}
       >
         <div className="flex items-center gap-1.5">
-          <span>📁</span>
+          <FolderIcon size={15} style={{ color: "#d29922" }} />
           <span className="text-xs font-semibold" style={{ color: "var(--text-primary)" }}>
-            cool-project
+            project-1
           </span>
         </div>
         <div
@@ -79,9 +81,9 @@ function LicenseVisual() {
         style={{ borderColor: "#da3633", background: "#1f0d0d" }}
       >
         <div className="flex items-center gap-1.5">
-          <span>📁</span>
+          <FolderIcon size={15} style={{ color: "#d29922" }} />
           <span className="text-xs font-semibold" style={{ color: "var(--text-primary)" }}>
-            other-project
+            project-2
           </span>
         </div>
         <div
@@ -100,10 +102,10 @@ function LicenseVisual() {
 
 function ForkFlowVisual() {
   const steps = [
-    { emoji: "🍴", label: "Fork" },
-    { emoji: "🛠️", label: "Fix" },
-    { emoji: "📤", label: "Pull Request" },
-    { emoji: "👀", label: "Review" },
+    { icon: <ForkIcon size={18} />, label: "Fork" },
+    { icon: <WrenchIcon size={18} />, label: "Fix" },
+    { icon: <PROpenIcon size={18} />, label: "Pull Request" },
+    { icon: <CodeReviewIcon size={18} />, label: "Review" },
   ];
 
   return (
@@ -114,7 +116,9 @@ function ForkFlowVisual() {
             className="flex flex-col items-center gap-1 px-4 py-3 rounded-md"
             style={{ background: "var(--surface)", border: "1px solid var(--border)", minWidth: "72px" }}
           >
-            <span className="text-lg">{step.emoji}</span>
+            <span className="flex items-center justify-center" style={{ color: "var(--text-secondary)" }}>
+              {step.icon}
+            </span>
             <span className="text-xs font-medium" style={{ color: "var(--text-primary)" }}>
               {step.label}
             </span>
