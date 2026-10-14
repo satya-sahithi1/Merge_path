@@ -53,6 +53,7 @@ export default function QuizPage() {
   );
   const [currentQ, setCurrentQ] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [showNextScreen, setShowNextScreen] = useState(false);
 
   const q = questions[currentQ];
   const ans = answers[currentQ];
@@ -129,6 +130,115 @@ export default function QuizPage() {
     }
   });
 
+  // ── "Choose another repo" screen ─────────────────────────────────────────
+
+  if (finished && showNextScreen) {
+    return (
+      <div className="min-h-screen" style={{ background: "var(--background)" }}>
+        <nav className="border-b px-6 py-3 flex items-center gap-4"
+          style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
+          <Link href="/" className="text-sm" style={{ color: "var(--text-secondary)" }}>Merge Path</Link>
+          <span style={{ color: "var(--text-secondary)" }}>/</span>
+          <Link href={`/repo/${repoId}`} className="text-sm" style={{ color: "var(--text-secondary)" }}>
+            {meta.name}
+          </Link>
+          <span style={{ color: "var(--text-secondary)" }}>/</span>
+          <button
+            onClick={() => setShowNextScreen(false)}
+            className="text-sm"
+            style={{ color: "var(--text-secondary)", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+          >
+            Quiz
+          </button>
+          <span style={{ color: "var(--text-secondary)" }}>/</span>
+          <span className="text-sm" style={{ color: "var(--text-primary)" }}>What's next</span>
+        </nav>
+
+        <div className="max-w-2xl mx-auto px-4 py-12 space-y-8 animate-fade-up">
+          <div className="space-y-1">
+            <h1 className="text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
+              Choose another repo
+            </h1>
+            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+              Try finding your first open-source contributing repo
+            </p>
+          </div>
+
+          {/* Practice repos */}
+          <div className="space-y-3">
+            <p className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--text-secondary)" }}>
+              Practice repos on Merge Path
+            </p>
+            <Link
+              href="/repos"
+              className="rounded-md border p-4 flex items-center justify-between gap-4 transition-colors hover:border-[var(--accent)]"
+              style={{ borderColor: "var(--border)", background: "var(--surface)", display: "flex" }}
+            >
+              <div className="space-y-0.5">
+                <p className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+                  Browse practice repos
+                </p>
+                <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
+                  Sharpen your judgment on another codebase before going real.
+                </p>
+              </div>
+              <span className="text-sm whitespace-nowrap" style={{ color: "var(--text-secondary)" }}>Pick a repo →</span>
+            </Link>
+          </div>
+
+          {/* Real open-source links */}
+          <div className="space-y-3">
+            <p className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--text-secondary)" }}>
+              Find a real issue to contribute to
+            </p>
+
+            <a
+              href="https://goodfirstissues.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md border p-4 flex items-start justify-between gap-4 transition-colors"
+              style={{ borderColor: "var(--border)", background: "var(--surface)", display: "flex", textDecoration: "none" }}
+            >
+              <div className="space-y-1">
+                <p className="text-sm font-semibold" style={{ color: "var(--accent)" }}>
+                  goodfirstissues.org ↗
+                </p>
+                <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
+                  Curated beginner-friendly issues from popular open-source projects.
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="https://goodfirstissue.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md border p-4 flex items-start justify-between gap-4 transition-colors"
+              style={{ borderColor: "var(--border)", background: "var(--surface)", display: "flex", textDecoration: "none" }}
+            >
+              <div className="space-y-1">
+                <p className="text-sm font-semibold" style={{ color: "var(--accent)" }}>
+                  goodfirstissue.dev ↗
+                </p>
+                <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
+                  Filter by language and find your first contribution across thousands of repos.
+                </p>
+              </div>
+            </a>
+          </div>
+
+          <button
+            onClick={() => setShowNextScreen(false)}
+            className="text-sm"
+            style={{ color: "var(--text-secondary)", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+          >
+            ← Back to results
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   // ── Results screen ────────────────────────────────────────────────────────
 
   if (finished) {
@@ -158,6 +268,73 @@ export default function QuizPage() {
             <p className="text-sm" style={{ color: "var(--text-primary)" }}>
               {band.note}
             </p>
+          </div>
+
+          {/* What's next — shown right after score */}
+          <div className="space-y-3">
+            {/* Try a different repo */}
+            <div
+              className="rounded-md border p-4 flex items-center justify-between gap-4"
+              style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+            >
+              <div className="space-y-0.5">
+                <p className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+                  Try a different repo
+                </p>
+                <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
+                  Practice on another codebase to sharpen your judgment.
+                </p>
+              </div>
+              <Link
+                href="/repos"
+                className="whitespace-nowrap text-sm px-4 py-2 rounded-md font-medium"
+                style={{ background: "var(--surface)", color: "var(--text-primary)", border: "1px solid var(--border)" }}
+              >
+                Pick a repo →
+              </Link>
+            </div>
+
+            {/* Real issues */}
+            <div
+              className="rounded-md border p-4 space-y-3"
+              style={{
+                borderColor: totalCorrect >= 7 ? "#238636" : "var(--border)",
+                background: totalCorrect >= 7 ? "#0d1f0d" : "var(--surface)",
+              }}
+            >
+              <div className="space-y-0.5">
+                <p className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+                  {totalCorrect >= 7
+                    ? "You're ready — go find a real issue"
+                    : "When you're ready, find a real issue"}
+                </p>
+                <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
+                  {totalCorrect >= 7
+                    ? "Use these to find beginner-friendly open source issues across real projects."
+                    : "Come back here once you've reviewed the tips and feel confident."}
+                </p>
+              </div>
+              <div className="flex gap-3 flex-wrap">
+                <a
+                  href="https://goodfirstissues.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm px-4 py-2 rounded-md font-medium"
+                  style={{ background: "var(--accent)", color: "#fff" }}
+                >
+                  goodfirstissues.dev ↗
+                </a>
+                <a
+                  href="https://goodfirstissue.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm px-4 py-2 rounded-md border font-medium"
+                  style={{ borderColor: "var(--border)", color: "var(--text-primary)", background: "var(--surface)" }}
+                >
+                  goodfirstissue.dev ↗
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Domain breakdown */}
@@ -253,33 +430,17 @@ export default function QuizPage() {
             })}
           </div>
 
-          {/* CTA */}
-          {totalCorrect >= 7 && (
-            <div className="rounded-md border p-4 space-y-3"
-              style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
-              <p className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
-                Ready to find a real issue?
-              </p>
-              <div className="flex gap-3 flex-wrap">
-                <a href="https://goodfirstissues.dev" target="_blank" rel="noopener noreferrer"
-                  className="text-sm px-4 py-2 rounded-md"
-                  style={{ background: "var(--accent)", color: "#fff" }}>
-                  goodfirstissues.dev ↗
-                </a>
-                <a href="https://goodfirstissue.dev" target="_blank" rel="noopener noreferrer"
-                  className="text-sm px-4 py-2 rounded-md border"
-                  style={{ borderColor: "var(--border)", color: "var(--text-primary)" }}>
-                  goodfirstissue.dev ↗
-                </a>
-              </div>
-            </div>
-          )}
+          {/* Next button — always shown at bottom of results */}
+          <div className="pt-4 border-t" style={{ borderColor: "var(--border)" }}>
+            <button
+              onClick={() => setShowNextScreen(true)}
+              className="w-full px-4 py-3 rounded-md text-sm font-medium transition-opacity"
+              style={{ background: "var(--accent)", color: "#fff", cursor: "pointer" }}
+            >
+              Next →
+            </button>
+          </div>
 
-          <Link href={`/repo/${repoId}`}
-            className="inline-block text-sm"
-            style={{ color: "var(--text-secondary)" }}>
-            ← Back to repo
-          </Link>
         </div>
       </div>
     );
