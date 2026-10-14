@@ -111,9 +111,9 @@ export default async function RepoPage({
           <div className="flex gap-0 border-b" style={{ borderColor: "var(--border)" }}>
             {[
               { key: "files", label: "Files" },
+              { key: "commits", label: "Commits" },
               { key: "issues", label: `Issues ${openIssues.length}` },
               { key: "prs", label: `Pull Requests ${openPRs.length}` },
-              { key: "commits", label: "Commits" },
             ].map(({ key, label }) => (
               <Link
                 key={key}
